@@ -17,12 +17,7 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .modal-backdrop {
-            transition: opacity 0.3s ease;
-        }
-        .modal-content {
-            transition: transform 0.3s ease;
-        }
+        /* Se eliminan las clases .modal-backdrop y .modal-content del CSS para usar clases de Tailwind en JS */
         #video-call-modal .modal-content {
             height: 90vh;
             max-height: 700px;
@@ -120,28 +115,28 @@
             </nav>
 
             <div id="patient-overview" class="patient-section">
-                   <div class="grid md:grid-cols-3 gap-6 mb-8">
-                       <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
-                           <h4 class="font-bold text-lg mb-2">Próxima Cita</h4>
-                           <p class="text-3xl font-bold text-blue-600">15 Dic, 10:00 AM</p>
-                           <p class="text-gray-600">Consulta de seguimiento con Dr. Martínez</p>
-                           <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver detalles</button>
-                       </div>
-                       
-                       <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
-                           <h4 class="font-bold text-lg mb-2">Medicamentos Hoy</h4>
-                           <p class="text-3xl font-bold text-blue-600">3 Dosis Pendientes</p>
-                           <p class="text-gray-600">Tamoxifeno, Ondansetrón, Calcio</p>
-                            <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver mi plan</button>
-                       </div>
-                       
-                       <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
-                           <h4 class="font-bold text-lg mb-2">Mi Estado</h4>
-                           <p class="text-3xl font-bold text-purple-600">Estable</p>
-                           <p class="text-gray-600">Actualizado por Dr. Martínez</p>
-                           <p class="text-xs text-gray-400 mt-3">Hoy, 2:30 PM</p>
-                       </div>
-                   </div>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
+                            <h4 class="font-bold text-lg mb-2">Próxima Cita</h4>
+                            <p class="text-3xl font-bold text-blue-600">15 Dic, 10:00 AM</p>
+                            <p class="text-gray-600">Consulta de seguimiento con Dr. Martínez</p>
+                            <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver detalles</button>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
+                            <h4 class="font-bold text-lg mb-2">Medicamentos Hoy</h4>
+                            <p class="text-3xl font-bold text-blue-600">3 Dosis Pendientes</p>
+                            <p class="text-gray-600">Tamoxifeno, Ondansetrón, Calcio</p>
+                             <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver mi plan</button>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
+                            <h4 class="font-bold text-lg mb-2">Mi Estado</h4>
+                            <p class="text-3xl font-bold text-purple-600">Estable</p>
+                            <p class="text-gray-600">Actualizado por Dr. Martínez</p>
+                            <p class="text-xs text-gray-400 mt-3">Hoy, 2:30 PM</p>
+                        </div>
+                    </div>
 
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-bold mb-4">Mi Plan del Día</h3>
@@ -253,7 +248,7 @@
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                           <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">📄 Descargar Plan de Medicación (PDF)</button>
+                            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">📄 Descargar Plan de Medicación (PDF)</button>
                     </div>
                 </div>
             </div>
@@ -315,7 +310,7 @@
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">2. Nivel de energía</label>
-                                           <div class="flex justify-between">
+                                            <div class="flex justify-between">
                                                 <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="energy" value="1" class="text-blue-600" required><span>Bajo</span></label>
                                                 <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="energy" value="3" class="text-blue-600"><span>Medio</span></label>
                                                 <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="energy" value="5" class="text-blue-600"><span>Alto</span></label>
@@ -373,7 +368,7 @@
                         </div>
                     </div>
                     
-                     <div class="mb-8">
+                    <div class="mb-8">
                         <h4 class="text-xl font-bold mb-4 text-gray-800">Ejercicios y Recomendaciones para el Bienestar</h4>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
@@ -410,45 +405,45 @@
                     </div>
 
                     <div class="mb-8">
-                         <h4 class="text-xl font-bold mb-4 text-gray-800">Beneficios de Entretenimiento (Descuentos)</h4>
-                         <div class="grid md:grid-cols-2 gap-6">
-                             <div class="p-6 bg-red-50 rounded-lg border border-red-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la página de convenios Cinépolis')">
-                                 <h5 class="font-bold text-xl text-red-800 mb-3">🎬 Descuentos en Cinépolis</h5>
-                                 <p class="text-sm text-gray-700 mb-3">Disfruta de la magia del cine a un precio especial.</p>
-                                 <ul class="list-disc list-inside text-sm space-y-1 text-red-700">
-                                     <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
-                                     <li>Precio especial en combos de dulcería.</li>
-                                 </ul>
-                                 <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">Ver Códigos y Salas</button>
-                             </div>
-                             <div class="p-6 bg-purple-50 rounded-lg border border-purple-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la cartelera de obras con descuento')">
-                                 <h5 class="font-bold text-xl text-purple-800 mb-3">🎭 Descuentos en Obras de Teatro</h5>
-                                 <p class="text-sm text-gray-700 mb-3">Acceso a cultura y esparcimiento con precios preferenciales.</p>
-                                 <ul class="list-disc list-inside text-sm space-y-1 text-purple-700">
-                                     <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
-                                     <li>Beneficio aplica para el paciente y un acompañante.</li>
-                                 </ul>
-                                 <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">Consultar Cartelera</button>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="grid md:grid-cols-2 gap-6">
-                        <div class="p-6 bg-purple-50 rounded-lg border border-purple-200">
-                            <h4 class="text-xl font-bold text-purple-800 mb-3">💬 Grupos de Apoyo en Comitán</h4>
-                            <p class="mb-4">Conéctate con otras personas que entienden por lo que estás pasando.</p>
-                            <p><strong>Grupo "Renacer":</strong> Reuniones los martes a las 5:00 PM en el DIF Municipal.</p>
+                           <h4 class="text-xl font-bold mb-4 text-gray-800">Beneficios de Entretenimiento (Descuentos)</h4>
+                           <div class="grid md:grid-cols-2 gap-6">
+                                <div class="p-6 bg-red-50 rounded-lg border border-red-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la página de convenios Cinépolis')">
+                                    <h5 class="font-bold text-xl text-red-800 mb-3">🎬 Descuentos en Cinépolis</h5>
+                                    <p class="text-sm text-gray-700 mb-3">Disfruta de la magia del cine a un precio especial.</p>
+                                    <ul class="list-disc list-inside text-sm space-y-1 text-red-700">
+                                        <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
+                                        <li>Precio especial en combos de dulcería.</li>
+                                    </ul>
+                                    <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">Ver Códigos y Salas</button>
+                                </div>
+                                <div class="p-6 bg-purple-50 rounded-lg border border-purple-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la cartelera de obras con descuento')">
+                                    <h5 class="font-bold text-xl text-purple-800 mb-3">🎭 Descuentos en Obras de Teatro</h5>
+                                    <p class="text-sm text-gray-700 mb-3">Acceso a cultura y esparcimiento con precios preferenciales.</p>
+                                    <ul class="list-disc list-inside text-sm space-y-1 text-purple-700">
+                                        <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
+                                        <li>Beneficio aplica para el paciente y un acompañante.</li>
+                                    </ul>
+                                    <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">Consultar Cartelera</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
-                            <h4 class="text-xl font-bold text-blue-800 mb-3">📚 Artículos y Guías</h4>
-                            <ul class="list-disc list-inside space-y-2">
-                                <li><a href="#" class="text-blue-600 hover:underline">Manejando la ansiedad durante el tratamiento</a></li>
-                                <li><a href="#" class="text-blue-600 hover:underline">Cómo hablar con tus seres queridos sobre el cáncer</a></li>
-                                <li><a href="#" class="text-blue-600 hover:underline">Técnicas de relajación y mindfulness para pacientes</a></li>
-                            </ul>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-6 bg-purple-50 rounded-lg border border-purple-200">
+                                <h4 class="text-xl font-bold text-purple-800 mb-3">💬 Grupos de Apoyo en Comitán</h4>
+                                <p class="mb-4">Conéctate con otras personas que entienden por lo que estás pasando.</p>
+                                <p><strong>Grupo "Renacer":</strong> Reuniones los martes a las 5:00 PM en el DIF Municipal.</p>
+                            </div>
+                            <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
+                                <h4 class="text-xl font-bold text-blue-800 mb-3">📚 Artículos y Guías</h4>
+                                <ul class="list-disc list-inside space-y-2">
+                                    <li><a href="#" class="text-blue-600 hover:underline">Manejando la ansiedad durante el tratamiento</a></li>
+                                    <li><a href="#" class="text-blue-600 hover:underline">Cómo hablar con tus seres queridos sobre el cáncer</a></li>
+                                    <li><a href="#" class="text-blue-600 hover:underline">Técnicas de relajación y mindfulness para pacientes</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             
             <div id="patient-nutrition" class="patient-section hidden">
                 <div class="bg-white rounded-lg shadow-md p-6">
@@ -532,8 +527,8 @@
         </div>
     </div>
 
-    <div id="requestAppointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden modal-backdrop">
-        <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-lg modal-content transform scale-95">
+    <div id="requestAppointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="appointmentModalContent" class="bg-white rounded-lg shadow-xl p-8 w-full max-w-lg transition-transform duration-300 transform scale-95">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold">Solicitar Nueva Cita</h3>
                 <button onclick="hideRequestAppointmentModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
@@ -566,7 +561,6 @@
             </form>
         </div>
     </div>
-
     <button onclick="showLuxiChat()" id="luxi-fab" class="fixed bottom-6 right-6 bg-purple-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform z-40">
         <span class="text-3xl">🤖</span>
     </button>
@@ -710,21 +704,38 @@
             }
         }
 
-        // Citas Modal Functions
+        // Citas Modal Functions - CORREGIDAS
         const appointmentModal = document.getElementById('requestAppointmentModal');
-        const appointmentModalContent = appointmentModal.querySelector('.modal-content');
+        // Se apunta al nuevo ID en el div interno
+        const appointmentModalContent = document.getElementById('appointmentModalContent');
 
         function showRequestAppointmentModal() {
+            // 1. Oculta el scroll del cuerpo
+            document.body.style.overflow = 'hidden';
+
             appointmentModal.classList.remove('hidden');
-            setTimeout(() => {
-                appointmentModal.querySelector('.modal-backdrop').style.opacity = 1;
-                appointmentModalContent.style.transform = 'scale(1)';
-            }, 10); 
+            // Forzar el redibujado para que las transiciones funcionen
+            void appointmentModal.offsetWidth;
+
+            // 2. Aplicar las clases finales para la transición de entrada
+            appointmentModal.classList.add('opacity-100');
+            appointmentModalContent.classList.remove('scale-95');
+            appointmentModalContent.classList.add('scale-100');
+
+            // **IMPORTANTE:** No se añaden listeners para 'Esc' o 'clic fuera',
+            // lo que bloquea el cierre involuntario como se solicitó.
         }
 
         function hideRequestAppointmentModal() {
-            appointmentModal.querySelector('.modal-backdrop').style.opacity = 0;
-            appointmentModalContent.style.transform = 'scale(0.95)';
+            // 1. Iniciar transición de salida
+            appointmentModal.classList.remove('opacity-100');
+            appointmentModalContent.classList.remove('scale-100');
+            appointmentModalContent.classList.add('scale-95');
+
+            // 2. Restaurar el scroll del cuerpo
+            document.body.style.overflow = ''; 
+
+            // 3. Ocultar modal después de la transición
             setTimeout(() => {
                 appointmentModal.classList.add('hidden');
                 document.getElementById('appointmentRequestForm').reset();
@@ -761,6 +772,11 @@
             `;
             list.insertAdjacentHTML('afterbegin', newAppointmentHTML);
         }
+
+        // Se dejan estas funciones vacías para forzar que el modal SOLO se cierre con hideRequestAppointmentModal()
+        function closeIfEscPressed(event) { }
+        function closeIfClickedOutside(event) { }
+
 
         // Asistente Virtual Luxi Functions (Powered by Gemini)
         const luxiModal = document.getElementById('luxi-chat-modal');
@@ -807,12 +823,12 @@
             const systemPrompt = `Eres Luxi, un asistente virtual de IA de Jarelux, diseñado para apoyar a pacientes oncológicos en Comitán de Domínguez, Chiapas. Tu propósito es ofrecer información general, aliento y recursos de bienestar.
 
             **Reglas Críticas:**
-            1.  **NO ERES UN MÉDICO:** Nunca debes dar consejos médicos, diagnósticos, interpretaciones de resultados, ni recomendaciones de tratamiento o dosis. Siempre debes empezar o terminar tus respuestas con un recordatorio de que tu información no sustituye la consulta con un profesional.
-            2.  **DETECCIÓN DE EMERGENCIAS:** Si el usuario menciona síntomas graves como "dolor fuerte en el pecho", "dificultad para respirar", "sangrado incontrolable", "pérdida de conciencia", o expresa ideas de autolesión, tu ÚNICA respuesta debe ser: "Detecto una posible emergencia. Por favor, no esperes. Llama al 911 de inmediato o acude al servicio de urgencias más cercano. Tu seguridad es lo más importante." No añadas nada más.
-            3.  **REDIRECCIÓN A ESPECIALISTAS:** Si las preguntas son sobre pronósticos, planes de tratamiento específicos, segundas opiniones o cualquier tema que requiera conocimiento del caso del paciente, debes redirigir amablemente al usuario a su oncólogo. Ejemplo: "Esa es una pregunta muy importante que debe ser respondida por tu equipo médico, ya que conocen tu caso a fondo. Por favor, consúltalo con ellos."
-            4.  **ENFOQUE EN BIENESTAR GENERAL:** Puedes responder a preguntas generales sobre qué es la quimioterapia, qué es la radioterapia, dar consejos sobre nutrición general (no dietas específicas), y ofrecer técnicas de relajación y manejo del estrés.
-            5.  **TONO:** Sé empático, amable, claro y conciso. Usa un lenguaje sencillo y tranquilizador.
-            6.  **UBICACIÓN:** Eres un asistente para pacientes en Comitán de Domínguez, Chiapas, México.
+            1.  **NO ERES UN MÉDICO:** Nunca debes dar consejos médicos, diagnósticos, interpretaciones de resultados, ni recomendaciones de tratamiento o dosis. Siempre debes empezar o terminar tus respuestas con un recordatorio de que tu información no sustituye la consulta con un profesional.
+            2.  **DETECCIÓN DE EMERGENCIAS:** Si el usuario menciona síntomas graves como "dolor fuerte en el pecho", "dificultad para respirar", "sangrado incontrolable", "pérdida de conciencia", o expresa ideas de autolesión, tu ÚNICA respuesta debe ser: "Detecto una posible emergencia. Por favor, no esperes. Llama al 911 de inmediato o acude al servicio de urgencias más cercano. Tu seguridad es lo más importante." No añadas nada más.
+            3.  **REDIRECCIÓN A ESPECIALISTAS:** Si las preguntas son sobre pronósticos, planes de tratamiento específicos, segundas opiniones o cualquier tema que requiera conocimiento del caso del paciente, debes redirigir amablemente al usuario a su oncólogo. Ejemplo: "Esa es una pregunta muy importante que debe ser respondida por tu equipo médico, ya que conocen tu caso a fondo. Por favor, consúltalo con ellos."
+            4.  **ENFOQUE EN BIENESTAR GENERAL:** Puedes responder a preguntas generales sobre qué es la quimioterapia, qué es la radioterapia, dar consejos sobre nutrición general (no dietas específicas), y ofrecer técnicas de relajación y manejo del estrés.
+            5.  **TONO:** Sé empático, amable, claro y conciso. Usa un lenguaje sencillo y tranquilizador.
+            6.  **UBICACIÓN:** Eres un asistente para pacientes en Comitán de Domínguez, Chiapas, México.
 
             Ejemplo de respuesta segura:
             Usuario: "¿Qué puedo comer si tengo náuseas por la quimio?"
