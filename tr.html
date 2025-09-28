@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descuentos de Transporte - Jarelux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #1e40af 50%, #1e40af 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12  flex items-center justify-center p-1">
+                        <img src="1000217146 (1).png" alt="Logo de Jarelux" class="w-full h-full object-contain">
+                    </div>
+                    <h1 class="text-2xl font-bold">Jarelux</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="hover:text-blue-200 transition-colors">Inicio</a>
+                    <a href="#descuentos" class="hover:text-blue-200 transition-colors">Descuentos</a>
+                    <a href="#contacto" class="hover:text-blue-200 transition-colors">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Descuentos Especiales en Transporte</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Para pacientes y familiares de la plataforma Jarelux. Viaja con comodidad y ahorra en tus traslados médicos.</p>
+            <button onclick="scrollToSection('descuentos')" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors shadow-lg">
+                Ver Descuentos
+            </button>
+        </div>
+    </section>
+
+    <!-- Descuentos Section -->
+    <section id="descuentos" class="py-16">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Líneas de Transporte con Descuento</h3>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Transporte 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-2xl">🚌</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800">TransMédico Express</h4>
+                    </div>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">25% OFF</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Servicio especializado para traslados a centros médicos. Comodidad y puntualidad garantizada.</p>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-500 mb-2">Rutas disponibles:</p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Centro - Hospitales Norte</li>
+                            <li>• Zona Sur - Clínicas Especializadas</li>
+                            <li>• Aeropuerto - Centros Médicos</li>
+                        </ul>
+                    </div>
+                    <button onclick="showDetails('TransMédico Express')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Solicitar Descuento
+                    </button>
+                </div>
+
+                <!-- Transporte 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-2xl">🚐</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800">ADO Linea Salud</h4>
+                    </div>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">30% OFF</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Transporte adaptado para personas con movilidad reducida. Vehículos equipados especialmente.</p>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-500 mb-2">Servicios incluidos:</p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Rampa de acceso</li>
+                            <li>• Asientos reclinables</li>
+                            <li>• Acompañante médico</li>
+                        </ul>
+                    </div>
+                    <button onclick="showDetails('Salud Móvil')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Solicitar Descuento
+                    </button>
+                </div>
+
+                <!-- Transporte 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-2xl">🚕</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800">Taxi Salud 24/7</h4>
+                    </div>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">20% OFF</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Servicio de taxi disponible las 24 horas para emergencias y citas médicas urgentes.</p>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-500 mb-2">Características:</p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Disponible 24/7</li>
+                            <li>• Conductores capacitados</li>
+                            <li>• Tarifas preferenciales</li>
+                        </ul>
+                    </div>
+                    <button onclick="showDetails('Taxi Salud 24/7')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Solicitar Descuento
+                    </button>
+                </div>
+
+                <!-- Transporte 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-2xl">🚆</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800">Metro Salud</h4>
+                    </div>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">15% OFF</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Descuentos en tarjetas de metro para pacientes que requieren traslados frecuentes.</p>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-500 mb-2">Beneficios:</p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Tarjeta preferencial</li>
+                            <li>• Acceso prioritario</li>
+                            <li>• Recarga con descuento</li>
+                        </ul>
+                    </div>
+                    <button onclick="showDetails('Metro Salud')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Solicitar Descuento
+                    </button>
+                </div>
+
+                <!-- Transporte 5 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-2xl">✈️</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800">AeroMéxico</h4>
+                    </div>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">35% OFF</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Descuentos especiales en vuelos para tratamientos médicos en otras ciudades.</p>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-500 mb-2">Incluye:</p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Vuelos nacionales</li>
+                            <li>• Asistencia en aeropuerto</li>
+                            <li>• Equipaje médico gratis</li>
+                        </ul>
+                    </div>
+                    <button onclick="showDetails('AeroMédico')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Solicitar Descuento
+                    </button>
+                </div>
+
+                <!-- Transporte 6 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-2xl">🚑</span>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-800">Ambulancia Privada</h4>
+                    </div>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">40% OFF</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Servicio de ambulancia privada para traslados programados y no urgentes.</p>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-500 mb-2">Servicios:</p>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Traslados programados</li>
+                            <li>• Personal médico</li>
+                            <li>• Equipamiento completo</li>
+                        </ul>
+                    </div>
+                    <button onclick="showDetails('Ambulancia Privada')" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Solicitar Descuento
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Obtener Descuentos -->
+    <section class="bg-blue-50 py-16">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">¿Cómo Obtener tu Descuento?</h3>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl font-bold">1</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Regístrate</h4>
+                    <p class="text-gray-600">Completa tu registro en la plataforma Jarelux con tu información médica.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl font-bold">2</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Verifica</h4>
+                    <p class="text-gray-600">Presenta tu documentación médica para validar tu elegibilidad.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl font-bold">3</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Disfruta</h4>
+                    <p class="text-gray-600">Recibe tu código de descuento y úsalo en cualquier línea de transporte.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6">¿Necesitas Ayuda?</h3>
+                <p class="text-gray-600 mb-8">Nuestro equipo está disponible para ayudarte con cualquier consulta sobre los descuentos de transporte.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-blue-600 text-3xl mb-3">📞</div>
+                        <h4 class="font-semibold mb-2">Teléfono</h4>
+                        <p class="text-gray-600">+52 (963) 123-4567</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="text-blue-600 text-3xl mb-3">✉️</div>
+                        <h4 class="font-semibold mb-2">Email</h4>
+                        <p class="text-gray-600">descuentos@jarelux.com</p>
+                    </div>
+                </div>
+                
+                <button onclick="openContactForm()" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    Contactar Soporte
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold">J</span>
+                        </div>
+                        <h4 class="text-xl font-bold">Jarelux</h4>
+                    </div>
+                    <p class="text-gray-400">Conectando pacientes con cáncer con descuentos que marcan la diferencia en su tratamiento.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Servicios</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Farmacias</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Clínicas</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Hospitales</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Laboratorios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Soporte</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Centro de Ayuda</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Contacto</h5>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📞 01-800-JARELUX</p>
+                        <p>✉️ info@jarelux.com</p>
+                        <p>📍 Ciudad de México, México</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Jarelux. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+            <h4 class="text-xl font-bold mb-4" id="modalTitle">Solicitar Descuento</h4>
+            <p class="text-gray-600 mb-6" id="modalContent">Para solicitar este descuento, por favor contacta a nuestro equipo de soporte con tu información de paciente registrado en Jarelux.</p>
+            <div class="flex space-x-4">
+                <button onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 transition-colors">
+                    Cerrar
+                </button>
+                <button onclick="contactSupport()" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Contactar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function showDetails(transportName) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = `Descuento - ${transportName}`;
+            modalContent.textContent = `Para obtener el descuento en ${transportName}, necesitas estar registrado como paciente o familiar en la plataforma Jarelux. Nuestro equipo verificará tu elegibilidad y te proporcionará el código de descuento correspondiente.`;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function contactSupport() {
+            alert('Redirigiendo al formulario de contacto...\n\nPor favor, ten a mano:\n- Tu número de registro en Jarelux\n- Documentación médica\n- Identificación oficial');
+            closeModal();
+        }
+
+        function openContactForm() {
+            alert('Formulario de contacto:\n\nPuedes contactarnos por:\n📞 Teléfono: +1 (555) 123-4567\n✉️ Email: descuentos@jarelux.com\n\nHorario de atención: Lunes a Viernes, 8:00 AM - 6:00 PM');
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97654dc9d4d93798',t:'MTc1NjM5OTc4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

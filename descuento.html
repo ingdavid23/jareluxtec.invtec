@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarelux - Descuentos para Pacientes con Cáncer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Global error handler for Google Maps
+        window.gm_authFailure = function() {
+            console.log('Google Maps authentication failed');
+            showMapFallback('Error de autenticación de Google Maps. Se requiere una clave API válida.');
+        };
+        
+        // Handle other Google Maps errors
+        window.addEventListener('error', function(e) {
+            if (e.message && e.message.includes('Google Maps')) {
+                showMapFallback('Error al cargar Google Maps. Mostrando vista alternativa.');
+            }
+        });
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&callback=initMap&libraries=places" onerror="handleMapError()"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #1e40af 50%, #1e40af 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        /* Estilo para los nuevos iconos de emoji */
+        .emoji-icon { font-size: 3rem; line-height: 1; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class=" bg-white rounded-full flex items-center space-x-3">
+                        <img src="1000217146 (1).png" alt="Logo Jarelux" class="w-12 h-12 rounded-full">
+
+                    </div>
+                    <h1 class= "text-2xl font-bold">Jarelux</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="hover:text-blue-200 transition-colors">Inicio</a>
+                    <a href="#descuentos" class="hover:text-blue-200 transition-colors">Descuentos</a>
+                    <a href="#mapa" class="hover:text-blue-200 transition-colors">Mapa</a>
+                    <a href="#como-funciona" class="hover:text-blue-200 transition-colors">Cómo Funciona</a>
+                    <a href="#contacto" class="hover:text-blue-200 transition-colors">Contacto</a>
+                </nav>
+                <button class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-bold mb-6">Descuentos Especiales para Pacientes con Cáncer</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Jarelux te conecta con descuentos exclusivos en farmacias, clínicas, hospitales, laboratorios y tratamientos de quimioterapia. Tu bienestar es nuestra prioridad.</p>
+            <button onclick="scrollToSection('descuentos')" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors shadow-lg">
+                Ver Descuentos Disponibles
+            </button>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center mb-12">Impacto de Jarelux en Números</h3>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="relative w-24 h-24 mx-auto mb-4">
+                        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="white" stroke-width="3" stroke-dasharray="85, 100" stroke-linecap="round"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold">85%</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Ahorro Promedio</h4>
+                    <p class="text-blue-100">en medicamentos oncológicos</p>
+                </div>
+                <div class="text-center">
+                    <div class="relative w-24 h-24 mx-auto mb-4">
+                        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="white" stroke-width="3" stroke-dasharray="92, 100" stroke-linecap="round"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold">92%</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Satisfacción</h4>
+                    <p class="text-blue-100">de pacientes registrados</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2">15K+</div>
+                    <h4 class="text-xl font-semibold mb-2">Pacientes Activos</h4>
+                    <p class="text-blue-100">usando Jarelux mensualmente</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold mb-2">$2.5M</div>
+                    <h4 class="text-xl font-semibold mb-2">Ahorrado Total</h4>
+                    <p class="text-blue-100">en tratamientos este año</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="descuentos" class="py-16">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-12">Categorías de Descuentos</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-t-4 border-green-500">
+                    <div class="text-green-600 mb-4 text-center">
+                        <span class="emoji-icon">💊</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Medicamentos y Farmacias</h4>
+                    <p class="text-gray-600 mb-6 text-center">Hasta **30% de ahorro** en medicamentos oncológicos, especializados y suplementos de apoyo.</p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                            Farmacia del Ahorro
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                            Farmacias Similares
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                            Benavides
+                        </div>
+                    </div>
+                    <button onclick="showDiscountDetails('farmacias')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Descuentos
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-t-4 border-blue-500">
+                    <div class="text-blue-600 mb-4 text-center">
+                        <span class="emoji-icon">🩺</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Consultas y Especialistas</h4>
+                    <p class="text-gray-600 mb-6 text-center">Accede a consultas de **oncología y seguimiento** con tarifas preferenciales del 15% al 25%.</p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                            Clínica Oncológica Integral
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                            Centro Médico Especializado
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                            Clínica San Rafael
+                        </div>
+                    </div>
+                    <button onclick="showDiscountDetails('clinicas')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Descuentos
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-t-4 border-red-500">
+                    <div class="text-red-600 mb-4 text-center">
+                        <span class="emoji-icon">🏥</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Hospitalización y Cirugías</h4>
+                    <p class="text-gray-600 mb-6 text-center">Tarifas especiales en **hospitalización, quirófano y cirugías** oncológicas mayores.</p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                            Hospital ABC
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                            Hospital Ángeles
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                            Hospital Médica Sur
+                        </div>
+                    </div>
+                    <button onclick="showDiscountDetails('hospitales')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Descuentos
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-t-4 border-yellow-500">
+                    <div class="text-yellow-600 mb-4 text-center">
+                        <span class="emoji-icon">🔬</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Estudios y Diagnóstico</h4>
+                    <p class="text-gray-600 mb-6 text-center">Descuentos de hasta **30% en análisis clínicos**, marcadores tumorales y pruebas de imagen.</p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
+                            Laboratorios Chopo
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
+                            Salud Digna
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
+                            Laboratorio Médico Polanco
+                        </div>
+                    </div>
+                    <button onclick="showDiscountDetails('laboratorios')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Descuentos
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-t-4 border-purple-500">
+                    <div class="text-purple-600 mb-4 text-center">
+                        <span class="emoji-icon">💉</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Tratamientos Oncológicos</h4>
+                    <p class="text-gray-600 mb-6 text-center">Apoyo directo en **sesiones de quimioterapia**, radioterapia y terapias biológicas dirigidas.</p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                            Centro de Oncología Integral
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                            Instituto Nacional de Cancerología
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                            Clínica de Quimioterapia Ambulatoria
+                        </div>
+                    </div>
+                    <button onclick="showDiscountDetails('quimioterapia')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Descuentos
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-t-4 border-pink-500">
+                    <div class="text-pink-600 mb-4 text-center">
+                        <span class="emoji-icon">✨</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Bienestar y Soporte</h4>
+                    <p class="text-gray-600 mb-6 text-center">Descuentos en servicios esenciales de **nutrición, psicología** y cuidados paliativos.</p>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-pink-500 rounded-full mr-3"></span>
+                            Nutrición Oncológica
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-pink-500 rounded-full mr-3"></span>
+                            Psicología Especializada
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <span class="w-2 h-2 bg-pink-500 rounded-full mr-3"></span>
+                            Cuidados Paliativos
+                        </div>
+                    </div>
+                    <button onclick="showDiscountDetails('complementarios')" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Ver Descuentos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-12">Comparación de Ahorros por Categoría</h3>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-6">Descuentos Promedio por Servicio</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-32 text-sm font-medium text-gray-700">Farmacias</div>
+                                <div class="flex-1 bg-gray-200 rounded-full h-6 mx-4">
+                                    <div class="bg-green-500 h-6 rounded-full flex items-center justify-end pr-2" style="width: 75%;">
+                                        <span class="text-white text-xs font-bold">25%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 text-sm font-medium text-gray-700">Laboratorios</div>
+                                <div class="flex-1 bg-gray-200 rounded-full h-6 mx-4">
+                                    <div class="bg-yellow-500 h-6 rounded-full flex items-center justify-end pr-2" style="width: 75%;">
+                                        <span class="text-white text-xs font-bold">25%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 text-sm font-medium text-gray-700">Clínicas</div>
+                                <div class="flex-1 bg-gray-200 rounded-full h-6 mx-4">
+                                    <div class="bg-blue-500 h-6 rounded-full flex items-center justify-end pr-2" style="width: 60%;">
+                                        <span class="text-white text-xs font-bold">20%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 text-sm font-medium text-gray-700">Quimioterapia</div>
+                                <div class="flex-1 bg-gray-200 rounded-full h-6 mx-4">
+                                    <div class="bg-purple-500 h-6 rounded-full flex items-center justify-end pr-2" style="width: 55%;">
+                                        <span class="text-white text-xs font-bold">18%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-32 text-sm font-medium text-gray-700">Hospitales</div>
+                                <div class="flex-1 bg-gray-200 rounded-full h-6 mx-4">
+                                    <div class="bg-red-500 h-6 rounded-full flex items-center justify-end pr-2" style="width: 37.5%;">
+                                        <span class="text-white text-xs font-bold">12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-6">Distribución de Proveedores</h4>
+                        <div class="relative w-64 h-64 mx-auto">
+                            <svg class="w-64 h-64 transform -rotate-90" viewBox="0 0 42 42">
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#10b981" stroke-width="3" stroke-dasharray="30 70" stroke-dashoffset="0"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#3b82f6" stroke-width="3" stroke-dasharray="25 75" stroke-dashoffset="-30"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#eab308" stroke-width="3" stroke-dasharray="20 80" stroke-dashoffset="-55"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#ef4444" stroke-width="3" stroke-dasharray="15 85" stroke-dashoffset="-75"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="10 90" stroke-dashoffset="-90"></circle>
+                            </svg>
+                        </div>
+                        <div class="mt-6 space-y-2">
+                            <div class="flex items-center justify-center">
+                                <div class="w-4 h-4 bg-green-500 rounded mr-2"></div>
+                                <span class="text-sm">Farmacias (30%)</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="w-4 h-4 bg-blue-500 rounded mr-2"></div>
+                                <span class="text-sm">Clínicas (25%)</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="w-4 h-4 bg-yellow-500 rounded mr-2"></div>
+                                <span class="text-sm">Laboratorios (20%)</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="w-4 h-4 bg-red-500 rounded mr-2"></div>
+                                <span class="text-sm">Hospitales (15%)</span>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="w-4 h-4 bg-purple-500 rounded mr-2"></div>
+                                <span class="text-sm">Quimioterapia (10%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-12">Calculadora de Ahorros</h3>
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-2xl font-semibold text-gray-800 mb-6">Calcula tu Ahorro Mensual</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Gasto mensual en medicamentos</label>
+                                <input type="number" id="medicamentos" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="$0" oninput="calculateSavings()">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Gasto mensual en consultas</label>
+                                <input type="number" id="consultas" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="$0" oninput="calculateSavings()">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Gasto mensual en estudios</label>
+                                <input type="number" id="estudios" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="$0" oninput="calculateSavings()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h4 class="text-2xl font-semibold text-blue-800 mb-6">Tu Ahorro Estimado</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Gasto actual mensual:</span>
+                                <span id="gastoTotal" class="font-bold text-lg">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Con descuentos Jarelux:</span>
+                                <span id="gastoConDescuento" class="font-bold text-lg text-green-600">$0</span>
+                            </div>
+                            <hr class="border-gray-300">
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-800 font-semibold">Ahorro mensual:</span>
+                                <span id="ahorroMensual" class="font-bold text-2xl text-blue-600">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-800 font-semibold">Ahorro anual:</span>
+                                <span id="ahorroAnual" class="font-bold text-xl text-blue-600">$0</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-blue-100 rounded-lg">
+                            <p class="text-sm text-blue-800">💡 <strong>Tip:</strong> Los ahorros mostrados son estimaciones basadas en descuentos promedio de la red Jarelux.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="bg-blue-50 py-16">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-12">¿Cómo Funciona Jarelux?</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white font-bold text-2xl">1</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Regístrate Gratis</h4>
+                    <p class="text-gray-600">Crea tu cuenta con tu información médica básica y obtén acceso inmediato a todos los descuentos.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white font-bold text-2xl">2</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Encuentra Descuentos</h4>
+                    <p class="text-gray-600">Explora nuestra red de proveedores y encuentra los mejores descuentos cerca de ti.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white font-bold text-2xl">3</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Ahorra Dinero</h4>
+                    <p class="text-gray-600">Presenta tu tarjeta Jarelux y obtén descuentos inmediatos en todos tus tratamientos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mapa" class="py-16">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-12">Encuentra Descuentos Cerca de Ti</h3>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-6 bg-blue-50 border-b">
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <button onclick="filterMarkers('all')" class="filter-btn active bg-blue-600 text-white px-4 py-2 rounded-full text-sm hover:bg-blue-700 transition-colors">
+                            Todos
+                        </button>
+                        <button onclick="filterMarkers('farmacias')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors">
+                            Farmacias
+                        </button>
+                        <button onclick="filterMarkers('clinicas')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors">
+                            Clínicas
+                        </button>
+                        <button onclick="filterMarkers('hospitales')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors">
+                            Hospitales
+                        </button>
+                        <button onclick="filterMarkers('laboratorios')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors">
+                            Laboratorios
+                        </button>
+                        <button onclick="filterMarkers('quimioterapia')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-300 transition-colors">
+                            Quimioterapia
+                        </button>
+                    </div>
+                </div>
+                <div id="map" style="height: 500px; width: 100%;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-6">¿Listo para Comenzar a Ahorrar?</h3>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Únete a miles de pacientes que ya están ahorrando en sus tratamientos con Jarelux.</p>
+            <button onclick="showRegistrationForm()" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors shadow-lg mr-4">
+                Registrarse Gratis
+            </button>
+            <button onclick="showContactForm()" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors mr-4">
+                Más Información
+            </button>
+            <button onclick="showDonationModal()" class="bg-yellow-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-600 transition-colors shadow-lg">
+                💝 Donar Ahora
+            </button>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold">J</span>
+                        </div>
+                        <h4 class="text-xl font-bold">Jarelux</h4>
+                    </div>
+                    <p class="text-gray-400">Conectando pacientes con cáncer con descuentos que marcan la diferencia en su tratamiento.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Servicios</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Farmacias</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Clínicas</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Hospitales</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Laboratorios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Soporte</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Centro de Ayuda</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Contacto</h5>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📞 01-800-JARELUX</p>
+                        <p>✉️ info@jarelux.com</p>
+                        <p>📍 Ciudad de México, México</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 Jarelux. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="discountModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold text-gray-800"></h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="modalContent" class="text-gray-600 mb-6"></div>
+            <button onclick="closeModal()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <div id="donationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-lg w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Donaciones Voluntarias</h3>
+                <button onclick="closeDonationModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">💝</span>
+                </div>
+                <h4 class="text-xl font-semibold text-gray-800 mb-2">Apoya la Fundación Jarelux</h4>
+                <p class="text-gray-600">Tu donación ayuda a que más pacientes con cáncer accedan a descuentos en sus tratamientos.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <button onclick="selectDonationAmount(100)" class="donation-btn border-2 border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-blue-50 transition-colors">
+                    <div class="text-2xl font-bold text-blue-600">$100</div>
+                    <div class="text-sm text-gray-600">Ayuda básica</div>
+                </button>
+                <button onclick="selectDonationAmount(250)" class="donation-btn border-2 border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-blue-50 transition-colors">
+                    <div class="text-2xl font-bold text-blue-600">$250</div>
+                    <div class="text-sm text-gray-600">Apoyo mensual</div>
+                </button>
+                <button onclick="selectDonationAmount(500)" class="donation-btn border-2 border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-blue-50 transition-colors">
+                    <div class="text-2xl font-bold text-blue-600">$500</div>
+                    <div class="text-sm text-gray-600">Patrocinador</div>
+                </button>
+                <button onclick="selectDonationAmount(1000)" class="donation-btn border-2 border-gray-300 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-blue-50 transition-colors">
+                    <div class="text-2xl font-bold text-blue-600">$1,000</div>
+                    <div class="text-sm text-gray-600">Benefactor</div>
+                </button>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Cantidad personalizada</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-2 text-gray-500">$</span>
+                    <input type="number" id="customAmount" class="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0.00" oninput="updateCustomAmount()">
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <h5 class="font-semibold text-blue-800 mb-2">¿Cómo se usa tu donación?</h5>
+                <div class="text-sm text-blue-700 space-y-1">
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <span>60% - Descuentos directos a pacientes</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <span>25% - Expansión de la red de proveedores</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <span>15% - Operación y administración</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                <p class="text-sm text-yellow-800"><strong>Nota:</strong> Este es un formulario de demostración. En la versión real, se integraría con procesadores de pago seguros como PayPal, Stripe o bancos mexicanos.</p>
+            </div>
+
+            <div class="space-y-3">
+                <button onclick="processDonation()" class="w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition-colors font-semibold">
+                    Donar <span id="selectedAmount">$0</span>
+                </button>
+                <button onclick="closeDonationModal()" class="w-full border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="registrationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Registro Gratuito</h3>
+                <button onclick="closeRegistrationModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tu nombre completo">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
+                    <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="tu@email.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                    <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tu número de teléfono">
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm text-blue-800"><strong>Nota:</strong> Este es un formulario de demostración. En la versión real, se requeriría verificación médica para acceder a los descuentos.</p>
+                </div>
+                <button type="button" onclick="submitRegistration()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    Crear Cuenta Gratuita
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let map;
+        let markers = [];
+        let infoWindow;
+
+        // Locations data with coordinates for Comitán de Domínguez, Chiapas
+        const locations = [
+            // Farmacias en Comitán de Domínguez
+            { name: "Farmacia del Ahorro - Centro Comitán", type: "farmacias", lat: 16.2467, lng: -92.1333, discount: "25% en medicamentos oncológicos", address: "1a Av. Norte Poniente 15, Centro, Comitán" },
+            { name: "Farmacias Similares - Comitán", type: "farmacias", lat: 16.2489, lng: -92.1289, discount: "30% en suplementos nutricionales", address: "Blvd. Dr. Belisario Domínguez 45, Comitán" },
+            { name: "Farmacia San José", type: "farmacias", lat: 16.2445, lng: -92.1356, discount: "20% en medicamentos de soporte", address: "2a Calle Oriente Norte 23, Centro, Comitán" },
+            { name: "Farmacia Guadalupe", type: "farmacias", lat: 16.2501, lng: -92.1298, discount: "22% en vitaminas y suplementos", address: "Av. Central Norte 67, Comitán" },
+            
+            // Clínicas en Comitán de Domínguez
+            { name: "Clínica Hospital Comitán", type: "clinicas", lat: 16.2478, lng: -92.1312, discount: "15% en consultas especializadas", address: "3a Av. Sur Poniente 34, Centro, Comitán" },
+            { name: "Centro Médico Las Flores", type: "clinicas", lat: 16.2456, lng: -92.1345, discount: "20% en estudios de imagen", address: "Barrio Las Flores, Comitán de Domínguez" },
+            { name: "Clínica San Rafael Comitán", type: "clinicas", lat: 16.2512, lng: -92.1278, discount: "18% en consultas multidisciplinarias", address: "Colonia San José, Comitán" },
+            { name: "Consultorio Médico Especializado", type: "clinicas", lat: 16.2434, lng: -92.1367, discount: "25% en consultas oncológicas", address: "1a Calle Poniente Sur 12, Comitán" },
+            
+            // Hospitales en Comitán de Domínguez
+            { name: "Hospital General de Comitán", type: "hospitales", lat: 16.2523, lng: -92.1267, discount: "12% en hospitalización", address: "Carretera Panamericana Km 1149, Comitán" },
+            { name: "Hospital Básico Comunitario", type: "hospitales", lat: 16.2445, lng: -92.1334, discount: "15% en cirugías", address: "Barrio San Sebastián, Comitán" },
+            { name: "Sanatorio Rosales", type: "hospitales", lat: 16.2489, lng: -92.1301, discount: "10% en tratamientos ambulatorios", address: "2a Av. Norte Oriente 89, Comitán" },
+            
+            // Laboratorios en Comitán de Domínguez
+            { name: "Laboratorio Clínico Comitán", type: "laboratorios", lat: 16.2467, lng: -92.1323, discount: "30% en marcadores tumorales", address: "1a Av. Sur Poniente 56, Centro, Comitán" },
+            { name: "Laboratorios Chopo - Comitán", type: "laboratorios", lat: 16.2501, lng: -92.1289, discount: "25% en estudios de seguimiento", address: "Blvd. Dr. Belisario Domínguez 123, Comitán" },
+            { name: "Lab. Análisis Clínicos Frontera", type: "laboratorios", lat: 16.2434, lng: -92.1345, discount: "28% en estudios especializados", address: "3a Calle Oriente Norte 45, Comitán" },
+            { name: "Laboratorio Médico del Sur", type: "laboratorios", lat: 16.2478, lng: -92.1356, discount: "22% en biometrías hemáticas", address: "Colonia Centro, Comitán de Domínguez" },
+            
+            // Centros de Quimioterapia en Comitán
+            { name: "Centro Oncológico Fronterizo", type: "quimioterapia", lat: 16.2512, lng: -92.1312, discount: "18% en sesiones de quimioterapia", address: "Av. Central Sur 234, Comitán" },
+            { name: "Unidad de Oncología Comitán", type: "quimioterapia", lat: 16.2456, lng: -92.1334, discount: "20% en terapias dirigidas", address: "Hospital General de Comitán, Anexo Oncológico" },
+            
+            // Servicios adicionales en la región
+            { name: "Farmacia Cruz Verde", type: "farmacias", lat: 16.2423, lng: -92.1378, discount: "24% en medicamentos especializados", address: "Barrio La Pila, Comitán" },
+            { name: "Centro de Salud Comunitario", type: "clinicas", lat: 16.2534, lng: -92.1245, discount: "30% en consultas preventivas", address: "Ejido Yalumá, Comitán" },
+            { name: "Laboratorio Biomédico Chiapas", type: "laboratorios", lat: 16.2445, lng: -92.1312, discount: "26% en estudios hormonales", address: "2a Av. Sur Oriente 78, Comitán" }
+        ];
+
+        function initMap() {
+            // Initialize map centered on Comitán de Domínguez, Chiapas
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 16.2467, lng: -92.1333 },
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
+            });
+
+            infoWindow = new google.maps.InfoWindow();
+
+            // Add markers for all locations
+            locations.forEach(location => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map: map,
+                    title: location.name,
+                    icon: getMarkerIcon(location.type)
+                });
+
+                marker.locationData = location;
+
+                marker.addListener("click", () => {
+                    const content = `
+                        <div class="p-4 max-w-xs">
+                            <h3 class="font-bold text-lg text-blue-600 mb-2">${location.name}</h3>
+                            <p class="text-sm text-gray-600 mb-2">${location.address}</p>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm font-semibold text-blue-800">💰 ${location.discount}</p>
+                            </div>
+                            <div class="mt-3 flex space-x-2">
+                                <button onclick="getDirections(${location.lat}, ${location.lng})" class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">
+                                    Cómo llegar
+                                </button>
+                                <button onclick="callLocation()" class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700">
+                                    Llamar
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, marker);
+                });
+
+                markers.push(marker);
+            });
+        }
+
+        // FUNCIÓN MODIFICADA: Ahora usa iconos de Google Maps más descriptivos (o los colores por defecto).
+        function getMarkerIcon(type) {
+            const icons = {
+                farmacias: { url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png' },
+                clinicas: { url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png' },
+                hospitales: { url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' },
+                laboratorios: { url: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png' },
+                quimioterapia: { url: 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png' }
+            };
+            return icons[type] || { url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png' };
+        }
+
+        function filterMarkers(type) {
+            // Update filter button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.add('active', 'bg-blue-600', 'text-white');
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+            // Filter markers
+            markers.forEach(marker => {
+                if (type === 'all' || marker.locationData.type === type) {
+                    marker.setVisible(true);
+                } else {
+                    marker.setVisible(false);
+                }
+            });
+
+            // Close info window
+            if (infoWindow) {
+                infoWindow.close();
+            }
+        }
+
+        function getDirections(lat, lng) {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+            window.open(url, '_blank');
+        }
+
+        function callLocation() {
+            alert('En la versión real de Jarelux, aquí se mostraría el número telefónico del establecimiento para que puedas llamar directamente.');
+        }
+
+        // Handle Google Maps script loading errors
+        function handleMapError() {
+            console.log('Failed to load Google Maps script');
+            showMapFallback('No se pudo cargar el script de Google Maps. Mostrando vista alternativa.');
+        }
+
+        // Show fallback content when Google Maps fails
+        function showMapFallback(errorMessage) {
+            const mapElement = document.getElementById('map');
+            if (mapElement) {
+                mapElement.innerHTML = `
+                    <div class="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-blue-100">
+                        <div class="text-center p-8 max-w-md">
+                            <div class="text-red-500 mb-4">
+                                <svg class="w-16 h-16 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">Mapa No Disponible</h3>
+                            <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4 text-left">
+                                <p class="text-sm text-yellow-800 font-medium">⚠️ Error de Google Maps:</p>
+                                <p class="text-xs text-yellow-700 mt-1">${errorMessage}</p>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold text-blue-800 mb-2">Ubicaciones Disponibles:</h4>
+                                <div class="text-sm text-blue-700 space-y-1">
+                                    <p>🏥 15+ Hospitales afiliados</p>
+                                    <p>💊 50+ Farmacias participantes</p>
+                                    <p>🔬 25+ Laboratorios asociados</p>
+                                    <p>🏥 30+ Clínicas especializadas</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <button onclick="showLocationsList()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                    Ver Lista de Ubicaciones
+                                </button>
+                                <p class="text-xs text-gray-600">
+                                    Para habilitar el mapa interactivo, se requiere configurar una clave API válida de Google Maps.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Show locations list as alternative to map
+        function showLocationsList() {
+            const mapElement = document.getElementById('map');
+            mapElement.innerHTML = `
+                <div class="bg-white h-full overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-gray-800">Ubicaciones con Descuentos Jarelux</h3>
+                            <button onclick="showMapFallback('Mapa no disponible')" class="text-blue-600 hover:text-blue-800 text-sm">
+                                ← Volver
+                            </button>
+                        </div>
+                        <div class="grid gap-4">
+                            ${locations.map(location => `
+                                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-gray-800">${location.name}</h4>
+                                            <p class="text-sm text-gray-600 mb-1">${location.address}</p>
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <span class="inline-block w-3 h-3 rounded-full ${getTypeColor(location.type)}"></span>
+                                                <span class="text-xs text-gray-500 capitalize">${location.type}</span>
+                                            </div>
+                                            <div class="bg-green-50 border border-green-200 rounded p-2">
+                                                <p class="text-sm text-green-800 font-medium">💰 ${location.discount}</p>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4 space-y-1">
+                                            <button onclick="openGoogleMaps(${location.lat}, ${location.lng})" class="block w-full bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">
+                                                Cómo llegar
+                                            </button>
+                                            <button onclick="callLocation()" class="block w-full bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700">
+                                                Llamar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getTypeColor(type) {
+            const colors = {
+                farmacias: 'bg-green-500',
+                clinicas: 'bg-blue-500',
+                hospitales: 'bg-red-500',
+                laboratorios: 'bg-yellow-500',
+                quimioterapia: 'bg-purple-500'
+            };
+            return colors[type] || 'bg-gray-500';
+        }
+
+        function openGoogleMaps(lat, lng) {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+            window.open(url, '_blank');
+        }
+
+        // Fallback check with improved error handling
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (typeof google === 'undefined' || !window.google || !window.google.maps) {
+                    console.log('Google Maps not loaded, showing fallback');
+                    showMapFallback('Google Maps no se cargó correctamente. Consulta la consola de JavaScript para obtener los detalles técnicos.');
+                }
+            }, 5000);
+        });
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showDiscountDetails(category) {
+            const modal = document.getElementById('discountModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const discountData = {
+                farmacias: {
+                    title: '💊 Descuentos en Farmacias',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-semibold">Farmacia del Ahorro</h4>
+                                <p class="text-sm">25% de descuento en medicamentos oncológicos</p>
+                                <p class="text-xs text-gray-500">Válido con receta médica</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-semibold">Farmacias Similares</h4>
+                                <p class="text-sm">30% de descuento en suplementos nutricionales</p>
+                                <p class="text-xs text-gray-500">Aplica para pacientes registrados</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-semibold">Benavides</h4>
+                                <p class="text-sm">20% de descuento en medicamentos de soporte</p>
+                                <p class="text-xs text-gray-500">Descuento acumulable con otros programas</p>
+                            </div>
+                        </div>
+                    `
+                },
+                clinicas: {
+                    title: '🩺 Descuentos en Clínicas',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold">Clínica Oncológica Integral</h4>
+                                <p class="text-sm">15% de descuento en consultas especializadas</p>
+                                <p class="text-xs text-gray-500">Incluye seguimiento post-tratamiento</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold">Centro Médico Especializado</h4>
+                                <p class="text-sm">20% de descuento en estudios de imagen</p>
+                                <p class="text-xs text-gray-500">TAC, resonancia magnética, PET-CT</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold">Clínica San Rafael</h4>
+                                <p class="text-sm">25% de descuento en consultas multidisciplinarias</p>
+                                <p class="text-xs text-gray-500">Equipo completo de especialistas</p>
+                            </div>
+                        </div>
+                    `
+                },
+                hospitales: {
+                    title: '🏥 Descuentos en Hospitales',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold">Hospital ABC</h4>
+                                <p class="text-sm">10% de descuento en hospitalización</p>
+                                <p class="text-xs text-gray-500">Incluye habitación y cuidados especializados</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold">Hospital Ángeles</h4>
+                                <p class="text-sm">15% de descuento en cirugías oncológicas</p>
+                                <p class="text-xs text-gray-500">Equipo quirúrgico especializado</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold">Hospital Médica Sur</h4>
+                                <p class="text-sm">12% de descuento en tratamientos ambulatorios</p>
+                                <p class="text-xs text-gray-500">Incluye radioterapia y quimioterapia</p>
+                            </div>
+                        </div>
+                    `
+                },
+                laboratorios: {
+                    title: '🔬 Descuentos en Laboratorios',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <h4 class="font-semibold">Laboratorios Chopo</h4>
+                                <p class="text-sm">30% de descuento en marcadores tumorales</p>
+                                <p class="text-xs text-gray-500">Incluye CEA, CA 19-9, PSA, CA 125</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <h4 class="font-semibold">Salud Digna</h4>
+                                <p class="text-sm">25% de descuento en estudios de seguimiento</p>
+                                <p class="text-xs text-gray-500">Biometría hemática, química sanguínea</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <h4 class="font-semibold">Laboratorio Médico Polanco</h4>
+                                <p class="text-sm">20% de descuento en estudios especializados</p>
+                                <p class="text-xs text-gray-500">Inmunohistoquímica y biología molecular</p>
+                            </div>
+                        </div>
+                    `
+                },
+                quimioterapia: {
+                    title: '💉 Descuentos en Quimioterapia',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-semibold">Centro de Oncología Integral</h4>
+                                <p class="text-sm">15% de descuento en sesiones de quimioterapia</p>
+                                <p class="text-xs text-gray-500">Incluye medicamentos y aplicación</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-semibold">Instituto Nacional de Cancerología</h4>
+                                <p class="text-sm">Apoyo económico hasta 40% en tratamientos</p>
+                                <p class="text-xs text-gray-500">Sujeto a evaluación socioeconómica</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-semibold">Clínica de Quimioterapia Ambulatoria</h4>
+                                <p class="text-sm">20% de descuento en terapias dirigidas</p>
+                                <p class="text-xs text-gray-500">Incluye inmunoterapia y terapias moleculares</p>
+                            </div>
+                        </div>
+                    `
+                },
+                complementarios: {
+                    title: '✨ Servicios Complementarios',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-pink-500 pl-4">
+                                <h4 class="font-semibold">Nutrición Oncológica</h4>
+                                <p class="text-sm">25% de descuento en consultas nutricionales</p>
+                                <p class="text-xs text-gray-500">Plan alimentario personalizado</p>
+                            </div>
+                            <div class="border-l-4 border-pink-500 pl-4">
+                                <h4 class="font-semibold">Psicología Especializada</h4>
+                                <p class="text-sm">30% de descuento en terapia psicológica</p>
+                                <p class="text-xs text-gray-500">Individual, familiar y de grupo</p>
+                            </div>
+                            <div class="border-l-4 border-pink-500 pl-4">
+                                <h4 class="font-semibold">Cuidados Paliativos</h4>
+                                <p class="text-sm">20% de descuento en cuidados especializados</p>
+                                <p class="text-xs text-gray-500">Manejo del dolor y cuidados de confort</p>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            title.textContent = discountData[category].title;
+            content.innerHTML = discountData[category].content;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('discountModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showRegistrationForm() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function submitRegistration() {
+            alert('¡Gracias por tu interés! En la versión real de Jarelux, tu registro sería procesado y recibirías tu tarjeta de descuentos por correo electrónico.');
+            closeRegistrationModal();
+        }
+
+        function showContactForm() {
+            alert('Para más información, puedes contactarnos al 01-800-JARELUX o enviar un correo a info@jarelux.com');
+        }
+
+        let selectedDonationAmount = 0;
+
+        function showDonationModal() {
+            const modal = document.getElementById('donationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeDonationModal() {
+            const modal = document.getElementById('donationModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            // Reset selection
+            selectedDonationAmount = 0;
+            document.getElementById('selectedAmount').textContent = '$0';
+            document.getElementById('customAmount').value = '';
+            // Reset button styles
+            document.querySelectorAll('.donation-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'bg-blue-50');
+                btn.classList.add('border-gray-300');
+            });
+        }
+
+        function selectDonationAmount(amount) {
+            selectedDonationAmount = amount;
+            document.getElementById('selectedAmount').textContent = '$' + amount.toLocaleString();
+            document.getElementById('customAmount').value = '';
+            
+            // Update button styles
+            document.querySelectorAll('.donation-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'bg-blue-50');
+                btn.classList.add('border-gray-300');
+            });
+            
+            // Highlight selected button
+            event.target.closest('.donation-btn').classList.remove('border-gray-300');
+            event.target.closest('.donation-btn').classList.add('border-blue-500', 'bg-blue-50');
+        }
+
+        function updateCustomAmount() {
+            const customAmount = parseFloat(document.getElementById('customAmount').value) || 0;
+            selectedDonationAmount = customAmount;
+            document.getElementById('selectedAmount').textContent = '$' + customAmount.toLocaleString();
+            
+            // Reset preset button styles when custom amount is entered
+            if (customAmount > 0) {
+                document.querySelectorAll('.donation-btn').forEach(btn => {
+                    btn.classList.remove('border-blue-500', 'bg-blue-50');
+                    btn.classList.add('border-gray-300');
+                });
+            }
+        }
+
+        function processDonation() {
+            if (selectedDonationAmount <= 0) {
+                alert('Por favor selecciona una cantidad para donar.');
+                return;
+            }
+            
+            alert(`¡Gracias por tu generosidad! Tu donación de $${selectedDonationAmount.toLocaleString()} ayudará a que más pacientes con cáncer accedan a descuentos en sus tratamientos.\n\nEn la versión real de Jarelux, serías redirigido a una plataforma de pago segura para completar tu donación.`);
+            closeDonationModal();
+        }
+
+        function calculateSavings() {
+            const medicamentos = parseFloat(document.getElementById('medicamentos').value) || 0;
+            const consultas = parseFloat(document.getElementById('consultas').value) || 0;
+            const estudios = parseFloat(document.getElementById('estudios').value) || 0;
+            
+            const gastoTotal = medicamentos + consultas + estudios;
+            
+            // Apply average discounts: medicamentos 25%, consultas 20%, estudios 25%
+            const medicamentosConDescuento = medicamentos * 0.75; // 25% discount
+            const consultasConDescuento = consultas * 0.80; // 20% discount
+            const estudiosConDescuento = estudios * 0.75; // 25% discount
+            
+            const gastoConDescuento = medicamentosConDescuento + consultasConDescuento + estudiosConDescuento;
+            const ahorroMensual = gastoTotal - gastoConDescuento;
+            const ahorroAnual = ahorroMensual * 12;
+            
+            // Format currency
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('es-MX', {
+                    style: 'currency',
+                    currency: 'MXN'
+                }).format(amount);
+            };
+            
+            document.getElementById('gastoTotal').textContent = formatCurrency(gastoTotal);
+            document.getElementById('gastoConDescuento').textContent = formatCurrency(gastoConDescuento);
+            document.getElementById('ahorroMensual').textContent = formatCurrency(ahorroMensual);
+            document.getElementById('ahorroAnual').textContent = formatCurrency(ahorroAnual);
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const discountModal = document.getElementById('discountModal');
+            const registrationModal = document.getElementById('registrationModal');
+            const donationModal = document.getElementById('donationModal');
+            if (event.target === discountModal) {
+                closeModal();
+            }
+            if (event.target === registrationModal) {
+                closeRegistrationModal();
+            }
+            if (event.target === donationModal) {
+                closeDonationModal();
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97660deae3935e48',t:'MTc1NjQwNzY1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

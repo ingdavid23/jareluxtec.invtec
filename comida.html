@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarelux Nutrición - Control Nutricional para Pacientes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'jarelux-blue': '#1e40af',
+                        'jarelux-light': '#3b82f6',
+                        'jarelux-dark': '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-jarelux-blue shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12  flex items-center justify-center p-1">
+                        <img src="1000217146 (1).png" alt="Logo de Jarelux" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-white text-2xl font-bold">Jarelux Nutrición</h1>
+                        <p class="text-blue-200 text-sm">Control nutricional especializado</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#dashboard" class="text-white hover:text-blue-200 transition-colors"> Control nutricional</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Welcome Section -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-jarelux-blue mb-4">Bienvenido a tu Plan Nutricional</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Diseñado especialmente para apoyar tu tratamiento oncológico con una nutrición personalizada y seguimiento continuo.</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <!-- Resumen Diario -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-semibold text-jarelux-blue">Resumen de Hoy</h3>
+                    <div class="w-12 h-12 bg-jarelux-light rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl">📊</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Calorías</span>
+                        <span class="font-semibold text-jarelux-blue">1,850 / 2,200</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-jarelux-light h-2 rounded-full" style="width: 84%"></div>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Proteínas</span>
+                        <span class="font-semibold text-green-600">95g / 90g ✓</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Hidratación</span>
+                        <span class="font-semibold text-jarelux-blue">6 / 8 vasos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Próxima Comida -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-semibold text-jarelux-blue">Próxima Comida</h3>
+                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl">🍽️</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-lg font-semibold text-gray-800">Almuerzo - 13:00</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Salmón a la plancha (150g)</li>
+                        <li>• Arroz integral (100g)</li>
+                        <li>• Brócoli al vapor</li>
+                        <li>• Aguacate (1/2 pieza)</li>
+                    </ul>
+                    <button class="w-full bg-jarelux-blue text-white py-2 rounded-lg hover:bg-jarelux-dark transition-colors">
+                        Ver Receta Completa
+                    </button>
+                </div>
+            </div>
+
+            <!-- Estado del Tratamiento -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-semibold text-jarelux-blue">Estado Nutricional</h3>
+                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl">💪</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Peso actual</span>
+                        <span class="font-semibold text-jarelux-blue">68.5 kg</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">IMC</span>
+                        <span class="font-semibold text-green-600">22.1 (Normal)</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Energía</span>
+                        <span class="font-semibold text-yellow-600">Moderada</span>
+                    </div>
+                    <button class="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                        Registrar Síntomas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plan de Comidas -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-jarelux-blue mb-6">Plan de Comidas Semanal</h3>
+            <div class="grid md:grid-cols-7 gap-4">
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Lunes</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Avena con frutas</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Pollo con quinoa</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Sopa de verduras</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Martes</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Yogur con nueces</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Pescado al horno</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Ensalada proteica</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Miércoles</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Batido proteico</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Lentejas con arroz</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Tortilla de verduras</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Jueves</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Tostadas integrales</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Pavo con vegetales</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Crema de calabaza</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Viernes</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Smoothie verde</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Salmón con brócoli</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Quinoa con pollo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Sábado</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Pancakes saludables</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Pasta integral</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Pescado a la plancha</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-semibold text-jarelux-blue mb-3">Domingo</h4>
+                    <div class="space-y-2">
+                        <div class="bg-blue-50 p-2 rounded text-xs">
+                            <p class="font-medium">Desayuno</p>
+                            <p>Huevos revueltos</p>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded text-xs">
+                            <p class="font-medium">Almuerzo</p>
+                            <p>Estofado de ternera</p>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded text-xs">
+                            <p class="font-medium">Cena</p>
+                            <p>Ensalada mixta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registro Rápido -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-jarelux-blue mb-4">Registro Rápido</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">¿Cómo te sientes hoy?</label>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 p-3 border-2 border-green-200 rounded-lg hover:bg-green-50 transition-colors">
+                                <span class="text-2xl">😊</span>
+                                <p class="text-xs mt-1">Bien</p>
+                            </button>
+                            <button class="flex-1 p-3 border-2 border-yellow-200 rounded-lg hover:bg-yellow-50 transition-colors">
+                                <span class="text-2xl">😐</span>
+                                <p class="text-xs mt-1">Regular</p>
+                            </button>
+                            <button class="flex-1 p-3 border-2 border-red-200 rounded-lg hover:bg-red-50 transition-colors">
+                                <span class="text-2xl">😔</span>
+                                <p class="text-xs mt-1">Mal</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nivel de apetito</label>
+                        <input type="range" min="1" max="10" value="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>Muy bajo</span>
+                            <span>Normal</span>
+                            <span>Muy alto</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-jarelux-blue text-white py-3 rounded-lg hover:bg-jarelux-dark transition-colors">
+                        Guardar Registro
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-jarelux-blue mb-4">Recordatorios</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                        <div class="w-3 h-3 bg-jarelux-blue rounded-full mr-3"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Tomar suplemento vitamínico</p>
+                            <p class="text-sm text-gray-600">En 30 minutos</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                        <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Beber agua</p>
+                            <p class="text-sm text-gray-600">Cada 2 horas</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                        <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Consulta nutricional</p>
+                            <p class="text-sm text-gray-600">Mañana 10:00 AM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Actividad Física -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-jarelux-blue mb-2">Actividad Física Terapéutica</h3>
+                    <p class="text-gray-600">Rutinas adaptadas para complementar tu tratamiento oncológico</p>
+                </div>
+                <div class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-lg">
+                    <span class="text-sm font-medium">💪 Nivel: Principiante</span>
+                </div>
+            </div>
+
+            <!-- Estado de Actividad Diaria -->
+            <div class="grid md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-green-700 font-medium">Hoy</span>
+                        <span class="text-2xl">✅</span>
+                    </div>
+                    <p class="text-sm text-green-600">15 min completados</p>
+                    <div class="w-full bg-green-200 rounded-full h-2 mt-2">
+                        <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-blue-700 font-medium">Esta semana</span>
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <p class="text-sm text-blue-600">4 de 5 días</p>
+                    <div class="w-full bg-blue-200 rounded-full h-2 mt-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-purple-700 font-medium">Energía</span>
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <p class="text-sm text-purple-600">Nivel: Bueno</p>
+                    <div class="flex space-x-1 mt-2">
+                        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-purple-300 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg border border-orange-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-orange-700 font-medium">Próxima</span>
+                        <span class="text-2xl">🎯</span>
+                    </div>
+                    <p class="text-sm text-orange-600">Yoga suave - 16:00</p>
+                    <button onclick="startRoutine('yoga-suave')" class="text-xs bg-orange-500 text-white px-2 py-1 rounded mt-2 hover:bg-orange-600 transition-colors">
+                        Iniciar ahora
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rutinas Disponibles -->
+            <div class="mb-8">
+                <h4 class="text-xl font-semibold text-jarelux-blue mb-4">Rutinas Recomendadas para Hoy</h4>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Rutina 1: Ejercicios Suaves -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                        <div class="bg-gradient-to-r from-green-400 to-green-500 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <h5 class="font-semibold">Ejercicios Suaves</h5>
+                                <span class="text-2xl">🌱</span>
+                            </div>
+                            <p class="text-sm opacity-90">Movimientos básicos y estiramientos</p>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm text-gray-600">⏱️ 15-20 minutos</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Principiante</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                                <li>• Respiración profunda (3 min)</li>
+                                <li>• Estiramientos de cuello y hombros</li>
+                                <li>• Movimientos de brazos suaves</li>
+                                <li>• Caminata en el lugar</li>
+                                <li>• Relajación final</li>
+                            </ul>
+                            <div class="flex space-x-2">
+                                <button onclick="startRoutine('ejercicios-suaves')" class="flex-1 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors text-sm">
+                                    ▶️ Iniciar
+                                </button>
+                                <button onclick="viewRoutineDetails('ejercicios-suaves')" class="px-3 py-2 border border-green-500 text-green-500 rounded-lg hover:bg-green-50 transition-colors text-sm">
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rutina 2: Yoga Terapéutico -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                        <div class="bg-gradient-to-r from-purple-400 to-purple-500 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <h5 class="font-semibold">Yoga Terapéutico</h5>
+                                <span class="text-2xl">🧘‍♀️</span>
+                            </div>
+                            <p class="text-sm opacity-90">Posturas adaptadas y meditación</p>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm text-gray-600">⏱️ 20-25 minutos</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Suave</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                                <li>• Respiración consciente (5 min)</li>
+                                <li>• Postura del gato-vaca</li>
+                                <li>• Torsiones suaves sentado</li>
+                                <li>• Postura del niño modificada</li>
+                                <li>• Meditación guiada (5 min)</li>
+                            </ul>
+                            <div class="flex space-x-2">
+                                <button onclick="startRoutine('yoga-terapeutico')" class="flex-1 bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600 transition-colors text-sm">
+                                    ▶️ Iniciar
+                                </button>
+                                <button onclick="viewRoutineDetails('yoga-terapeutico')" class="px-3 py-2 border border-purple-500 text-purple-500 rounded-lg hover:bg-purple-50 transition-colors text-sm">
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rutina 3: Fortalecimiento Ligero -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                        <div class="bg-gradient-to-r from-blue-400 to-blue-500 p-4 text-white">
+                            <div class="flex items-center justify-between">
+                                <h5 class="font-semibold">Fortalecimiento</h5>
+                                <span class="text-2xl">💪</span>
+                            </div>
+                            <p class="text-sm opacity-90">Ejercicios de resistencia suave</p>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm text-gray-600">⏱️ 25-30 minutos</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Intermedio</span>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                                <li>• Calentamiento (5 min)</li>
+                                <li>• Ejercicios con banda elástica</li>
+                                <li>• Sentadillas asistidas</li>
+                                <li>• Flexiones de pared</li>
+                                <li>• Enfriamiento y estiramientos</li>
+                            </ul>
+                            <div class="flex space-x-2">
+                                <button onclick="startRoutine('fortalecimiento')" class="flex-1 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                    ▶️ Iniciar
+                                </button>
+                                <button onclick="viewRoutineDetails('fortalecimiento')" class="px-3 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition-colors text-sm">
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rutina en Progreso (Modal) -->
+            <div id="routineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 id="routineTitle" class="text-2xl font-bold text-jarelux-blue">Rutina en Progreso</h3>
+                            <button onclick="closeRoutine()" class="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+                        </div>
+                        
+                        <!-- Progreso de la rutina -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Progreso</span>
+                                <span id="routineProgress" class="text-sm text-jarelux-blue font-medium">1 de 5 ejercicios</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="progressBar" class="bg-jarelux-blue h-3 rounded-full transition-all duration-500" style="width: 20%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio actual -->
+                        <div id="currentExercise" class="text-center mb-6">
+                            <div class="w-32 h-32 bg-gradient-to-br from-jarelux-blue to-jarelux-light rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-4xl">🌱</span>
+                            </div>
+                            <h4 class="text-xl font-semibold text-jarelux-blue mb-2">Respiración Profunda</h4>
+                            <p class="text-gray-600 mb-4">Inhala profundamente por la nariz durante 4 segundos, mantén 2 segundos, exhala por la boca durante 6 segundos.</p>
+                            
+                            <!-- Timer -->
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <div class="text-3xl font-bold text-jarelux-blue mb-2" id="exerciseTimer">3:00</div>
+                                <div class="text-sm text-gray-600">Tiempo restante</div>
+                            </div>
+                        </div>
+
+                        <!-- Controles -->
+                        <div class="flex space-x-3">
+                            <button id="pauseBtn" onclick="pauseExercise()" class="flex-1 bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition-colors">
+                                ⏸️ Pausar
+                            </button>
+                            <button onclick="skipExercise()" class="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition-colors">
+                                ⏭️ Siguiente
+                            </button>
+                            <button onclick="completeExercise()" class="flex-1 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors">
+                                ✅ Completar
+                            </button>
+                        </div>
+
+                        <!-- Instrucciones adicionales -->
+                        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                            <h5 class="font-medium text-jarelux-blue mb-2">💡 Consejos importantes:</h5>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Escucha a tu cuerpo y detente si sientes dolor</li>
+                                <li>• Mantén una respiración constante</li>
+                                <li>• Hidrátate antes y después del ejercicio</li>
+                                <li>• Si te sientes mareado, siéntate y descansa</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historial y Estadísticas -->
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                    <h4 class="font-semibold text-jarelux-blue mb-4">📈 Progreso Semanal</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Lunes</span>
+                            <div class="flex space-x-1">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Martes</span>
+                            <div class="flex space-x-1">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Miércoles</span>
+                            <div class="flex space-x-1">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Jueves</span>
+                            <div class="flex space-x-1">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Viernes</span>
+                            <div class="flex space-x-1">
+                                <div class="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                                <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                    <h4 class="font-semibold text-jarelux-blue mb-4">🏆 Logros Recientes</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm">🥇</span>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800">Primera semana completada</p>
+                                <p class="text-xs text-gray-600">Hace 2 días</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm">💪</span>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800">5 rutinas consecutivas</p>
+                                <p class="text-xs text-gray-600">Ayer</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm">🧘</span>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800">Maestro del yoga</p>
+                                <p class="text-xs text-gray-600">Hoy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="flex flex-wrap gap-3">
+                <button onclick="showAllRoutines()" class="bg-jarelux-blue text-white px-6 py-3 rounded-lg hover:bg-jarelux-dark transition-colors">
+                    📚 Ver Todas las Rutinas
+                </button>
+                <button onclick="customizeRoutine()" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+                    ⚙️ Personalizar Rutina
+                </button>
+                <button onclick="shareProgress()" class="bg-purple-500 text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors">
+                    📤 Compartir Progreso
+                </button>
+                <button onclick="consultPhysiotherapist()" class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors">
+                    👨‍⚕️ Consultar Fisioterapeuta
+                </button>
+            </div>
+        </div>
+
+        <!-- Centros Comerciales con Descuentos -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-jarelux-blue mb-6">Centros Comerciales con Descuentos Jarelux</h3>
+            
+            <!-- Mapa Interactivo Mejorado -->
+            <div class="mb-8">
+                <div id="map" class="w-full h-[500px] rounded-lg border-2 border-gray-200 relative overflow-hidden">
+                    <!-- Mapa interactivo sin dependencia de Google Maps API -->
+                    <div class="relative w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg overflow-hidden">
+                        <!-- Header del mapa -->
+                        <div class="absolute top-0 left-0 right-0 bg-white bg-opacity-95 backdrop-blur-sm p-4 z-20 border-b border-blue-200">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-jarelux-blue rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm">🗺️</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-jarelux-blue">Mapa Interactivo Jarelux</h3>
+                                        <p class="text-xs text-gray-600">Centros comerciales en Comitán de Domínguez</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="detectLocation()" class="bg-jarelux-blue text-white px-3 py-1 rounded-lg text-xs hover:bg-jarelux-dark transition-colors">
+                                        📍 Mi ubicación
+                                    </button>
+                                    <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                                        ✓ Funcional
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Área principal del mapa -->
+                        <div class="pt-20 pb-4 px-4 h-full">
+                            <div class="relative w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg border border-blue-300 overflow-hidden">
+                                <!-- Grid de fondo para simular mapa -->
+                                <div class="absolute inset-0 opacity-20">
+                                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e40af" stroke-width="1"/>
+                                            </pattern>
+                                        </defs>
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                    </svg>
+                                </div>
+
+                                <!-- Título de la ciudad -->
+                                <div class="absolute top-4 left-4 bg-white bg-opacity-90 px-3 py-2 rounded-lg shadow-md">
+                                    <h4 class="font-bold text-jarelux-blue">Comitán de Domínguez, Chiapas</h4>
+                                    <p class="text-xs text-gray-600">6 centros comerciales con descuentos</p>
+                                </div>
+
+                                <!-- Marcadores de tiendas -->
+                                <div id="mapMarkers" class="absolute inset-0">
+                                    <!-- Soriana Hiper -->
+                                    <div class="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group" 
+                                         style="left: 25%; top: 25%;"
+                                         onclick="selectStore('soriana')">
+                                        <div class="relative">
+                                            <div class="w-12 h-12 bg-jarelux-blue rounded-full border-3 border-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <span class="text-white text-lg">🛒</span>
+                                            </div>
+                                            <div class="absolute inset-0 w-12 h-12 bg-jarelux-blue rounded-full animate-ping opacity-30"></div>
+                                            <div class="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg text-xs font-medium text-jarelux-blue whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                                Soriana
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Walmart -->
+                                    <div class="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group" 
+                                         style="left: 50%; top: 25%;"
+                                         onclick="selectStore('walmart')">
+                                        <div class="relative">
+                                            <div class="w-12 h-12 bg-jarelux-blue rounded-full border-3 border-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <span class="text-white text-lg">🛒</span>
+                                            </div>
+                                            <div class="absolute inset-0 w-12 h-12 bg-jarelux-blue rounded-full animate-ping opacity-30"></div>
+                                            <div class="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg text-xs font-medium text-jarelux-blue whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                                Walmart
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chedraui -->
+                                    <div class="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group" 
+                                         style="left: 75%; top: 25%;"
+                                         onclick="selectStore('chedraui')">
+                                        <div class="relative">
+                                            <div class="w-12 h-12 bg-jarelux-blue rounded-full border-3 border-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <span class="text-white text-lg">🛒</span>
+                                            </div>
+                                            <div class="absolute inset-0 w-12 h-12 bg-jarelux-blue rounded-full animate-ping opacity-30"></div>
+                                            <div class="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg text-xs font-medium text-jarelux-blue whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                                Chedraui
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bodega Aurrera -->
+                                    <div class="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group" 
+                                         style="left: 25%; top: 55%;"
+                                         onclick="selectStore('aurrera')">
+                                        <div class="relative">
+                                            <div class="w-12 h-12 bg-jarelux-blue rounded-full border-3 border-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <span class="text-white text-lg">🛒</span>
+                                            </div>
+                                            <div class="absolute inset-0 w-12 h-12 bg-jarelux-blue rounded-full animate-ping opacity-30"></div>
+                                            <div class="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg text-xs font-medium text-jarelux-blue whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                                Aurrera
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Super Che -->
+                                    <div class="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group" 
+                                         style="left: 50%; top: 55%;"
+                                         onclick="selectStore('super-che')">
+                                        <div class="relative">
+                                            <div class="w-12 h-12 bg-jarelux-blue rounded-full border-3 border-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <span class="text-white text-lg">🛒</span>
+                                            </div>
+                                            <div class="absolute inset-0 w-12 h-12 bg-jarelux-blue rounded-full animate-ping opacity-30"></div>
+                                            <div class="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg text-xs font-medium text-jarelux-blue whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                                Super Che
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mercado San Caralampio -->
+                                    <div class="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group" 
+                                         style="left: 75%; top: 55%;"
+                                         onclick="selectStore('mercado-san-caralampio')">
+                                        <div class="relative">
+                                            <div class="w-12 h-12 bg-jarelux-blue rounded-full border-3 border-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                                <span class="text-white text-lg">🛒</span>
+                                            </div>
+                                            <div class="absolute inset-0 w-12 h-12 bg-jarelux-blue rounded-full animate-ping opacity-30"></div>
+                                            <div class="absolute top-14 left-1/2 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg text-xs font-medium text-jarelux-blue whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                                Mercado
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Marcador de usuario (si está detectado) -->
+                                <div id="userMarker" class="absolute transform -translate-x-1/2 -translate-y-1/2 hidden" style="left: 50%; top: 50%;">
+                                    <div class="relative">
+                                        <div class="w-8 h-8 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
+                                        <div class="absolute inset-0 w-8 h-8 bg-blue-500 rounded-full animate-pulse opacity-50"></div>
+                                        <div class="absolute top-10 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
+                                            Tu ubicación
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Información de la tienda seleccionada -->
+                                <div id="storeInfo" class="absolute bottom-4 left-4 right-4 bg-white rounded-lg shadow-lg p-4 transform translate-y-full transition-transform duration-300 z-20">
+                                    <!-- Contenido dinámico -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Controles del mapa -->
+                        <div class="absolute bottom-4 right-4 flex flex-col space-y-2 z-10">
+                            <button onclick="zoomIn()" class="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+                                <span class="text-jarelux-blue font-bold">+</span>
+                            </button>
+                            <button onclick="zoomOut()" class="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+                                <span class="text-jarelux-blue font-bold">−</span>
+                            </button>
+                            <button onclick="resetView()" class="w-10 h-10 bg-white rounded-lg shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+                                <span class="text-jarelux-blue text-xs">🏠</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lista de Tiendas debajo del mapa -->
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="md:col-span-3">
+                    <div class="bg-gradient-to-r from-jarelux-blue to-jarelux-light text-white p-4 rounded-lg mb-6">
+                        <h4 class="font-bold text-lg mb-2">🎯 Descuentos Especiales Jarelux</h4>
+                        <p class="text-sm">Hasta 25% de descuento en alimentos recomendados para tu tratamiento</p>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-3">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="storesList">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition-colors">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h5 class="font-semibold text-jarelux-blue">Soriana Hiper Comitán</h5>
+                                    <p class="text-sm text-gray-600">Blvd. Dr. Belisario Domínguez 2355</p>
+                                    <p class="text-xs text-green-600 font-medium">20% descuento en productos orgánicos</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full" id="distance-soriana">2.3 km</span>
+                            </div>
+                            <button onclick="openDirections('16.2467', '-92.1364', 'Soriana Hiper Comitán')" 
+                                    class="w-full bg-jarelux-blue text-white py-2 rounded-lg text-sm hover:bg-jarelux-dark transition-colors">
+                                🗺️ Cómo llegar
+                            </button>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition-colors">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h5 class="font-semibold text-jarelux-blue">Walmart Comitán</h5>
+                                    <p class="text-sm text-gray-600">Carretera Panamericana Km 1081</p>
+                                    <p class="text-xs text-green-600 font-medium">15% descuento en suplementos</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full" id="distance-walmart">1.8 km</span>
+                            </div>
+                            <button onclick="openDirections('16.2512', '-92.1298', 'Walmart Comitán')" 
+                                    class="w-full bg-jarelux-blue text-white py-2 rounded-lg text-sm hover:bg-jarelux-dark transition-colors">
+                                🗺️ Cómo llegar
+                            </button>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition-colors">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h5 class="font-semibold text-jarelux-blue">Chedraui Comitán</h5>
+                                    <p class="text-sm text-gray-600">Av. Central Poniente 15, Centro</p>
+                                    <p class="text-xs text-green-600 font-medium">25% descuento en pescados frescos</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full" id="distance-chedraui">1.2 km</span>
+                            </div>
+                            <button onclick="openDirections('16.2445', '-92.1387', 'Chedraui Comitán')" 
+                                    class="w-full bg-jarelux-blue text-white py-2 rounded-lg text-sm hover:bg-jarelux-dark transition-colors">
+                                🗺️ Cómo llegar
+                            </button>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition-colors">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h5 class="font-semibold text-jarelux-blue">Bodega Aurrera Comitán</h5>
+                                    <p class="text-sm text-gray-600">Av. 2a Sur Poniente 45</p>
+                                    <p class="text-xs text-green-600 font-medium">18% descuento en productos integrales</p>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full" id="distance-aurrera">3.1 km</span>
+                            </div>
+                            <button onclick="openDirections('16.2389', '-92.1456', 'Bodega Aurrera Comitán')" 
+                                    class="w-full bg-jarelux-blue text-white py-2 rounded-lg text-sm hover:bg-jarelux-dark transition-colors">
+                                🗺️ Cómo llegar
+                            </button>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition-colors">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h5 class="font-semibold text-jarelux-blue">Super Che Comitán</h5>
+                                    <p class="text-sm text-gray-600">Blvd. Dr. Belisario Domínguez 1890</p>
+                                    <p class="text-xs text-green-600 font-medium">22% descuento en carnes magras</p>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full" id="distance-super-che">2.7 km</span>
+                            </div>
+                            <button onclick="openDirections('16.2523', '-92.1423', 'Super Che Comitán')" 
+                                    class="w-full bg-jarelux-blue text-white py-2 rounded-lg text-sm hover:bg-jarelux-dark transition-colors">
+                                🗺️ Cómo llegar
+                            </button>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition-colors">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h5 class="font-semibold text-jarelux-blue">Mercado San Caralampio</h5>
+                                    <p class="text-sm text-gray-600">Calle 2a Norte Poniente, Centro</p>
+                                    <p class="text-xs text-green-600 font-medium">12% descuento en lácteos locales</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full" id="distance-mercado">0.8 km</span>
+                            </div>
+                            <button onclick="openDirections('16.2456', '-92.1334', 'Mercado San Caralampio')" 
+                                    class="w-full bg-jarelux-blue text-white py-2 rounded-lg text-sm hover:bg-jarelux-dark transition-colors">
+                                🗺️ Cómo llegar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-jarelux-blue text-white py-3 rounded-lg hover:bg-jarelux-dark transition-colors mt-6">
+                        Ver Todos los Descuentos Disponibles
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Contacto Profesional -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-jarelux-blue mb-2">Contacto con Profesionales</h3>
+                <p class="text-gray-600">Tu equipo médico especializado está disponible para apoyarte</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Nutriólogo -->
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white text-2xl">👩‍⚕️</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-jarelux-blue">Dra. María González</h4>
+                            <p class="text-green-700 font-medium">Nutrióloga Oncológica</p>
+                            <p class="text-sm text-gray-600">Especialista en nutrición para tratamientos oncológicos</p>
+                        </div>
+                    </div>
+
+                    <!-- Estado de disponibilidad -->
+                    <div class="flex items-center mb-4 p-3 bg-green-100 rounded-lg">
+                        <div class="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                        <span class="text-green-800 font-medium">En línea - Disponible ahora</span>
+                    </div>
+
+                    <!-- Información profesional -->
+                    <div class="mb-6 space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">🎓</span>
+                            <span>15 años de experiencia en oncología</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">📋</span>
+                            <span>Certificada en nutrición clínica</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">⭐</span>
+                            <span>4.9/5 - 127 reseñas de pacientes</span>
+                        </div>
+                    </div>
+
+                    <!-- Opciones de contacto -->
+                    <div class="space-y-3">
+                        <button onclick="startVideoCall('nutriologo')" class="w-full bg-green-500 text-white py-3 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center">
+                            <span class="mr-2">📹</span>
+                            Videollamada Inmediata
+                        </button>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="startChat('nutriologo')" class="bg-white border-2 border-green-500 text-green-500 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors flex items-center justify-center text-sm">
+                                <span class="mr-1">💬</span>
+                                Chat
+                            </button>
+                            <button onclick="scheduleAppointment('nutriologo')" class="bg-white border-2 border-green-500 text-green-500 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors flex items-center justify-center text-sm">
+                                <span class="mr-1">📅</span>
+                                Agendar
+                            </button>
+                        </div>
+
+                        <button onclick="sendNutritionReport()" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center text-sm">
+                            <span class="mr-2">📊</span>
+                            Enviar Reporte Nutricional
+                        </button>
+                    </div>
+
+                    <!-- Próxima cita -->
+                    <div class="mt-4 p-3 bg-white rounded-lg border border-green-200">
+                        <p class="text-sm font-medium text-jarelux-blue mb-1">Próxima consulta:</p>
+                        <p class="text-sm text-gray-600">Viernes 15 Nov, 10:00 AM</p>
+                        <button onclick="modifyAppointment('nutriologo')" class="text-xs text-green-600 hover:text-green-800 mt-1">
+                            Modificar cita →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fisioterapeuta -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white text-2xl">🏃‍♂️</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-jarelux-blue">Dr. Carlos Ramírez</h4>
+                            <p class="text-blue-700 font-medium">Fisioterapeuta Oncológico</p>
+                            <p class="text-sm text-gray-600">Especialista en rehabilitación para pacientes oncológicos</p>
+                        </div>
+                    </div>
+
+                    <!-- Estado de disponibilidad -->
+                    <div class="flex items-center mb-4 p-3 bg-yellow-100 rounded-lg">
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
+                        <span class="text-yellow-800 font-medium">Ocupado - Disponible en 25 min</span>
+                    </div>
+
+                    <!-- Información profesional -->
+                    <div class="mb-6 space-y-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">🎓</span>
+                            <span>12 años en fisioterapia oncológica</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">🏆</span>
+                            <span>Certificado en terapia de rehabilitación</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="mr-2">⭐</span>
+                            <span>4.8/5 - 89 reseñas de pacientes</span>
+                        </div>
+                    </div>
+
+                    <!-- Opciones de contacto -->
+                    <div class="space-y-3">
+                        <button onclick="scheduleVideoCall('fisioterapeuta')" class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center">
+                            <span class="mr-2">📹</span>
+                            Agendar Videollamada
+                        </button>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="startChat('fisioterapeuta')" class="bg-white border-2 border-blue-500 text-blue-500 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center text-sm">
+                                <span class="mr-1">💬</span>
+                                Chat
+                            </button>
+                            <button onclick="scheduleAppointment('fisioterapeuta')" class="bg-white border-2 border-blue-500 text-blue-500 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center text-sm">
+                                <span class="mr-1">📅</span>
+                                Agendar
+                            </button>
+                        </div>
+
+                        <button onclick="sendActivityReport()" class="w-full bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors flex items-center justify-center text-sm">
+                            <span class="mr-2">📈</span>
+                            Enviar Reporte de Actividad
+                        </button>
+                    </div>
+
+                    <!-- Próxima cita -->
+                    <div class="mt-4 p-3 bg-white rounded-lg border border-blue-200">
+                        <p class="text-sm font-medium text-jarelux-blue mb-1">Próxima sesión:</p>
+                        <p class="text-sm text-gray-600">Lunes 18 Nov, 3:00 PM</p>
+                        <button onclick="modifyAppointment('fisioterapeuta')" class="text-xs text-blue-600 hover:text-blue-800 mt-1">
+                            Modificar cita →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opciones adicionales -->
+            <div class="mt-8 grid md:grid-cols-3 gap-4">
+                <button onclick="emergencyContact()" class="bg-red-500 text-white p-4 rounded-lg hover:bg-red-600 transition-colors">
+                    <div class="text-2xl mb-2">🚨</div>
+                    <p class="font-semibold">Contacto de Emergencia</p>
+                    <p class="text-xs opacity-90">24/7 disponible</p>
+                </button>
+                
+                <button onclick="teamConsultation()" class="bg-purple-500 text-white p-4 rounded-lg hover:bg-purple-600 transition-colors">
+                    <div class="text-2xl mb-2">👥</div>
+                    <p class="font-semibold">Consulta en Equipo</p>
+                    <p class="text-xs opacity-90">Nutriólogo + Fisioterapeuta</p>
+                </button>
+                
+                <button onclick="viewMedicalHistory()" class="bg-gray-600 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                    <div class="text-2xl mb-2">📋</div>
+                    <p class="font-semibold">Historial Médico</p>
+                    <p class="text-xs opacity-90">Consultas anteriores</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal de Chat -->
+        <div id="chatModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl max-w-md w-full max-h-[80vh] flex flex-col">
+                <!-- Header del chat -->
+                <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div id="chatAvatar" class="w-10 h-10 bg-jarelux-blue rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white">👩‍⚕️</span>
+                        </div>
+                        <div>
+                            <h3 id="chatTitle" class="font-semibold text-jarelux-blue">Chat con Profesional</h3>
+                            <p id="chatStatus" class="text-xs text-green-600">En línea</p>
+                        </div>
+                    </div>
+                    <button onclick="closeChat()" class="text-gray-400 hover:text-gray-600 text-xl">×</button>
+                </div>
+
+                <!-- Área de mensajes -->
+                <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 min-h-[300px]">
+                    <!-- Los mensajes se añadirán dinámicamente -->
+                </div>
+
+                <!-- Input de mensaje -->
+                <div class="p-4 border-t border-gray-200">
+                    <div class="flex space-x-2">
+                        <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." 
+                               class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-jarelux-blue"
+                               onkeypress="handleChatKeyPress(event)">
+                        <button onclick="sendChatMessage()" class="bg-jarelux-blue text-white px-4 py-2 rounded-lg hover:bg-jarelux-dark transition-colors">
+                            Enviar
+                        </button>
+                    </div>
+                    <div class="flex space-x-2 mt-2">
+                        <button onclick="sendQuickMessage('¿Cómo está mi progreso?')" class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-gray-200 transition-colors">
+                            ¿Cómo está mi progreso?
+                        </button>
+                        <button onclick="sendQuickMessage('Necesito ajustar mi plan')" class="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded hover:bg-gray-200 transition-colors">
+                            Necesito ajustar mi plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Videollamada -->
+        <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+                <!-- Header de videollamada -->
+                <div class="p-4 bg-jarelux-blue text-white flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                            <span>📹</span>
+                        </div>
+                        <div>
+                            <h3 id="videoTitle" class="font-semibold">Videollamada con Profesional</h3>
+                            <p id="videoTimer" class="text-xs opacity-90">00:00</p>
+                        </div>
+                    </div>
+                    <button onclick="endVideoCall()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                        Finalizar
+                    </button>
+                </div>
+
+                <!-- Área de video -->
+                <div class="relative bg-gray-900 h-96 flex items-center justify-center">
+                    <div class="text-white text-center">
+                        <div class="w-32 h-32 bg-jarelux-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-4xl">👩‍⚕️</span>
+                        </div>
+                        <p class="text-lg font-medium mb-2">Conectando con profesional...</p>
+                        <p class="text-sm opacity-75">La videollamada iniciará en unos segundos</p>
+                    </div>
+                    
+                    <!-- Video del usuario (simulado) -->
+                    <div class="absolute bottom-4 right-4 w-32 h-24 bg-gray-700 rounded-lg flex items-center justify-center">
+                        <span class="text-white text-2xl">📷</span>
+                    </div>
+                </div>
+
+                <!-- Controles de videollamada -->
+                <div class="p-4 bg-gray-50 flex justify-center space-x-4">
+                    <button onclick="toggleMicrophone()" class="w-12 h-12 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition-colors flex items-center justify-center">
+                        🎤
+                    </button>
+                    <button onclick="toggleCamera()" class="w-12 h-12 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition-colors flex items-center justify-center">
+                        📹
+                    </button>
+                    <button onclick="shareScreen()" class="w-12 h-12 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors flex items-center justify-center">
+                        🖥️
+                    </button>
+                    <button onclick="endVideoCall()" class="w-12 h-12 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors flex items-center justify-center">
+                        📞
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Agendamiento -->
+        <div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 id="appointmentTitle" class="text-xl font-bold text-jarelux-blue">Agendar Cita</h3>
+                        <button onclick="closeAppointmentModal()" class="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+                    </div>
+
+                    <!-- Tipo de consulta -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Tipo de consulta:</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="selectConsultationType('presencial')" class="consultation-type p-3 border-2 border-gray-200 rounded-lg hover:border-jarelux-blue transition-colors text-center">
+                                <div class="text-2xl mb-1">🏥</div>
+                                <p class="text-sm font-medium">Presencial</p>
+                            </button>
+                            <button onclick="selectConsultationType('virtual')" class="consultation-type p-3 border-2 border-gray-200 rounded-lg hover:border-jarelux-blue transition-colors text-center">
+                                <div class="text-2xl mb-1">💻</div>
+                                <p class="text-sm font-medium">Virtual</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Calendario -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Selecciona fecha:</label>
+                        <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                            <div class="p-2 font-medium text-gray-500">Dom</div>
+                            <div class="p-2 font-medium text-gray-500">Lun</div>
+                            <div class="p-2 font-medium text-gray-500">Mar</div>
+                            <div class="p-2 font-medium text-gray-500">Mié</div>
+                            <div class="p-2 font-medium text-gray-500">Jue</div>
+                            <div class="p-2 font-medium text-gray-500">Vie</div>
+                            <div class="p-2 font-medium text-gray-500">Sáb</div>
+                            
+                            <!-- Días del calendario -->
+                            <div class="p-2 text-gray-400">1</div>
+                            <div class="p-2 text-gray-400">2</div>
+                            <div class="p-2 text-gray-400">3</div>
+                            <div class="p-2 text-gray-400">4</div>
+                            <div class="p-2 text-gray-400">5</div>
+                            <div class="p-2 text-gray-400">6</div>
+                            <div class="p-2 text-gray-400">7</div>
+                            
+                            <div class="p-2 text-gray-400">8</div>
+                            <div class="p-2 text-gray-400">9</div>
+                            <div class="p-2 text-gray-400">10</div>
+                            <div class="p-2 text-gray-400">11</div>
+                            <div class="p-2 text-gray-400">12</div>
+                            <div class="p-2 text-gray-400">13</div>
+                            <div class="p-2 text-gray-400">14</div>
+                            
+                            <button onclick="selectDate(15)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">15</button>
+                            <button onclick="selectDate(16)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">16</button>
+                            <button onclick="selectDate(17)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">17</button>
+                            <button onclick="selectDate(18)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">18</button>
+                            <button onclick="selectDate(19)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">19</button>
+                            <button onclick="selectDate(20)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">20</button>
+                            <button onclick="selectDate(21)" class="calendar-day p-2 hover:bg-jarelux-blue hover:text-white rounded transition-colors">21</button>
+                        </div>
+                    </div>
+
+                    <!-- Horarios disponibles -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Horarios disponibles:</label>
+                        <div class="grid grid-cols-3 gap-2" id="availableSlots">
+                            <button onclick="selectTime('09:00')" class="time-slot p-2 border border-gray-300 rounded hover:border-jarelux-blue hover:bg-jarelux-blue hover:text-white transition-colors text-sm">09:00</button>
+                            <button onclick="selectTime('10:00')" class="time-slot p-2 border border-gray-300 rounded hover:border-jarelux-blue hover:bg-jarelux-blue hover:text-white transition-colors text-sm">10:00</button>
+                            <button onclick="selectTime('11:00')" class="time-slot p-2 border border-gray-300 rounded hover:border-jarelux-blue hover:bg-jarelux-blue hover:text-white transition-colors text-sm">11:00</button>
+                            <button onclick="selectTime('14:00')" class="time-slot p-2 border border-gray-300 rounded hover:border-jarelux-blue hover:bg-jarelux-blue hover:text-white transition-colors text-sm">14:00</button>
+                            <button onclick="selectTime('15:00')" class="time-slot p-2 border border-gray-300 rounded hover:border-jarelux-blue hover:bg-jarelux-blue hover:text-white transition-colors text-sm">15:00</button>
+                            <button onclick="selectTime('16:00')" class="time-slot p-2 border border-gray-300 rounded hover:border-jarelux-blue hover:bg-jarelux-blue hover:text-white transition-colors text-sm">16:00</button>
+                        </div>
+                    </div>
+
+                    <!-- Notas adicionales -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Notas o síntomas a comentar:</label>
+                        <textarea id="appointmentNotes" rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-jarelux-blue" placeholder="Describe cualquier síntoma o pregunta específica..."></textarea>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="flex space-x-3">
+                        <button onclick="confirmAppointment()" class="flex-1 bg-jarelux-blue text-white py-3 rounded-lg hover:bg-jarelux-dark transition-colors">
+                            Confirmar Cita
+                        </button>
+                        <button onclick="closeAppointmentModal()" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="grid md:grid-cols-4 gap-4">
+            
+        </div>
+    </main>
+
+    <!-- Botón flotante de Luxi AI -->
+    <div id="luxiButton" class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleLuxiChat()" class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group hover:scale-110">
+            <div class="relative">
+                <span class="text-2xl">🤖</span>
+                <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+            </div>
+        </button>
+        <div class="absolute bottom-20 right-0 bg-white rounded-lg shadow-lg p-3 transform scale-0 group-hover:scale-100 transition-transform duration-200 whitespace-nowrap">
+            <p class="text-sm font-medium text-purple-600">¡Hola! Soy Luxi 🤖</p>
+            <p class="text-xs text-gray-600">Tu asistente de nutrición y ejercicio</p>
+        </div>
+    </div>
+
+    <!-- Chat de Luxi AI -->
+    <div id="luxiChat" class="fixed bottom-24 right-6 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 transform translate-y-full opacity-0 transition-all duration-300 z-40 hidden">
+        <!-- Header del chat de Luxi -->
+        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-t-xl">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <span class="text-xl">🤖</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">Luxi AI</h3>
+                        <p class="text-xs opacity-90">Asistente Inteligente Jarelux</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <button onclick="closeLuxiChat()" class="text-white hover:text-gray-200 text-xl">×</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de mensajes de Luxi -->
+        <div id="luxiMessages" class="h-80 overflow-y-auto p-4 space-y-3 bg-gray-50">
+            <!-- Mensaje de bienvenida -->
+            <div class="flex items-start space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-white text-sm">🤖</span>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm max-w-xs">
+                    <p class="text-sm text-gray-800">¡Hola! Soy <strong>Luxi</strong>, tu asistente de IA especializado en nutrición oncológica y ejercicio terapéutico. 🌟</p>
+                    <p class="text-xs text-gray-500 mt-2">Pregúntame sobre:</p>
+                    <ul class="text-xs text-gray-600 mt-1 space-y-1">
+                        <li>• Alimentos recomendados</li>
+                        <li>• Ejercicios seguros</li>
+                        <li>• Manejo de síntomas</li>
+                        <li>• Consejos nutricionales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sugerencias rápidas -->
+        <div class="p-3 border-t border-gray-200 bg-white">
+            <p class="text-xs text-gray-600 mb-2">Preguntas frecuentes:</p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="sendLuxiQuickQuestion('¿Qué puedo comer si tengo náuseas?')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full hover:bg-purple-200 transition-colors">
+                    Náuseas
+                </button>
+                <button onclick="sendLuxiQuickQuestion('¿Qué ejercicios son seguros para mí?')" class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded-full hover:bg-pink-200 transition-colors">
+                    Ejercicios
+                </button>
+                <button onclick="sendLuxiQuickQuestion('¿Cómo aumentar mi energía?')" class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full hover:bg-blue-200 transition-colors">
+                    Energía
+                </button>
+            </div>
+        </div>
+
+        <!-- Input de mensaje para Luxi -->
+        <div class="p-4 border-t border-gray-200 bg-white rounded-b-xl">
+            <div class="flex space-x-2">
+                <input type="text" id="luxiInput" placeholder="Pregúntale a Luxi..." 
+                       class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500"
+                       onkeypress="handleLuxiKeyPress(event)">
+                <button onclick="sendLuxiMessage()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-colors">
+                    <span class="text-sm">📤</span>
+                </button>
+            </div>
+            <div class="flex items-center justify-between mt-2">
+                <p class="text-xs text-gray-500">Luxi está aprendiendo constantemente</p>
+                <div class="flex items-center space-x-1">
+                    <div class="w-1 h-1 bg-purple-400 rounded-full animate-pulse"></div>
+                    <div class="w-1 h-1 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                    <div class="w-1 h-1 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold">J</span>
+                        </div>
+                        <h4 class="text-xl font-bold">Jarelux</h4>
+                    </div>
+                    <p class="text-gray-400">Conectando pacientes con cáncer con descuentos que marcan la diferencia en su tratamiento.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Servicios</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Farmacias</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Clínicas</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Hospitales</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Laboratorios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Soporte</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Centro de Ayuda</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold mb-4">Contacto</h5>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📞 01-800-JARELUX</p>
+                        <p>✉️ info@jarelux.com</p>
+                        <p>📍 Ciudad de México, México</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Jarelux. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let userLocation = null;
+        let selectedStore = null;
+        let currentRoutine = null;
+        let exerciseTimer = null;
+        let currentExerciseIndex = 0;
+        let isPaused = false;
+        let currentProfessional = null;
+        let videoCallTimer = null;
+        let selectedDate = null;
+        let selectedTime = null;
+        let consultationType = null;
+        let luxiChatOpen = false;
+        let luxiTypingTimer = null;
+
+        // Datos de rutinas de ejercicio
+        const routinesData = {
+            'ejercicios-suaves': {
+                title: 'Ejercicios Suaves',
+                icon: '🌱',
+                color: 'green',
+                duration: 20,
+                exercises: [
+                    {
+                        name: 'Respiración Profunda',
+                        duration: 180, // 3 minutos
+                        instructions: 'Inhala profundamente por la nariz durante 4 segundos, mantén 2 segundos, exhala por la boca durante 6 segundos.',
+                        icon: '🫁'
+                    },
+                    {
+                        name: 'Estiramientos de Cuello',
+                        duration: 240, // 4 minutos
+                        instructions: 'Gira suavemente la cabeza hacia la derecha, mantén 10 segundos, luego hacia la izquierda. Repite 5 veces.',
+                        icon: '🦒'
+                    },
+                    {
+                        name: 'Movimientos de Brazos',
+                        duration: 300, // 5 minutos
+                        instructions: 'Levanta los brazos lentamente hacia arriba, luego bájalos. Haz círculos suaves con los hombros.',
+                        icon: '🤲'
+                    },
+                    {
+                        name: 'Caminata en el Lugar',
+                        duration: 360, // 6 minutos
+                        instructions: 'Camina suavemente en el lugar, levantando ligeramente las rodillas. Mantén un ritmo cómodo.',
+                        icon: '🚶‍♀️'
+                    },
+                    {
+                        name: 'Relajación Final',
+                        duration: 120, // 2 minutos
+                        instructions: 'Siéntate cómodamente, cierra los ojos y respira naturalmente. Relaja todos los músculos.',
+                        icon: '🧘‍♀️'
+                    }
+                ]
+            },
+            'yoga-terapeutico': {
+                title: 'Yoga Terapéutico',
+                icon: '🧘‍♀️',
+                color: 'purple',
+                duration: 25,
+                exercises: [
+                    {
+                        name: 'Respiración Consciente',
+                        duration: 300, // 5 minutos
+                        instructions: 'Siéntate con la espalda recta. Inhala contando hasta 4, exhala contando hasta 6. Concéntrate en tu respiración.',
+                        icon: '🌬️'
+                    },
+                    {
+                        name: 'Postura Gato-Vaca',
+                        duration: 360, // 6 minutos
+                        instructions: 'En cuatro patas, alterna entre arquear y redondear la espalda suavemente. Sincroniza con tu respiración.',
+                        icon: '🐱'
+                    },
+                    {
+                        name: 'Torsiones Suaves',
+                        duration: 420, // 7 minutos
+                        instructions: 'Sentado, gira suavemente el torso hacia la derecha, mantén 30 segundos. Repite hacia la izquierda.',
+                        icon: '🌀'
+                    },
+                    {
+                        name: 'Postura del Niño',
+                        duration: 240, // 4 minutos
+                        instructions: 'Arrodíllate y siéntate sobre los talones. Inclínate hacia adelante con los brazos extendidos.',
+                        icon: '🙇‍♀️'
+                    },
+                    {
+                        name: 'Meditación Guiada',
+                        duration: 180, // 3 minutos
+                        instructions: 'Cierra los ojos y visualiza un lugar tranquilo. Respira profundamente y deja ir cualquier tensión.',
+                        icon: '✨'
+                    }
+                ]
+            },
+            'fortalecimiento': {
+                title: 'Fortalecimiento Ligero',
+                icon: '💪',
+                color: 'blue',
+                duration: 30,
+                exercises: [
+                    {
+                        name: 'Calentamiento',
+                        duration: 300, // 5 minutos
+                        instructions: 'Movimientos suaves de articulaciones: hombros, codos, muñecas, caderas, rodillas y tobillos.',
+                        icon: '🔥'
+                    },
+                    {
+                        name: 'Ejercicios con Banda',
+                        duration: 480, // 8 minutos
+                        instructions: 'Usa una banda elástica para ejercicios de brazos y piernas. Movimientos lentos y controlados.',
+                        icon: '🎗️'
+                    },
+                    {
+                        name: 'Sentadillas Asistidas',
+                        duration: 420, // 7 minutos
+                        instructions: 'Apóyate en una silla. Baja lentamente como si fueras a sentarte, luego levántate. 10 repeticiones.',
+                        icon: '🪑'
+                    },
+                    {
+                        name: 'Flexiones de Pared',
+                        duration: 360, // 6 minutos
+                        instructions: 'De pie frente a una pared, apoya las manos y empuja suavemente. 8-10 repeticiones.',
+                        icon: '🧱'
+                    },
+                    {
+                        name: 'Enfriamiento',
+                        duration: 240, // 4 minutos
+                        instructions: 'Estiramientos suaves de todos los músculos trabajados. Respiración profunda para relajar.',
+                        icon: '❄️'
+                    }
+                ]
+            }
+        };
+
+        // Base de conocimiento de Luxi AI
+        const luxiKnowledgeBase = {
+            nutrition: {
+                nauseas: [
+                    "Para las náuseas, te recomiendo alimentos suaves como galletas saladas, jengibre fresco o té de manzanilla. 🫖",
+                    "Evita alimentos grasos o muy condimentados. Prueba con tostadas secas o bananas maduras. 🍌",
+                    "Come en pequeñas porciones frecuentes. El agua con limón también puede ayudar. 🍋"
+                ],
+                energia: [
+                    "Para aumentar tu energía, incluye proteínas magras como pollo, pescado y huevos en cada comida. 🥚",
+                    "Los frutos secos, avena y frutas como plátanos son excelentes fuentes de energía sostenida. 🥜",
+                    "Mantente hidratado y considera suplementos de hierro si tu médico lo recomienda. 💧"
+                ],
+                apetito: [
+                    "Si tienes poco apetito, prueba con batidos nutritivos con frutas, yogur y proteína en polvo. 🥤",
+                    "Los alimentos aromáticos como sopas calientes pueden estimular el apetito. 🍲",
+                    "Come en un ambiente agradable y sin distracciones para disfrutar más la comida. ✨"
+                ],
+                digestion: [
+                    "Para mejorar la digestión, incluye fibra soluble como avena, manzanas y zanahorias. 🥕",
+                    "Los probióticos en yogur natural pueden ayudar a mantener una flora intestinal saludable. 🦠",
+                    "Evita alimentos procesados y come despacio, masticando bien cada bocado. 🐌"
+                ]
+            },
+            exercise: {
+                seguro: [
+                    "Los ejercicios seguros incluyen caminatas suaves, yoga terapéutico y estiramientos. 🚶‍♀️",
+                    "Siempre escucha a tu cuerpo y detente si sientes dolor o fatiga excesiva. ⚠️",
+                    "Consulta con tu fisioterapeuta antes de iniciar cualquier rutina nueva. 👨‍⚕️"
+                ],
+                fatiga: [
+                    "Si sientes fatiga, opta por ejercicios de baja intensidad como respiración profunda. 🫁",
+                    "Las caminatas cortas de 5-10 minutos pueden ser más beneficiosas que sesiones largas. ⏰",
+                    "El yoga suave y la meditación también ayudan a combatir la fatiga. 🧘‍♀️"
+                ],
+                fuerza: [
+                    "Para mantener la fuerza, usa bandas elásticas o pesas ligeras bajo supervisión. 💪",
+                    "Los ejercicios de resistencia corporal como sentadillas asistidas son ideales. 🪑",
+                    "Progresa gradualmente y celebra cada pequeño logro. 🎉"
+                ]
+            },
+            symptoms: {
+                dolor: [
+                    "Para el dolor leve, prueba técnicas de relajación y respiración profunda. 😌",
+                    "Aplicar calor o frío según lo que te resulte más cómodo puede ayudar. 🧊",
+                    "Si el dolor persiste, contacta inmediatamente a tu equipo médico. 📞"
+                ],
+                sueno: [
+                    "Para mejorar el sueño, establece una rutina nocturna relajante. 🌙",
+                    "Evita pantallas 1 hora antes de dormir y mantén tu habitación fresca. 📱",
+                    "Una infusión de manzanilla o valeriana puede ayudarte a relajarte. 🌼"
+                ],
+                estres: [
+                    "Para manejar el estrés, practica meditación mindfulness 10 minutos al día. 🧠",
+                    "La respiración 4-7-8 es muy efectiva: inhala 4, mantén 7, exhala 8. 💨",
+                    "Hablar con familiares, amigos o un psicólogo también es muy beneficioso. 💬"
+                ]
+            },
+            general: [
+                "Recuerda que cada persona es única. Lo que funciona para otros puede necesitar ajustes para ti. 🌟",
+                "Mantén una comunicación constante con tu equipo médico sobre cualquier cambio. 👥",
+                "Celebra cada pequeño progreso, ¡cada paso cuenta en tu recuperación! 🎊",
+                "La constancia es más importante que la perfección. Sé paciente contigo mismo. 💝",
+                "Tu bienestar mental es tan importante como el físico. No dudes en pedir apoyo. 🤗"
+            ]
+        };
+
+        // Datos de las tiendas con coordenadas reales de Comitán de Domínguez
+        const storesData = {
+            'soriana': {
+                position: { lat: 16.2467, lng: -92.1364 },
+                title: 'Soriana Hiper Comitán',
+                address: 'Blvd. Dr. Belisario Domínguez 2355, Comitán de Domínguez',
+                discount: '20% descuento en productos orgánicos',
+                phone: '+52 963 632 4500',
+                hours: 'L-D: 07:00-23:00',
+                specialOffers: ['Frutas orgánicas', 'Verduras ecológicas', 'Suplementos naturales']
+            },
+            'walmart': {
+                position: { lat: 16.2512, lng: -92.1298 },
+                title: 'Walmart Comitán',
+                address: 'Carretera Panamericana Km 1081, Comitán de Domínguez',
+                discount: '15% descuento en suplementos',
+                phone: '+52 963 632 7800',
+                hours: 'L-D: 07:00-23:00',
+                specialOffers: ['Vitaminas', 'Proteínas en polvo', 'Omega-3']
+            },
+            'chedraui': {
+                position: { lat: 16.2445, lng: -92.1387 },
+                title: 'Chedraui Comitán',
+                address: 'Av. Central Poniente 15, Centro, Comitán de Domínguez',
+                discount: '25% descuento en pescados frescos',
+                phone: '+52 963 632 1200',
+                hours: 'L-D: 08:00-22:00',
+                specialOffers: ['Pescado fresco', 'Mariscos', 'Atún', 'Sardinas']
+            },
+            'aurrera': {
+                position: { lat: 16.2389, lng: -92.1456 },
+                title: 'Bodega Aurrera Comitán',
+                address: 'Av. 2a Sur Poniente 45, Comitán de Domínguez',
+                discount: '18% descuento en productos integrales',
+                phone: '+52 963 632 5600',
+                hours: 'L-D: 07:00-22:00',
+                specialOffers: ['Pan integral', 'Cereales', 'Pasta integral', 'Arroz integral']
+            },
+            'super-che': {
+                position: { lat: 16.2523, lng: -92.1423 },
+                title: 'Super Che Comitán',
+                address: 'Blvd. Dr. Belisario Domínguez 1890, Comitán de Domínguez',
+                discount: '22% descuento en carnes magras',
+                phone: '+52 963 632 3400',
+                hours: 'L-S: 08:00-21:00, D: 09:00-20:00',
+                specialOffers: ['Pollo fresco', 'Res magra', 'Cerdo', 'Embutidos bajos en grasa']
+            },
+            'mercado-san-caralampio': {
+                position: { lat: 16.2456, lng: -92.1334 },
+                title: 'Mercado San Caralampio',
+                address: 'Calle 2a Norte Poniente, Centro, Comitán de Domínguez',
+                discount: '12% descuento en lácteos locales',
+                phone: '+52 963 632 0800',
+                hours: 'L-D: 06:00-18:00',
+                specialOffers: ['Quesos artesanales', 'Leche fresca', 'Yogurt natural', 'Crema']
+            }
+        };
+
+        // Detectar ubicación del usuario
+        function detectLocation() {
+            if (navigator.geolocation) {
+                showNotification('Detectando tu ubicación...');
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        // Mostrar marcador de usuario
+                        const userMarker = document.getElementById('userMarker');
+                        if (userMarker) {
+                            userMarker.classList.remove('hidden');
+                        }
+                        
+                        updateDistances();
+                        showNotification('¡Ubicación detectada! Distancias actualizadas');
+                    },
+                    (error) => {
+                        let errorMessage = 'No se pudo obtener tu ubicación';
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = 'Permiso de ubicación denegado';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = 'Ubicación no disponible';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = 'Tiempo de espera agotado';
+                                break;
+                        }
+                        showNotification(errorMessage);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 300000
+                    }
+                );
+            } else {
+                showNotification('Geolocalización no soportada en este navegador');
+            }
+        }
+
+        // Abrir direcciones en Google Maps
+        function openDirections(lat, lng, storeName) {
+            const destination = `${lat},${lng}`;
+            let url = '';
+            
+            if (userLocation) {
+                // Si tenemos la ubicación del usuario, crear ruta desde su ubicación
+                const origin = `${userLocation.lat},${userLocation.lng}`;
+                url = `https://www.google.com/maps/dir/${origin}/${destination}`;
+            } else {
+                // Si no tenemos ubicación, abrir solo el destino
+                url = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+            }
+            
+            // Abrir en nueva pestaña
+            window.open(url, '_blank');
+            showNotification(`Abriendo direcciones a ${storeName}...`);
+        }
+
+        // Seleccionar tienda en el mapa
+        function selectStore(storeId) {
+            const store = storesData[storeId];
+            if (!store) return;
+
+            selectedStore = store;
+            
+            const storeInfo = document.getElementById('storeInfo');
+            if (storeInfo) {
+                storeInfo.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h4 class="font-bold text-jarelux-blue text-lg">${store.title}</h4>
+                            <p class="text-gray-600 text-sm">📍 ${store.address}</p>
+                        </div>
+                        <button onclick="closeStoreInfo()" class="text-gray-400 hover:text-gray-600">
+                            <span class="text-xl">×</span>
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-sm text-gray-600">📞 ${store.phone}</p>
+                            <p class="text-sm text-gray-600">🕒 ${store.hours}</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                ${store.discount}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <p class="font-medium text-jarelux-blue mb-2">Ofertas especiales:</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${store.specialOffers.map(offer => `
+                                <span class="bg-blue-50 text-jarelux-blue px-2 py-1 rounded text-xs">${offer}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button onclick="openDirections('${store.position.lat}', '${store.position.lng}', '${store.title}')" class="flex-1 bg-jarelux-blue text-white py-2 px-4 rounded-lg hover:bg-jarelux-dark transition-colors text-sm">
+                            🗺️ Cómo llegar
+                        </button>
+                        <button onclick="showOffers('${storeId}')" class="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors text-sm">
+                            🛒 Ver ofertas
+                        </button>
+                    </div>
+                `;
+                
+                // Mostrar panel
+                storeInfo.classList.remove('translate-y-full');
+            }
+        }
+
+        // Cerrar información de tienda
+        function closeStoreInfo() {
+            const storeInfo = document.getElementById('storeInfo');
+            if (storeInfo) {
+                storeInfo.classList.add('translate-y-full');
+            }
+        }
+
+        // Mostrar ofertas específicas
+        function showOffers(storeId) {
+            const store = storesData[storeId];
+            if (!store) return;
+
+            showNotification(`Abriendo ofertas especiales de ${store.title}...`);
+            
+            setTimeout(() => {
+                showNotification(`${store.discount} - Válido hasta fin de mes`);
+            }, 1500);
+        }
+
+        // Actualizar distancias en la lista
+        function updateDistances() {
+            if (!userLocation) return;
+
+            Object.keys(storesData).forEach(storeId => {
+                const store = storesData[storeId];
+                const distance = calculateDistance(userLocation, store.position);
+                const distanceElement = document.getElementById(`distance-${storeId}`);
+                
+                if (distanceElement) {
+                    distanceElement.textContent = `${distance.toFixed(1)} km`;
+                    
+                    // Cambiar color según distancia
+                    if (distance < 2) {
+                        distanceElement.className = 'bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full';
+                    } else if (distance < 5) {
+                        distanceElement.className = 'bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full';
+                    } else {
+                        distanceElement.className = 'bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full';
+                    }
+                }
+            });
+        }
+
+        // Calcular distancia entre dos puntos
+        function calculateDistance(pos1, pos2) {
+            const R = 6371; // Radio de la Tierra en km
+            const dLat = (pos2.lat - pos1.lat) * Math.PI / 180;
+            const dLon = (pos2.lng - pos1.lng) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(pos1.lat * Math.PI / 180) * Math.cos(pos2.lat * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Controles del mapa
+        function zoomIn() {
+            showNotification('Acercando vista...');
+        }
+
+        function zoomOut() {
+            showNotification('Alejando vista...');
+        }
+
+        function resetView() {
+            showNotification('Vista restablecida');
+            closeStoreInfo();
+        }
+
+        // Simulación de notificaciones
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-jarelux-blue text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Funcionalidad para los botones de estado de ánimo
+        document.querySelectorAll('button').forEach(button => {
+            if (button.querySelector('span') && button.querySelector('p')) {
+                button.addEventListener('click', function() {
+                    // Remover selección previa
+                    this.parentNode.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('border-jarelux-blue', 'bg-blue-50');
+                    });
+                    // Agregar selección actual
+                    this.classList.add('border-jarelux-blue', 'bg-blue-50');
+                });
+            }
+        });
+
+        // Funcionalidad para el slider de apetito
+        const slider = document.querySelector('input[type="range"]');
+        if (slider) {
+            slider.addEventListener('input', function() {
+                const value = this.value;
+                const percentage = ((value - 1) / 9) * 100;
+                this.style.background = `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`;
+            });
+        }
+
+        // Funcionalidad para tiendas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detectar ubicación automáticamente al cargar
+            setTimeout(() => {
+                detectLocation();
+            }, 1000);
+
+            // Funcionalidad para las tiendas
+            const storeItems = document.querySelectorAll('#storesList > div');
+            storeItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const storeName = this.querySelector('h5').textContent;
+                    showNotification(`Abriendo ofertas de ${storeName}...`);
+                });
+            });
+
+            // Agregar funcionalidad a botones principales
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                if (button.textContent.includes('Guardar Registro')) {
+                    button.addEventListener('click', () => {
+                        showNotification('Registro guardado exitosamente');
+                    });
+                }
+                if (button.textContent.includes('Ver Receta')) {
+                    button.addEventListener('click', () => {
+                        showNotification('Abriendo receta detallada...');
+                    });
+                }
+                if (button.textContent.includes('Contactar Nutricionista')) {
+                    button.addEventListener('click', () => {
+                        showNotification('Conectando con tu nutricionista...');
+                    });
+                }
+                if (button.textContent.includes('Ver Todos los Descuentos')) {
+                    button.addEventListener('click', () => {
+                        showNotification('Cargando catálogo completo de descuentos...');
+                    });
+                }
+                if (button.textContent.includes('Lista de Compras')) {
+                    button.addEventListener('click', () => {
+                        showNotification('Generando lista de compras personalizada...');
+                    });
+                }
+            });
+
+            // Mostrar notificación de éxito
+            showNotification('¡Sistema Jarelux cargado correctamente!');
+        });
+
+        // Funciones para rutinas de ejercicio
+        function startRoutine(routineId) {
+            const routine = routinesData[routineId];
+            if (!routine) {
+                showNotification('Rutina no encontrada');
+                return;
+            }
+
+            currentRoutine = routine;
+            currentExerciseIndex = 0;
+            isPaused = false;
+
+            // Mostrar modal
+            const modal = document.getElementById('routineModal');
+            modal.classList.remove('hidden');
+
+            // Configurar título
+            document.getElementById('routineTitle').textContent = routine.title;
+
+            // Iniciar primer ejercicio
+            startExercise();
+            showNotification(`Iniciando ${routine.title}...`);
+        }
+
+        function startExercise() {
+            if (!currentRoutine || currentExerciseIndex >= currentRoutine.exercises.length) {
+                completeRoutine();
+                return;
+            }
+
+            const exercise = currentRoutine.exercises[currentExerciseIndex];
+            const totalExercises = currentRoutine.exercises.length;
+
+            // Actualizar progreso
+            const progress = ((currentExerciseIndex + 1) / totalExercises) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('routineProgress').textContent = `${currentExerciseIndex + 1} de ${totalExercises} ejercicios`;
+
+            // Actualizar ejercicio actual
+            const exerciseDiv = document.getElementById('currentExercise');
+            exerciseDiv.querySelector('.text-4xl').textContent = exercise.icon;
+            exerciseDiv.querySelector('h4').textContent = exercise.name;
+            exerciseDiv.querySelector('p').textContent = exercise.instructions;
+
+            // Iniciar timer
+            startTimer(exercise.duration);
+        }
+
+        function startTimer(duration) {
+            let timeLeft = duration;
+            const timerElement = document.getElementById('exerciseTimer');
+            
+            function updateTimer() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(exerciseTimer);
+                    nextExercise();
+                    return;
+                }
+                
+                if (!isPaused) {
+                    timeLeft--;
+                }
+            }
+
+            exerciseTimer = setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
+        function pauseExercise() {
+            isPaused = !isPaused;
+            const pauseBtn = document.getElementById('pauseBtn');
+            
+            if (isPaused) {
+                pauseBtn.innerHTML = '▶️ Reanudar';
+                pauseBtn.className = 'flex-1 bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors';
+                showNotification('Ejercicio pausado');
+            } else {
+                pauseBtn.innerHTML = '⏸️ Pausar';
+                pauseBtn.className = 'flex-1 bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition-colors';
+                showNotification('Ejercicio reanudado');
+            }
+        }
+
+        function skipExercise() {
+            if (exerciseTimer) {
+                clearInterval(exerciseTimer);
+            }
+            nextExercise();
+            showNotification('Ejercicio omitido');
+        }
+
+        function completeExercise() {
+            if (exerciseTimer) {
+                clearInterval(exerciseTimer);
+            }
+            nextExercise();
+            showNotification('Ejercicio completado');
+        }
+
+        function nextExercise() {
+            currentExerciseIndex++;
+            if (currentExerciseIndex < currentRoutine.exercises.length) {
+                startExercise();
+            } else {
+                completeRoutine();
+            }
+        }
+
+        function completeRoutine() {
+            if (exerciseTimer) {
+                clearInterval(exerciseTimer);
+            }
+            
+            closeRoutine();
+            showNotification(`¡Rutina ${currentRoutine.title} completada! 🎉`);
+            
+            // Actualizar estadísticas (simulado)
+            setTimeout(() => {
+                showNotification('Progreso guardado en tu historial');
+            }, 2000);
+        }
+
+        function closeRoutine() {
+            if (exerciseTimer) {
+                clearInterval(exerciseTimer);
+            }
+            
+            const modal = document.getElementById('routineModal');
+            modal.classList.add('hidden');
+            
+            currentRoutine = null;
+            currentExerciseIndex = 0;
+            isPaused = false;
+        }
+
+        function viewRoutineDetails(routineId) {
+            const routine = routinesData[routineId];
+            if (!routine) return;
+
+            let exercisesList = routine.exercises.map((exercise, index) => 
+                `${index + 1}. ${exercise.name} (${Math.floor(exercise.duration / 60)} min)`
+            ).join('\n');
+
+            showNotification(`${routine.title}:\n${exercisesList}`);
+        }
+
+        // Funciones adicionales para actividad física
+        function showAllRoutines() {
+            showNotification('Cargando biblioteca completa de rutinas...');
+            setTimeout(() => {
+                showNotification('Disponibles: Pilates, Tai Chi, Aqua Terapia, Caminatas guiadas');
+            }, 1500);
+        }
+
+        function customizeRoutine() {
+            showNotification('Abriendo personalizador de rutinas...');
+            setTimeout(() => {
+                showNotification('Ajusta duración, intensidad y ejercicios según tus necesidades');
+            }, 1500);
+        }
+
+        function shareProgress() {
+            showNotification('Generando reporte de progreso...');
+            setTimeout(() => {
+                showNotification('Reporte listo para compartir con tu equipo médico');
+            }, 1500);
+        }
+
+        function consultPhysiotherapist() {
+            showNotification('Conectando con fisioterapeuta especializado...');
+            setTimeout(() => {
+                showNotification('Dr. García disponible para consulta virtual - Clic para agendar');
+            }, 1500);
+        }
+
+        // Funciones para contacto con profesionales
+        function startVideoCall(professionalType) {
+            currentProfessional = professionalType;
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('hidden');
+            
+            const title = professionalType === 'nutriologo' ? 'Dra. María González - Nutrióloga' : 'Dr. Carlos Ramírez - Fisioterapeuta';
+            document.getElementById('videoTitle').textContent = `Videollamada con ${title}`;
+            
+            // Simular conexión
+            setTimeout(() => {
+                showNotification('Conectando videollamada...');
+                startVideoTimer();
+            }, 1000);
+            
+            setTimeout(() => {
+                showNotification('¡Videollamada conectada exitosamente!');
+            }, 3000);
+        }
+
+        function scheduleVideoCall(professionalType) {
+            showNotification('Abriendo calendario para agendar videollamada...');
+            setTimeout(() => {
+                scheduleAppointment(professionalType);
+            }, 1000);
+        }
+
+        function startVideoTimer() {
+            let seconds = 0;
+            videoCallTimer = setInterval(() => {
+                seconds++;
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                document.getElementById('videoTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function endVideoCall() {
+            if (videoCallTimer) {
+                clearInterval(videoCallTimer);
+                videoCallTimer = null;
+            }
+            
+            const modal = document.getElementById('videoModal');
+            modal.classList.add('hidden');
+            
+            showNotification('Videollamada finalizada. Resumen enviado a tu historial médico.');
+            currentProfessional = null;
+        }
+
+        function toggleMicrophone() {
+            showNotification('Micrófono alternado');
+        }
+
+        function toggleCamera() {
+            showNotification('Cámara alternada');
+        }
+
+        function shareScreen() {
+            showNotification('Compartiendo pantalla...');
+        }
+
+        function startChat(professionalType) {
+            currentProfessional = professionalType;
+            const modal = document.getElementById('chatModal');
+            modal.classList.remove('hidden');
+            
+            // Configurar chat según el profesional
+            if (professionalType === 'nutriologo') {
+                document.getElementById('chatTitle').textContent = 'Chat con Dra. María González';
+                document.getElementById('chatAvatar').innerHTML = '<span class="text-white">👩‍⚕️</span>';
+                document.getElementById('chatStatus').textContent = 'En línea';
+            } else {
+                document.getElementById('chatTitle').textContent = 'Chat con Dr. Carlos Ramírez';
+                document.getElementById('chatAvatar').innerHTML = '<span class="text-white">🏃‍♂️</span>';
+                document.getElementById('chatStatus').textContent = 'Disponible en 25 min';
+            }
+            
+            // Limpiar mensajes anteriores y mostrar mensaje de bienvenida
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = '';
+            
+            setTimeout(() => {
+                addChatMessage('professional', `¡Hola! Soy ${professionalType === 'nutriologo' ? 'la Dra. González' : 'el Dr. Ramírez'}. ¿En qué puedo ayudarte hoy?`);
+            }, 1000);
+        }
+
+        function closeChat() {
+            const modal = document.getElementById('chatModal');
+            modal.classList.add('hidden');
+            currentProfessional = null;
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addChatMessage('user', message);
+                input.value = '';
+                
+                // Simular respuesta del profesional
+                setTimeout(() => {
+                    const responses = [
+                        'Entiendo tu preocupación. Déjame revisar tu historial.',
+                        'Esa es una excelente pregunta. Te explico...',
+                        'Basándome en tu progreso actual, te recomiendo...',
+                        'Es normal sentir eso durante el tratamiento. Vamos a ajustar...',
+                        'Perfecto, veo que has estado siguiendo bien las indicaciones.'
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addChatMessage('professional', randomResponse);
+                }, 1500);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            addChatMessage('user', message);
+            
+            // Respuestas específicas para mensajes rápidos
+            setTimeout(() => {
+                let response = '';
+                if (message.includes('progreso')) {
+                    response = 'Tu progreso es excelente. Has mejorado un 15% en los últimos 7 días. ¡Sigue así!';
+                } else if (message.includes('ajustar')) {
+                    response = 'Claro, podemos hacer algunos ajustes. ¿Qué aspectos específicos te gustaría modificar?';
+                }
+                addChatMessage('professional', response);
+            }, 1000);
+        }
+
+        function addChatMessage(sender, message) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.className = 'flex justify-end';
+                messageDiv.innerHTML = `
+                    <div class="bg-jarelux-blue text-white px-4 py-2 rounded-lg max-w-xs">
+                        <p class="text-sm">${message}</p>
+                        <p class="text-xs opacity-75 mt-1">${new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.className = 'flex justify-start';
+                messageDiv.innerHTML = `
+                    <div class="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg max-w-xs">
+                        <p class="text-sm">${message}</p>
+                        <p class="text-xs text-gray-500 mt-1">${new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}</p>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function scheduleAppointment(professionalType) {
+            currentProfessional = professionalType;
+            const modal = document.getElementById('appointmentModal');
+            modal.classList.remove('hidden');
+            
+            const title = professionalType === 'nutriologo' ? 'Agendar Cita - Dra. María González' : 'Agendar Cita - Dr. Carlos Ramírez';
+            document.getElementById('appointmentTitle').textContent = title;
+            
+            // Resetear selecciones
+            selectedDate = null;
+            selectedTime = null;
+            consultationType = null;
+        }
+
+        function closeAppointmentModal() {
+            const modal = document.getElementById('appointmentModal');
+            modal.classList.add('hidden');
+            currentProfessional = null;
+        }
+
+        function selectConsultationType(type) {
+            consultationType = type;
+            
+            // Actualizar UI
+            document.querySelectorAll('.consultation-type').forEach(btn => {
+                btn.classList.remove('border-jarelux-blue', 'bg-blue-50');
+            });
+            
+            event.target.closest('.consultation-type').classList.add('border-jarelux-blue', 'bg-blue-50');
+            showNotification(`Consulta ${type} seleccionada`);
+        }
+
+        function selectDate(day) {
+            selectedDate = day;
+            
+            // Actualizar UI
+            document.querySelectorAll('.calendar-day').forEach(btn => {
+                btn.classList.remove('bg-jarelux-blue', 'text-white');
+            });
+            
+            event.target.classList.add('bg-jarelux-blue', 'text-white');
+            showNotification(`Fecha seleccionada: ${day} de Noviembre`);
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            
+            // Actualizar UI
+            document.querySelectorAll('.time-slot').forEach(btn => {
+                btn.classList.remove('bg-jarelux-blue', 'text-white', 'border-jarelux-blue');
+                btn.classList.add('border-gray-300');
+            });
+            
+            event.target.classList.remove('border-gray-300');
+            event.target.classList.add('bg-jarelux-blue', 'text-white', 'border-jarelux-blue');
+            showNotification(`Horario seleccionado: ${time}`);
+        }
+
+        function confirmAppointment() {
+            if (!consultationType || !selectedDate || !selectedTime) {
+                showNotification('Por favor completa todos los campos requeridos');
+                return;
+            }
+            
+            const notes = document.getElementById('appointmentNotes').value;
+            const professionalName = currentProfessional === 'nutriologo' ? 'Dra. María González' : 'Dr. Carlos Ramírez';
+            
+            closeAppointmentModal();
+            showNotification('¡Cita agendada exitosamente!');
+            
+            setTimeout(() => {
+                showNotification(`Cita ${consultationType} con ${professionalName} - ${selectedDate} Nov a las ${selectedTime}`);
+            }, 2000);
+            
+            setTimeout(() => {
+                showNotification('Recordatorio enviado a tu calendario y email');
+            }, 4000);
+        }
+
+        function modifyAppointment(professionalType) {
+            showNotification('Abriendo opciones para modificar cita...');
+            setTimeout(() => {
+                scheduleAppointment(professionalType);
+            }, 1000);
+        }
+
+        function sendNutritionReport() {
+            showNotification('Generando reporte nutricional completo...');
+            setTimeout(() => {
+                showNotification('Reporte enviado a Dra. María González - Incluye: progreso, síntomas, adherencia');
+            }, 2000);
+        }
+
+        function sendActivityReport() {
+            showNotification('Generando reporte de actividad física...');
+            setTimeout(() => {
+                showNotification('Reporte enviado a Dr. Carlos Ramírez - Incluye: rutinas completadas, progreso, energía');
+            }, 2000);
+        }
+
+        function emergencyContact() {
+            showNotification('🚨 Activando protocolo de emergencia...');
+            setTimeout(() => {
+                showNotification('Contacto de emergencia: +52 963 123 4567 - Disponible 24/7');
+            }, 1500);
+            setTimeout(() => {
+                showNotification('También puedes usar el botón SOS en la app móvil');
+            }, 3000);
+        }
+
+        function teamConsultation() {
+            showNotification('Programando consulta multidisciplinaria...');
+            setTimeout(() => {
+                showNotification('Consulta en equipo disponible: Lunes 20 Nov, 2:00 PM');
+            }, 2000);
+            setTimeout(() => {
+                showNotification('Participantes: Nutrióloga + Fisioterapeuta + Oncólogo');
+            }, 4000);
+        }
+
+        function viewMedicalHistory() {
+            showNotification('Cargando historial médico completo...');
+            setTimeout(() => {
+                showNotification('Historial disponible: 15 consultas, 8 reportes, 12 seguimientos');
+            }, 2000);
+        }
+
+        // Funciones adicionales para botones principales
+        function showProgressReport() {
+            showNotification('Generando reporte completo de progreso...');
+            setTimeout(() => {
+                showNotification('Reporte listo: Nutrición 85%, Actividad 78%, Bienestar 82%');
+            }, 2000);
+        }
+
+        function showSpecialRecipes() {
+            showNotification('Cargando recetas especializadas para tu tratamiento...');
+            setTimeout(() => {
+                showNotification('25 recetas disponibles: Anti-náuseas, Energizantes, Digestivas');
+            }, 2000);
+        }
+
+        function generateShoppingList() {
+            showNotification('Generando lista de compras personalizada...');
+            setTimeout(() => {
+                showNotification('Lista creada con 18 productos recomendados + descuentos Jarelux');
+            }, 2000);
+        }
+
+        function accessEducationalResources() {
+            showNotification('Abriendo biblioteca de recursos educativos...');
+            setTimeout(() => {
+                showNotification('Disponible: Videos, artículos, guías PDF, webinars grabados');
+            }, 2000);
+        }
+
+        // Funciones de Luxi AI
+        function toggleLuxiChat() {
+            const chat = document.getElementById('luxiChat');
+            const button = document.getElementById('luxiButton');
+            
+            if (luxiChatOpen) {
+                closeLuxiChat();
+            } else {
+                openLuxiChat();
+            }
+        }
+
+        function openLuxiChat() {
+            const chat = document.getElementById('luxiChat');
+            chat.classList.remove('hidden');
+            
+            setTimeout(() => {
+                chat.classList.remove('translate-y-full', 'opacity-0');
+                chat.classList.add('translate-y-0', 'opacity-100');
+            }, 10);
+            
+            luxiChatOpen = true;
+            
+            // Mensaje de bienvenida personalizado si es la primera vez
+            setTimeout(() => {
+                if (document.getElementById('luxiMessages').children.length === 1) {
+                    addLuxiMessage('luxi', '¿En qué puedo ayudarte hoy? Puedes preguntarme sobre tu alimentación, ejercicios o cualquier síntoma que tengas. 😊');
+                }
+            }, 500);
+        }
+
+        function closeLuxiChat() {
+            const chat = document.getElementById('luxiChat');
+            chat.classList.remove('translate-y-0', 'opacity-100');
+            chat.classList.add('translate-y-full', 'opacity-0');
+            
+            setTimeout(() => {
+                chat.classList.add('hidden');
+            }, 300);
+            
+            luxiChatOpen = false;
+        }
+
+        function handleLuxiKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendLuxiMessage();
+            }
+        }
+
+        function sendLuxiMessage() {
+            const input = document.getElementById('luxiInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addLuxiMessage('user', message);
+                input.value = '';
+                
+                // Mostrar indicador de escritura
+                showLuxiTyping();
+                
+                // Generar respuesta de Luxi
+                setTimeout(() => {
+                    const response = generateLuxiResponse(message);
+                    hideLuxiTyping();
+                    addLuxiMessage('luxi', response);
+                }, 1500 + Math.random() * 1000); // Tiempo variable para parecer más natural
+            }
+        }
+
+        function sendLuxiQuickQuestion(question) {
+            addLuxiMessage('user', question);
+            
+            showLuxiTyping();
+            
+            setTimeout(() => {
+                const response = generateLuxiResponse(question);
+                hideLuxiTyping();
+                addLuxiMessage('luxi', response);
+            }, 1200);
+        }
+
+        function addLuxiMessage(sender, message) {
+            const messagesContainer = document.getElementById('luxiMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.className = 'flex justify-end';
+                messageDiv.innerHTML = `
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg max-w-xs">
+                        <p class="text-sm">${message}</p>
+                        <p class="text-xs opacity-75 mt-1">${new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.className = 'flex items-start space-x-2';
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white text-sm">🤖</span>
+                    </div>
+                    <div class="bg-white rounded-lg p-3 shadow-sm max-w-xs">
+                        <p class="text-sm text-gray-800">${message}</p>
+                        <p class="text-xs text-gray-500 mt-1">${new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}</p>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showLuxiTyping() {
+            const messagesContainer = document.getElementById('luxiMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'luxiTyping';
+            typingDiv.className = 'flex items-start space-x-2';
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-white text-sm">🤖</span>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideLuxiTyping() {
+            const typingDiv = document.getElementById('luxiTyping');
+            if (typingDiv) {
+                typingDiv.remove();
+            }
+        }
+
+        function generateLuxiResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Análisis de palabras clave para generar respuestas contextuales
+            if (message.includes('náusea') || message.includes('nausea') || message.includes('vómito') || message.includes('mareo')) {
+                return getRandomResponse(luxiKnowledgeBase.nutrition.nauseas);
+            }
+            
+            if (message.includes('energía') || message.includes('energia') || message.includes('cansancio') || message.includes('débil')) {
+                return getRandomResponse(luxiKnowledgeBase.nutrition.energia);
+            }
+            
+            if (message.includes('apetito') || message.includes('hambre') || message.includes('comer')) {
+                return getRandomResponse(luxiKnowledgeBase.nutrition.apetito);
+            }
+            
+            if (message.includes('digestión') || message.includes('digestion') || message.includes('estómago') || message.includes('intestino')) {
+                return getRandomResponse(luxiKnowledgeBase.nutrition.digestion);
+            }
+            
+            if (message.includes('ejercicio') || message.includes('actividad') || message.includes('seguro') || message.includes('entrenar')) {
+                return getRandomResponse(luxiKnowledgeBase.exercise.seguro);
+            }
+            
+            if (message.includes('fatiga') || message.includes('cansado') || message.includes('agotado')) {
+                return getRandomResponse(luxiKnowledgeBase.exercise.fatiga);
+            }
+            
+            if (message.includes('fuerza') || message.includes('músculo') || message.includes('musculo') || message.includes('fortalecer')) {
+                return getRandomResponse(luxiKnowledgeBase.exercise.fuerza);
+            }
+            
+            if (message.includes('dolor') || message.includes('duele') || message.includes('molestia')) {
+                return getRandomResponse(luxiKnowledgeBase.symptoms.dolor);
+            }
+            
+            if (message.includes('sueño') || message.includes('dormir') || message.includes('insomnio') || message.includes('descanso')) {
+                return getRandomResponse(luxiKnowledgeBase.symptoms.sueno);
+            }
+            
+            if (message.includes('estrés') || message.includes('estres') || message.includes('ansiedad') || message.includes('nervioso')) {
+                return getRandomResponse(luxiKnowledgeBase.symptoms.estres);
+            }
+            
+            // Respuestas para saludos
+            if (message.includes('hola') || message.includes('buenos') || message.includes('buenas')) {
+                return '¡Hola! Me alegra verte por aquí. Soy Luxi, tu asistente de IA especializado en nutrición oncológica. ¿Cómo te sientes hoy? 😊';
+            }
+            
+            if (message.includes('gracias') || message.includes('thank')) {
+                return '¡De nada! Estoy aquí para apoyarte en tu proceso. Si tienes más preguntas, no dudes en hacérmelas. 💜';
+            }
+            
+            if (message.includes('adiós') || message.includes('adios') || message.includes('bye')) {
+                return '¡Hasta pronto! Recuerda que estoy aquí 24/7 para ayudarte. Cuídate mucho. 🌟';
+            }
+            
+            // Preguntas sobre Luxi
+            if (message.includes('quién eres') || message.includes('quien eres') || message.includes('qué eres')) {
+                return 'Soy Luxi, tu asistente de inteligencia artificial especializado en nutrición oncológica y ejercicio terapéutico. Estoy aquí para brindarte consejos personalizados y apoyo durante tu tratamiento. 🤖💙';
+            }
+            
+            // Respuestas generales
+            const generalResponses = [
+                'Esa es una excelente pregunta. Basándome en mi conocimiento especializado, te sugiero que consultes con tu equipo médico para obtener consejos personalizados. 👨‍⚕️',
+                'Entiendo tu preocupación. Cada situación es única, por lo que es importante que hables con tu nutricionista o médico tratante. 💬',
+                'Me gustaría ayudarte más específicamente. ¿Podrías contarme un poco más sobre tu situación actual? 🤔',
+                getRandomResponse(luxiKnowledgeBase.general)
+            ];
+            
+            return getRandomResponse(generalResponses);
+        }
+
+        function getRandomResponse(responses) {
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Inicializar Luxi con mensaje de bienvenida personalizado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar notificación sobre Luxi después de cargar
+            setTimeout(() => {
+                showNotification('💜 ¡Luxi AI está disponible! Haz clic en el botón morado para chatear');
+            }, 3000);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786821162b7f863',t:'MTc1Njc0Nzk1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

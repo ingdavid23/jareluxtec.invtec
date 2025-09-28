@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarelux - Portal del Paciente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #1e40af 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        #video-call-modal .modal-content {
+            height: 90vh;
+            max-height: 700px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12  flex items-center justify-center p-1">
+                        <img src="1000217146 (1).png" alt="Logo de Jarelux" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">Jarelux</h1>
+                        <p class="text-blue-100">Portal de Apoyo al Paciente</p>
+                    </div>
+                </div>
+                <div id="userInfo" class="hidden">
+                    <span id="userName" class="mr-4"></span>
+                    <button onclick="logout()" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-md w-full">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Bienvenido a Jarelux</h2>
+                <p class="text-xl text-gray-600">Tu portal de salud y bienestar</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-8 card-hover cursor-pointer" onclick="showLogin('patient')">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-4xl">🤒</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Acceso Paciente</h3>
+                    <p class="text-gray-600 mb-6">Consulta tu tratamiento, citas y recursos de apoyo.</p>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-sm text-blue-700">• Historial médico</p>
+                        <p class="text-sm text-blue-700">• Control de medicamentos</p>
+                        <p class="text-sm text-blue-700">• Apoyo emocional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginForm" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <h3 id="loginTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+                <p class="text-gray-600">Ingresa tus credenciales</p>
+            </div>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Usuario</label>
+                    <input type="text" id="username" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingresa tu usuario" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+                    <input type="password" id="password" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingresa tu contraseña" required>
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                    Iniciar Sesión
+                </button>
+            </form>
+            
+            <button onclick="backToSelection()" class="w-full mt-4 text-gray-600 hover:text-gray-800">
+                ← Volver
+            </button>
+        </div>
+    </div>
+
+    <div id="patientDashboard" class="hidden">
+        <div class="container mx-auto px-4 py-8">
+            <nav class="bg-white rounded-lg shadow-md mb-8">
+                <div class="flex flex-wrap justify-center space-x-1 p-2">
+                    <button onclick="showPatientSection('overview')" class="patient-nav-btn bg-blue-600 text-white px-4 py-2 rounded-lg m-1">🏠 Inicio</button>
+                    <button onclick="showPatientSection('appointments')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📅 Citas</button>
+                    <button onclick="showPatientSection('medications')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">💊 Medicamentos</button>
+                    <button onclick="showPatientSection('history')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📂 Historial</button>
+                    <button onclick="showPatientSection('support')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">❤️ Apoyo</button>
+                    <button onclick="showPatientSection('nutrition')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">🥗 Nutrición</button>
+                    <button onclick="showPatientSection('services')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📍 Servicios</button>
+                </div>
+            </nav>
+
+            <div id="patient-overview" class="patient-section">
+                   <div class="grid md:grid-cols-3 gap-6 mb-8">
+                       <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
+                           <h4 class="font-bold text-lg mb-2">Próxima Cita</h4>
+                           <p class="text-3xl font-bold text-blue-600">15 Dic, 10:00 AM</p>
+                           <p class="text-gray-600">Consulta de seguimiento con Dr. Martínez</p>
+                           <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver detalles</button>
+                       </div>
+                       
+                       <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
+                           <h4 class="font-bold text-lg mb-2">Medicamentos Hoy</h4>
+                           <p class="text-3xl font-bold text-blue-600">3 Dosis Pendientes</p>
+                           <p class="text-gray-600">Tamoxifeno, Ondansetrón, Calcio</p>
+                            <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver mi plan</button>
+                       </div>
+                       
+                       <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
+                           <h4 class="font-bold text-lg mb-2">Mi Estado</h4>
+                           <p class="text-3xl font-bold text-purple-600">Estable</p>
+                           <p class="text-gray-600">Actualizado por Dr. Martínez</p>
+                           <p class="text-xs text-gray-400 mt-3">Hoy, 2:30 PM</p>
+                       </div>
+                   </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold mb-4">Mi Plan del Día</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                            <span class="text-3xl mr-4">💊</span>
+                            <div>
+                                <p class="font-semibold text-blue-800">8:00 AM - Tomar Tamoxifeno</p>
+                                <p class="text-sm text-gray-600">1 tableta de 20mg con el desayuno.</p>
+                            </div>
+                            <button class="ml-auto bg-blue-600 text-white px-3 py-1 text-sm rounded-lg hover:bg-blue-700">Marcar como tomada</button>
+                        </div>
+                        <div class="flex items-center p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                            <span class="text-3xl mr-4">🚶‍♀️</span>
+                            <div>
+                                <p class="font-semibold text-blue-800">10:00 AM - Caminata Ligera</p>
+                                <p class="text-sm text-gray-600">20 minutos al aire libre, si el clima lo permite.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                            <span class="text-3xl mr-4">💧</span>
+                            <div>
+                                <p class="font-semibold text-purple-800">Recordatorio: Hidratación</p>
+                                <p class="text-sm text-gray-600">Beber al menos 2 litros de agua durante el día.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-center p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                            <span class="text-3xl mr-4">📓</span>
+                            <div>
+                                <p class="font-semibold text-yellow-800">Tarde - Registrar Síntomas</p>
+                                <p class="text-sm text-gray-600">Anota cómo te has sentido hoy en tu diario de salud.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="patient-appointments" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold">Mis Citas</h3>
+                        <button onclick="showRequestAppointmentModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">＋ Solicitar Nueva Cita</button>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3">Próximas Citas</h4>
+                        <div id="upcomingAppointmentsList" class="space-y-4">
+                            <div class="p-4 border rounded-lg bg-blue-50">
+                                <p class="font-bold text-blue-800">Consulta de Seguimiento</p>
+                                <p class="text-gray-700"><strong>Fecha:</strong> 15 de Diciembre, 2024 - 10:00 AM</p>
+                                <p class="text-gray-700"><strong>Médico:</strong> Dr. Carlos Martínez</p>
+                                <p class="text-gray-700"><strong>Lugar:</strong> Hospital General de Comitán, Consultorio 3</p>
+                                <div class="mt-3 flex space-x-2">
+                                    <button class="bg-blue-500 text-white text-sm px-3 py-1 rounded">Confirmar Asistencia</button>
+                                    <button class="bg-yellow-500 text-white text-sm px-3 py-1 rounded">Reprogramar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold mb-3">Historial de Citas</h4>
+                        <ul class="space-y-3">
+                            <li class="p-3 bg-gray-100 rounded-lg flex justify-between items-center">
+                                <div>
+                                    <p class="font-semibold">Sesión de Quimioterapia</p>
+                                    <p class="text-sm text-gray-500">1 de Diciembre, 2024</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">✔️ Completada</span>
+                            </li>
+                            <li class="p-3 bg-gray-100 rounded-lg flex justify-between items-center">
+                                <div>
+                                    <p class="font-semibold">Consulta de Resultados</p>
+                                    <p class="text-sm text-gray-500">15 de Noviembre, 2024</p>
+                                </div>
+                                <span class="text-sm text-blue-600 font-medium">✔️ Completada</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="patient-medications" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-6">Mi Plan de Medicamentos</h3>
+                    <div class="space-y-6">
+                        <div class="p-4 border-2 border-blue-500 rounded-lg bg-blue-50">
+                            <h4 class="text-xl font-bold text-blue-800 mb-2">💊 Tamoxifeno 20mg</h4>
+                            <p class="text-gray-700"><strong>Instrucciones:</strong> Tomar 1 tableta por la mañana con alimentos.</p>
+                            <p class="text-gray-700"><strong>Propósito:</strong> Terapia hormonal para tratar el cáncer de mama.</p>
+                            <div class="mt-4">
+                                <p class="text-sm font-semibold mb-2">Horario de Hoy:</p>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                    <span>8:00 AM</span>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" class="h-5 w-5 rounded text-blue-600">
+                                        <span>Marcar como tomada</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">💊 Ondansetrón 8mg</h4>
+                            <p class="text-gray-600"><strong>Instrucciones:</strong> Tomar 1 tableta 30 minutos antes de la quimioterapia, o si presenta náuseas.</p>
+                            <p class="text-gray-600"><strong>Propósito:</strong> Prevenir y tratar náuseas y vómitos.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">💊 Suplemento de Calcio + Vitamina D</h4>
+                            <p class="text-gray-600"><strong>Instrucciones:</strong> Tomar 1 tableta con la cena.</p>
+                            <p class="text-gray-600"><strong>Propósito:</strong> Fortalecer los huesos durante la terapia hormonal.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                           <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">📄 Descargar Plan de Medicación (PDF)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="patient-history" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-6">Mi Historial Médico</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-blue-700 border-b pb-2 mb-3">Diagnóstico Principal</h4>
+                            <p><strong>Condición:</strong> Carcinoma Ductal Infiltrante (Cáncer de Mama)</p>
+                            <p><strong>Fecha de Diagnóstico:</strong> 10 de Octubre, 2024</p>
+                            <p><strong>Estadio:</strong> IIA (T2, N0, M0)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-blue-700 border-b pb-2 mb-3">Tratamientos Recibidos</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong>Cirugía:</strong> Lumpectomía (25 de Octubre, 2024)</li>
+                                <li><strong>Quimioterapia:</strong> Esquema AC-T (Inició 15 de Noviembre, 2024)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-purple-700 border-b pb-2 mb-3">Resultados de Laboratorio y Estudios</h4>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center">
+                                    <p>📄 Biopsia - 10/10/2024</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Descargar</button>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg flex justify-between items-center">
+                                    <p>📄 Análisis de Sangre Pre-Quimio - 14/11/2024</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Descargar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="patient-support" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-2">Recursos de Apoyo Emocional</h3>
+                    <p class="text-gray-600 mb-8">No estás solo/a en este camino. Aquí tienes recursos para ayudarte.</p>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">Registro de Bienestar Emocional</h4>
+                        <div class="p-6 bg-gray-50 rounded-lg border mb-6">
+                            <form id="wellness-form" onsubmit="handleWellnessLogSubmit(event)">
+                                <p class="font-semibold mb-4 text-gray-700">¿Cómo te sientes hoy?</p>
+                                <div class="grid md:grid-cols-3 gap-6 items-center">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">1. Estado de ánimo (1=Bajo, 5=Excelente)</label>
+                                        <div class="flex justify-between">
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="mood" value="1" class="text-blue-600" required><span>1</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="mood" value="2" class="text-blue-600"><span>2</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="mood" value="3" class="text-blue-600"><span>3</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="mood" value="4" class="text-blue-600"><span>4</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="mood" value="5" class="text-blue-600"><span>5</span></label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">2. Nivel de energía</label>
+                                           <div class="flex justify-between">
+                                                <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="energy" value="1" class="text-blue-600" required><span>Bajo</span></label>
+                                                <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="energy" value="3" class="text-blue-600"><span>Medio</span></label>
+                                                <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="energy" value="5" class="text-blue-600"><span>Alto</span></label>
+                                            </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">3. Nivel de ansiedad (1=Nada, 5=Mucha)</label>
+                                        <div class="flex justify-between">
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="anxiety" value="1" class="text-blue-600" required><span>1</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="anxiety" value="2" class="text-blue-600"><span>2</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="anxiety" value="3" class="text-blue-600"><span>3</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="anxiety" value="4" class="text-blue-600"><span>4</span></label>
+                                            <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="anxiety" value="5" class="text-blue-600"><span>5</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full md:w-auto float-right mt-4 bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">Guardar Registro</button>
+                            </form>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg border p-4 h-64 flex flex-col">
+                                <h5 class="text-center font-semibold text-gray-700 text-sm mb-2">Evolución del Ánimo</h5>
+                                <div class="flex-grow"><canvas id="mood-chart"></canvas></div>
+                            </div>
+                            <div class="bg-white rounded-lg border p-4 h-64 flex flex-col">
+                                <h5 class="text-center font-semibold text-gray-700 text-sm mb-2">Resumen de Bienestar</h5>
+                                <div class="flex-grow"><canvas id="wellness-summary-chart"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">Progreso del Tratamiento y Bienestar</h4>
+                        <div class="bg-white rounded-lg border p-4 h-80">
+                               <canvas id="treatment-progress-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">Comunicación Directa con Especialistas</h4>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-50 rounded-lg border flex flex-col md:flex-row items-start md:items-center justify-between">
+                                <div class="mb-3 md:mb-0">
+                                    <p class="font-bold text-lg text-purple-800">Dr. Luis Hernández</p>
+                                    <p class="text-sm text-gray-600">Psico-oncólogo</p>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <button onclick="startChatWithSpecialist('Dr. Luis Hernández')" class="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-lg hover:bg-gray-300">💬 Chatear</button>
+                                    <button onclick="startCallWithSpecialist('Dr. Luis Hernández')" class="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-lg hover:bg-gray-300">📞 Llamar</button>
+                                    <button onclick="showVideoCallModal('Dr. Luis Hernández')" class="bg-gray-200 text-gray-800 text-sm px-3 py-1 rounded-lg hover:bg-gray-300">📹 Videollamada</button>
+                                    <button onclick="scheduleInPersonAppointment('Dr. Luis Hernández')" class="bg-purple-600 text-white text-sm px-3 py-1 rounded-lg hover:bg-purple-700">🗓️ Agendar Presencial</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <div class="mb-8">
+                        <h4 class="text-xl font-bold mb-4 text-gray-800">Ejercicios y Recomendaciones para el Bienestar</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
+                                <h5 class="font-bold text-lg text-blue-800 mb-3">🌬️ Ejercicio de Respiración 4-4-6</h5>
+                                <p class="text-sm text-gray-600 mb-3">Una técnica simple para calmar la ansiedad en cualquier momento.</p>
+                                <ol class="list-decimal list-inside text-sm space-y-1">
+                                    <li>Inhala lentamente por la nariz contando hasta 4.</li>
+                                    <li>Sostén la respiración contando hasta 4.</li>
+                                    <li>Exhala lentamente por la boca contando hasta 6.</li>
+                                    <li>Repite de 5 a 10 veces, concentrándote en el ritmo.</li>
+                                </ol>
+                            </div>
+                            <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
+                                <h5 class="font-bold text-lg text-blue-800 mb-3">🧘‍♀️ Ejercicio de 5 Sentidos</h5>
+                                <p class="text-sm text-gray-600 mb-3">Conecta con el presente para reducir el estrés y los pensamientos abrumadores.</p>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    <li><strong>Observa</strong> 5 objetos a tu alrededor.</li>
+                                    <li><strong>Siente</strong> 4 cosas (ej. la silla, tu ropa).</li>
+                                    <li><strong>Escucha</strong> 3 sonidos diferentes.</li>
+                                    <li><strong>Huele</strong> 2 aromas distintos.</li>
+                                    <li><strong>Saborea</strong> 1 cosa (ej. un sorbo de agua).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-6 bg-gray-50 rounded-lg border">
+                            <h5 class="font-bold text-lg text-gray-800 mb-3">✨ Recomendaciones Adicionales</h5>
+                               <ul class="list-disc list-inside text-sm space-y-2 text-gray-700">
+                                    <li><strong>Mantén una rutina:</strong> Horarios regulares para dormir y comer pueden darte estabilidad.</li>
+                                    <li><strong>Expresa tus emociones:</strong> Habla con tus seres queridos o escribe en un diario.</li>
+                                    <li><strong>Actividad suave:</strong> Un paseo corto o estiramientos pueden mejorar tu ánimo.</li>
+                                    <li><strong>Sé amable contigo:</strong> Permítete descansar y no te exijas demasiado. Cada día es diferente.</li>
+                                </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                         <h4 class="text-xl font-bold mb-4 text-gray-800">Beneficios de Entretenimiento (Descuentos)</h4>
+                         <div class="grid md:grid-cols-2 gap-6">
+                             <div class="p-6 bg-red-50 rounded-lg border border-red-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la página de convenios Cinépolis')">
+                                 <h5 class="font-bold text-xl text-red-800 mb-3">🎬 Descuentos en Cinépolis</h5>
+                                 <p class="text-sm text-gray-700 mb-3">Disfruta de la magia del cine a un precio especial.</p>
+                                 <ul class="list-disc list-inside text-sm space-y-1 text-red-700">
+                                     <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
+                                     <li>Precio especial en combos de dulcería.</li>
+                                 </ul>
+                                 <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">Ver Códigos y Salas</button>
+                             </div>
+                             <div class="p-6 bg-purple-50 rounded-lg border border-purple-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la cartelera de obras con descuento')">
+                                 <h5 class="font-bold text-xl text-purple-800 mb-3">🎭 Descuentos en Obras de Teatro</h5>
+                                 <p class="text-sm text-gray-700 mb-3">Acceso a cultura y esparcimiento con precios preferenciales.</p>
+                                 <ul class="list-disc list-inside text-sm space-y-1 text-purple-700">
+                                     <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
+                                     <li>Beneficio aplica para el paciente y un acompañante.</li>
+                                 </ul>
+                                 <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">Consultar Cartelera</button>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-purple-50 rounded-lg border border-purple-200">
+                            <h4 class="text-xl font-bold text-purple-800 mb-3">💬 Grupos de Apoyo en Comitán</h4>
+                            <p class="mb-4">Conéctate con otras personas que entienden por lo que estás pasando.</p>
+                            <p><strong>Grupo "Renacer":</strong> Reuniones los martes a las 5:00 PM en el DIF Municipal.</p>
+                        </div>
+                        <div class="p-6 bg-blue-50 rounded-lg border border-blue-200">
+                            <h4 class="text-xl font-bold text-blue-800 mb-3">📚 Artículos y Guías</h4>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><a href="#" class="text-blue-600 hover:underline">Manejando la ansiedad durante el tratamiento</a></li>
+                                <li><a href="#" class="text-blue-600 hover:underline">Cómo hablar con tus seres queridos sobre el cáncer</a></li>
+                                <li><a href="#" class="text-blue-600 hover:underline">Técnicas de relajación y mindfulness para pacientes</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="patient-nutrition" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-6">Guía de Nutrición Oncológica</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="p-6 bg-yellow-50 rounded-lg">
+                            <h4 class="text-lg font-bold mb-3 text-yellow-800">🍽️ Plan de Comidas Sugerido</h4>
+                            <ul class="text-sm space-y-2">
+                                <li><strong>Desayuno:</strong> Avena con frutas y nueces.</li>
+                                <li><strong>Almuerzo:</strong> Sopa de lentejas con pollo a la plancha.</li>
+                                <li><strong>Cena:</strong> Salmón al horno con brócoli y camote.</li>
+                                <li><strong>Snacks:</strong> Yogur griego, almendras, batidos de frutas.</li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-red-50 rounded-lg">
+                            <h4 class="text-lg font-bold mb-3 text-red-800">🚫 Alimentos a Limitar</h4>
+                            <ul class="text-sm list-disc list-inside space-y-1">
+                                <li>Alimentos procesados y ultraprocesados.</li>
+                                <li>Carnes rojas en exceso.</li>
+                                <li>Azúcares refinados y bebidas azucaradas.</li>
+                                <li>Alcohol.</li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-blue-50 rounded-lg">
+                            <h4 class="text-lg font-bold mb-3 text-blue-800">💡 Consejos Clave</h4>
+                            <ul class="text-sm list-disc list-inside space-y-1">
+                                <li>Mantente bien hidratado/a.</li>
+                                <li>Come porciones pequeñas y frecuentes si no tienes apetito.</li>
+                                <li>Enfócate en alimentos ricos en proteínas para la recuperación.</li>
+                                <li>Consulta siempre antes de tomar suplementos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center border-t pt-6">
+                        <button onclick="window.location.href='comida.html';" class="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 mb-4">
+                            Jarelux Nutrimental
+                        </button>
+                        <p class="mb-3">Para un plan personalizado, contacta a un especialista.</p>
+                        <p><strong>Nutrióloga Oncológica:</strong> Lic. María Flores - 📞 (963) 632-7777</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="patient-services" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-6">Servicios Locales en Comitán de Domínguez</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="border rounded-lg p-4 bg-gray-50">
+                            <h4 class="font-bold text-lg mb-3 text-red-600">🏥 Hospitales</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>Hospital General de Comitán:</strong> <br>Av. Central Norte #15 - 📞 (963) 632-0150</p>
+                                <p><strong>IMSS Comitán:</strong> <br>Blvd. Dr. Belisario Domínguez - 📞 (963) 632-1234</p>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4 bg-gray-50">
+                            <h4 class="font-bold text-lg mb-3 text-blue-600">🔬 Laboratorios</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>Laboratorios Salud Digna:</strong> <br>Calle Central Poniente #10</p>
+                                <p><strong>Laboratorio Clínico de Comitán:</strong> <br>2a Av. Poniente Sur #5</p>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4 bg-gray-50">
+                            <h4 class="font-bold text-lg mb-3 text-blue-600">💊 Farmacias 24h</h4>
+                            <div class="space-y-2 text-sm">
+                                <p><strong>Farmacia Guadalajara:</strong> <br>Av. Central Sur #23</p>
+                                <p><strong>Farmacia del Ahorro:</strong> <br>Blvd. Belisario Domínguez</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center border-t pt-6">
+                        <button onclick="window.location.href='descuento.html';" class="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 mb-4">
+                            jarelux descuentos
+                        </button>
+
+                        <button onclick="window.location.href='tr.html';" class="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 mb-4">
+                            jareluex trasporte
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="requestAppointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden modal-backdrop">
+        <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-lg modal-content transform scale-95">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Solicitar Nueva Cita</h3>
+                <button onclick="hideRequestAppointmentModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            <form id="appointmentRequestForm" onsubmit="handleAppointmentRequest(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label for="appointmentType" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Cita</label>
+                        <select id="appointmentType" name="appointmentType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="Consulta de Seguimiento">Consulta de Seguimiento</option>
+                            <option value="Revisión de Resultados">Revisión de Resultados</option>
+                            <option value="Consulta por nuevos síntomas">Consulta por nuevos síntomas</option>
+                            <option value="Otro motivo">Otro motivo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="preferredDate" class="block text-sm font-medium text-gray-700 mb-1">Fecha Preferida</label>
+                        <input type="date" id="preferredDate" name="preferredDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="appointmentNotes" class="block text-sm font-medium text-gray-700 mb-1">Motivo o Notas (Opcional)</label>
+                        <textarea id="appointmentNotes" name="appointmentNotes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej: He sentido más cansancio de lo normal..."></textarea>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-end space-x-3">
+                    <button type="button" onclick="hideRequestAppointmentModal()" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancelar</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Enviar Solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button onclick="showLuxiChat()" id="luxi-fab" class="fixed bottom-6 right-6 bg-purple-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform z-40">
+        <span class="text-3xl">🤖</span>
+    </button>
+
+    <div id="luxi-chat-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50 modal-backdrop">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md flex flex-col h-[70vh] modal-content transform scale-95">
+            <div class="bg-purple-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🤖</span>
+                    <h3 class="text-xl font-bold">Asistente Virtual Luxi</h3>
+                </div>
+                <button onclick="hideLuxiChat()" class="text-purple-100 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div id="luxi-messages" class="flex-1 p-4 overflow-y-auto bg-gray-100 space-y-4">
+            </div>
+            <div class="p-4 border-t bg-white rounded-b-lg">
+                <div class="flex space-x-2">
+                    <input type="text" id="luxi-input" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Escribe tu pregunta..." onkeypress="handleLuxiKeyPress(event)">
+                    <button onclick="sendLuxiMessage()" class="bg-purple-600 text-white px-4 rounded-lg hover:bg-purple-700 shrink-0">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-call-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50 modal-backdrop">
+        <div class="bg-gray-800 text-white rounded-lg shadow-2xl w-full max-w-3xl flex flex-col modal-content transform scale-95 relative">
+            <div class="bg-gray-900 p-4 rounded-t-lg flex justify-between items-center">
+                <div>
+                    <h3 class="text-xl font-bold" id="video-call-specialist-name">Videollamada con Dr. ...</h3>
+                    <p class="text-sm text-gray-400">Estado: <span class="text-green-400">Conectado</span> • <span id="video-call-timer">00:00</span></p>
+                </div>
+                <button onclick="hideVideoCallModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="flex-1 bg-black relative flex items-center justify-center">
+                <div class="text-center">
+                    <div class="w-32 h-32 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-gray-600">
+                        <span class="text-6xl">👨‍⚕️</span>
+                    </div>
+                    <h4 class="text-2xl" id="video-call-specialist-name-main">Dr. Luis Hernández</h4>
+                    <p class="text-gray-400">Psico-oncólogo</p>
+                </div>
+                <div class="absolute bottom-4 right-4 w-48 h-36 bg-gray-700 rounded-lg border-2 border-gray-500 flex items-center justify-center text-center">
+                    <div>
+                        <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-2xl">😊</span>
+                        </div>
+                        <p class="text-sm font-semibold">Tú</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-b-lg flex justify-center items-center space-x-4">
+                <button id="mic-btn" onclick="toggleMic()" class="bg-gray-600 hover:bg-gray-500 w-14 h-14 rounded-full flex items-center justify-center text-2xl">🎤</button>
+                <button id="cam-btn" onclick="toggleCam()" class="bg-gray-600 hover:bg-gray-500 w-14 h-14 rounded-full flex items-center justify-center text-2xl">📹</button>
+                <button onclick="toggleVideoChat()" class="bg-blue-600 hover:bg-blue-500 w-14 h-14 rounded-full flex items-center justify-center text-2xl">💬</button>
+                <button onclick="hideVideoCallModal()" class="bg-red-600 hover:bg-red-700 w-20 h-14 rounded-full flex items-center justify-center text-2xl">📞</button>
+            </div>
+            
+            <div id="video-chat-panel" class="absolute right-0 top-0 h-full w-80 bg-white text-black flex-col hidden transform translate-x-full transition-transform duration-300">
+                <div class="p-3 border-b flex justify-between items-center bg-gray-50">
+                    <h4 class="font-bold">Chat de la consulta</h4>
+                    <button onclick="toggleVideoChat()" class="text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+                </div>
+                <div id="video-chat-messages" class="flex-1 p-3 overflow-y-auto bg-gray-100 space-y-3"></div>
+                <div class="p-2 border-t">
+                    <div class="flex space-x-2">
+                        <input type="text" id="video-chat-input" class="w-full px-3 py-2 border rounded-lg text-sm" placeholder="Escribe un mensaje...">
+                        <button onclick="sendVideoChatMessage()" class="bg-purple-600 text-white px-3 rounded-lg text-sm">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUserType = '';
+        let currentUser = '';
+
+        // Login functions
+        function showLogin(userType) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+            currentUserType = userType;
+            
+            const titles = {
+                'patient': 'Acceso Paciente'
+            };
+            
+            document.getElementById('loginTitle').textContent = titles[userType];
+        }
+
+        function backToSelection() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                currentUser = username;
+                document.getElementById('userName').textContent = `Bienvenido, ${username}`;
+                document.getElementById('userInfo').classList.remove('hidden');
+                
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('loginScreen').classList.add('hidden');
+                
+                if (currentUserType === 'patient') {
+                    document.getElementById('patientDashboard').classList.remove('hidden');
+                }
+            }
+        }
+
+        function logout() {
+            document.getElementById('patientDashboard').classList.add('hidden');
+            document.getElementById('userInfo').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            currentUser = '';
+            currentUserType = '';
+        }
+        
+        // Patient dashboard functions
+        function showPatientSection(section) {
+            document.querySelectorAll('.patient-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`patient-${section}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.patient-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-blue-600', 'text-white');
+
+            if (section === 'support') {
+                initializeSupportCharts();
+            }
+        }
+
+        // Citas Modal Functions
+        const appointmentModal = document.getElementById('requestAppointmentModal');
+        const appointmentModalContent = appointmentModal.querySelector('.modal-content');
+
+        function showRequestAppointmentModal() {
+            appointmentModal.classList.remove('hidden');
+            setTimeout(() => {
+                appointmentModal.querySelector('.modal-backdrop').style.opacity = 1;
+                appointmentModalContent.style.transform = 'scale(1)';
+            }, 10); 
+        }
+
+        function hideRequestAppointmentModal() {
+            appointmentModal.querySelector('.modal-backdrop').style.opacity = 0;
+            appointmentModalContent.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                appointmentModal.classList.add('hidden');
+                document.getElementById('appointmentRequestForm').reset();
+            }, 300);
+        }
+        
+        function handleAppointmentRequest(event) {
+            event.preventDefault();
+            const type = document.getElementById('appointmentType').value;
+            const date = document.getElementById('preferredDate').value;
+            const notes = document.getElementById('appointmentNotes').value;
+            const formattedDate = new Date(date + 'T00:00:00').toLocaleDateString('es-ES', {
+                day: 'numeric', month: 'long', year: 'numeric'
+            });
+            addAppointmentToList(type, formattedDate, notes);
+            hideRequestAppointmentModal();
+            alert('✅ Tu solicitud de cita ha sido enviada.\nRecibirás una notificación cuando sea confirmada.');
+        }
+
+        function addAppointmentToList(type, date, notes) {
+            const list = document.getElementById('upcomingAppointmentsList');
+            const newAppointmentHTML = `
+                <div class="p-4 border rounded-lg bg-yellow-50 border-yellow-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold text-yellow-800">${type}</p>
+                            <p class="text-gray-700"><strong>Fecha solicitada:</strong> ${date}</p>
+                            <p class="text-gray-700"><strong>Médico:</strong> Por asignar</p>
+                            ${notes ? `<p class="text-sm text-gray-600 mt-2"><strong>Motivo:</strong> ${notes}</p>` : ''}
+                        </div>
+                        <span class="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Pendiente de Confirmación</span>
+                    </div>
+                </div>
+            `;
+            list.insertAdjacentHTML('afterbegin', newAppointmentHTML);
+        }
+
+        // Asistente Virtual Luxi Functions (Powered by Gemini)
+        const luxiModal = document.getElementById('luxi-chat-modal');
+        const luxiModalContent = luxiModal.querySelector('.modal-content');
+        const luxiMessagesContainer = document.getElementById('luxi-messages');
+
+        function showLuxiChat() {
+            luxiModal.classList.remove('hidden');
+            setTimeout(() => {
+                luxiModal.style.opacity = 1;
+                luxiModalContent.style.transform = 'scale(1)';
+            }, 10);
+            if (luxiMessagesContainer.children.length === 0) {
+                 addMessageToLuxiChat("¡Hola! Soy Luxi, tu asistente virtual de Jarelux. Estoy aquí para responder preguntas generales sobre oncología. ¿En qué puedo ayudarte?", 'luxi');
+            }
+        }
+
+        function hideLuxiChat() {
+            luxiModal.style.opacity = 0;
+            luxiModalContent.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                luxiModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleLuxiKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendLuxiMessage();
+            }
+        }
+
+        async function sendLuxiMessage() {
+            const input = document.getElementById('luxi-input');
+            const userQuery = input.value.trim();
+            if (!userQuery) return;
+
+            addMessageToLuxiChat(userQuery, 'user');
+            input.value = '';
+            addLuxiThinkingMessage();
+
+            const apiKey = ""; // Canvas will provide the key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+
+            const systemPrompt = `Eres Luxi, un asistente virtual de IA de Jarelux, diseñado para apoyar a pacientes oncológicos en Comitán de Domínguez, Chiapas. Tu propósito es ofrecer información general, aliento y recursos de bienestar.
+
+            **Reglas Críticas:**
+            1.  **NO ERES UN MÉDICO:** Nunca debes dar consejos médicos, diagnósticos, interpretaciones de resultados, ni recomendaciones de tratamiento o dosis. Siempre debes empezar o terminar tus respuestas con un recordatorio de que tu información no sustituye la consulta con un profesional.
+            2.  **DETECCIÓN DE EMERGENCIAS:** Si el usuario menciona síntomas graves como "dolor fuerte en el pecho", "dificultad para respirar", "sangrado incontrolable", "pérdida de conciencia", o expresa ideas de autolesión, tu ÚNICA respuesta debe ser: "Detecto una posible emergencia. Por favor, no esperes. Llama al 911 de inmediato o acude al servicio de urgencias más cercano. Tu seguridad es lo más importante." No añadas nada más.
+            3.  **REDIRECCIÓN A ESPECIALISTAS:** Si las preguntas son sobre pronósticos, planes de tratamiento específicos, segundas opiniones o cualquier tema que requiera conocimiento del caso del paciente, debes redirigir amablemente al usuario a su oncólogo. Ejemplo: "Esa es una pregunta muy importante que debe ser respondida por tu equipo médico, ya que conocen tu caso a fondo. Por favor, consúltalo con ellos."
+            4.  **ENFOQUE EN BIENESTAR GENERAL:** Puedes responder a preguntas generales sobre qué es la quimioterapia, qué es la radioterapia, dar consejos sobre nutrición general (no dietas específicas), y ofrecer técnicas de relajación y manejo del estrés.
+            5.  **TONO:** Sé empático, amable, claro y conciso. Usa un lenguaje sencillo y tranquilizador.
+            6.  **UBICACIÓN:** Eres un asistente para pacientes en Comitán de Domínguez, Chiapas, México.
+
+            Ejemplo de respuesta segura:
+            Usuario: "¿Qué puedo comer si tengo náuseas por la quimio?"
+            Luxi: "Es común sentir náuseas. Algunas personas encuentran útil comer porciones pequeñas y frecuentes, probar alimentos blandos como galletas saladas o jengibre. Sin embargo, es muy importante que hables con tu médico o nutriólogo para que te den recomendaciones específicas para ti. Recuerda, esta es solo información general."`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                removeLuxiThinkingMessage();
+
+                if (result.candidates && result.candidates.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    addMessageToLuxiChat(text, 'luxi');
+                } else {
+                    addMessageToLuxiChat('No he podido procesar tu solicitud en este momento. Inténtalo de nuevo.', 'luxi');
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                removeLuxiThinkingMessage();
+                addMessageToLuxiChat('Lo siento, estoy teniendo problemas para conectarme. Por favor, intenta de nuevo más tarde.', 'luxi');
+            }
+        }
+        
+        function addLuxiThinkingMessage() {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'flex justify-start';
+            messageElement.id = 'luxi-thinking';
+            messageElement.innerHTML = `
+                <div class="bg-white text-gray-800 p-3 rounded-lg max-w-xs border">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                    </div>
+                </div>
+            `;
+            luxiMessagesContainer.appendChild(messageElement);
+            luxiMessagesContainer.scrollTop = luxiMessagesContainer.scrollHeight;
+        }
+
+        function removeLuxiThinkingMessage() {
+            const thinkingMessage = document.getElementById('luxi-thinking');
+            if (thinkingMessage) {
+                thinkingMessage.remove();
+            }
+        }
+
+
+        function addMessageToLuxiChat(message, sender) {
+            const messageElement = document.createElement('div');
+            if (sender === 'user') {
+                messageElement.className = 'flex justify-end';
+                messageElement.innerHTML = `<div class="bg-blue-600 text-white p-3 rounded-lg max-w-xs">${message}</div>`;
+            } else {
+                messageElement.className = 'flex justify-start';
+                messageElement.innerHTML = `<div class="bg-white text-gray-800 p-3 rounded-lg max-w-xs border">${message}</div>`;
+            }
+            luxiMessagesContainer.appendChild(messageElement);
+            luxiMessagesContainer.scrollTop = luxiMessagesContainer.scrollHeight;
+        }
+
+        // Funciones para la sección de apoyo emocional
+        function startChatWithSpecialist(specialistName) {
+            alert(`💬 Iniciando chat con ${specialistName}...\n\nEn una aplicación real, esto abriría una ventana de chat segura para hablar con el especialista.`);
+        }
+
+        function startCallWithSpecialist(specialistName) {
+            alert(`📞 Realizando llamada a ${specialistName}...\n\nEn una aplicación real, esto iniciaría una llamada de voz segura.`);
+        }
+
+        function scheduleInPersonAppointment(specialistName) {
+            alert(`🗓️ Agendando cita presencial con ${specialistName}...\n\nEn una aplicación real, esto te llevaría a un calendario para seleccionar una fecha y hora disponibles para una consulta en persona.`);
+        }
+
+        // Funciones para la videollamada
+        const videoCallModal = document.getElementById('video-call-modal');
+        const videoCallModalContent = videoCallModal.querySelector('.modal-content');
+        let callInterval;
+        let seconds = 0;
+
+        function showVideoCallModal(specialistName) {
+            document.getElementById('video-call-specialist-name').textContent = `Videollamada con ${specialistName}`;
+            document.getElementById('video-call-specialist-name-main').textContent = specialistName;
+            
+            videoCallModal.classList.remove('hidden');
+            setTimeout(() => {
+                videoCallModal.style.opacity = 1;
+                videoCallModalContent.style.transform = 'scale(1)';
+            }, 10);
+            
+            startTimer();
+        }
+
+        function hideVideoCallModal() {
+            videoCallModal.style.opacity = 0;
+            videoCallModalContent.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                videoCallModal.classList.add('hidden');
+            }, 300);
+            stopTimer();
+            document.getElementById('video-chat-panel').classList.add('hidden', 'translate-x-full');
+        }
+
+        function startTimer() {
+            seconds = 0;
+            const timerEl = document.getElementById('video-call-timer');
+            timerEl.textContent = '00:00';
+            callInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const secs = (seconds % 60).toString().padStart(2, '0');
+                timerEl.textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(callInterval);
+        }
+
+        function toggleMic() {
+            const micBtn = document.getElementById('mic-btn');
+            const isMuted = micBtn.classList.toggle('bg-red-600');
+            micBtn.innerHTML = isMuted ? '🔇' : '🎤';
+        }
+
+        function toggleCam() {
+            const camBtn = document.getElementById('cam-btn');
+            const isOff = camBtn.classList.toggle('bg-red-600');
+            camBtn.innerHTML = isOff ? '📷' : '📹';
+        }
+
+        function toggleVideoChat() {
+            document.getElementById('video-chat-panel').classList.toggle('hidden');
+            document.getElementById('video-chat-panel').classList.toggle('translate-x-full');
+        }
+
+        function sendVideoChatMessage() {
+            const input = document.getElementById('video-chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addVideoChatMessage(message, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                addVideoChatMessage("Entiendo. Gracias por compartirlo conmigo. Continuemos hablando.", 'specialist');
+            }, 1500);
+        }
+
+        function addVideoChatMessage(message, sender) {
+            const container = document.getElementById('video-chat-messages');
+            const messageEl = document.createElement('div');
+            if (sender === 'user') {
+                messageEl.className = 'flex justify-end';
+                messageEl.innerHTML = `<div class="bg-blue-500 text-white p-2 rounded-lg max-w-xs text-sm">${message}</div>`;
+            } else {
+                messageEl.className = 'flex justify-start';
+                messageEl.innerHTML = `<div class="bg-gray-200 text-gray-800 p-2 rounded-lg max-w-xs text-sm">${message}</div>`;
+            }
+            container.appendChild(messageEl);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Funciones para gráficos de bienestar
+        let moodChart, wellnessSummaryChart, treatmentProgressChart;
+
+        function initializeSupportCharts() {
+            if (moodChart) moodChart.destroy();
+            if (wellnessSummaryChart) wellnessSummaryChart.destroy();
+            if (treatmentProgressChart) treatmentProgressChart.destroy();
+
+            // Mood Chart (Line)
+            const moodCtx = document.getElementById('mood-chart').getContext('2d');
+            moodChart = new Chart(moodCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Hace 6 días', 'Hace 5 días', 'Hace 4 días', 'Hace 3 días', 'Ayer'],
+                    datasets: [{
+                        label: 'Estado de Ánimo',
+                        data: [3, 4, 3, 5, 4],
+                        borderColor: 'rgba(59, 130, 246, 0.8)',
+                        backgroundColor: 'transparent',
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointRadius: 4,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 5 } }, plugins: { legend: { display: false } } }
+            });
+
+            // Wellness Summary (Radar)
+            const wellnessCtx = document.getElementById('wellness-summary-chart').getContext('2d');
+            wellnessSummaryChart = new Chart(wellnessCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Ánimo', 'Energía', 'Ansiedad (Inverso)'],
+                    datasets: [{
+                        label: 'Último Registro',
+                        data: [4, 3, 2], // Ansiedad se invierte (5-ansiedad) para que más alto sea mejor
+                        backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                        borderColor: 'rgba(168, 85, 247, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 5, stepSize: 1, pointLabels: { font: { size: 11 } } } }, plugins: { legend: { display: false } } }
+            });
+
+            const progressCtx = document.getElementById('treatment-progress-chart').getContext('2d');
+            treatmentProgressChart = new Chart(progressCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Inicio Tto.', 'Ciclo 2', 'Ciclo 3', 'Ciclo 4 (Actual)'],
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Estado de Ánimo (1-5)',
+                            data: [3, 4, 2, 4],
+                            borderColor: 'rgba(239, 68, 68, 0.8)',
+                            backgroundColor: 'transparent',
+                            yAxisID: 'y1',
+                            tension: 0.3,
+                            pointRadius: 5,
+                            pointBackgroundColor: 'rgba(239, 68, 68, 1)'
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Progreso del Tratamiento (%)',
+                            data: [25, 50, 75, 85],
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Progreso (%)' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            beginAtZero: true,
+                            max: 5,
+                            grid: { drawOnChartArea: false },
+                            title: { display: true, text: 'Ánimo (1-5)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function handleWellnessLogSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const mood = parseInt(formData.get('mood'));
+            const energy = parseInt(formData.get('energy'));
+            const anxiety = parseInt(formData.get('anxiety'));
+
+            moodChart.data.labels.push('Hoy');
+            moodChart.data.datasets[0].data.push(mood);
+            if(moodChart.data.labels.length > 7) {
+                moodChart.data.labels.shift();
+                moodChart.data.datasets[0].data.shift();
+            }
+            moodChart.update();
+            
+            wellnessSummaryChart.data.datasets[0].data = [mood, energy, 6 - anxiety];
+            wellnessSummaryChart.update();
+
+            alert('✅ Tu registro de bienestar ha sido guardado. ¡Gracias por compartir cómo te sientes!');
+            event.target.reset();
+        }
+    </script>
+</body>
+<footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold">J</span>
+                    </div>
+                    <h4 class="text-xl font-bold">Jarelux</h4>
+                </div>
+                <p class="text-gray-400">Conectando pacientes con cáncer con descuentos que marcan la diferencia en su tratamiento.</p>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-4">Servicios</h5>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Farmacias</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Clínicas</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Hospitales</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Laboratorios</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-4">Soporte</h5>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Centro de Ayuda</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Contacto</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold mb-4">Contacto</h5>
+                <div class="space-y-2 text-gray-400">
+                    <p>📞 01-800-JARELUX</p>
+                    <p>✉️ info@jarelux.com</p>
+                    <p>📍 Ciudad de México, México</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 Jarelux. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
