@@ -22,6 +22,15 @@
             height: 90vh;
             max-height: 700px;
         }
+
+        /* Estilos de transición para el modal de chat */
+        #luxi-chat-modal {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #luxi-chat-modal .modal-content {
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -29,7 +38,7 @@
         <div class="container mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12  flex items-center justify-center p-1">
+                    <div class="w-12 h-12 flex items-center justify-center p-1">
                         <img src="1000217146 (1).png" alt="Logo de Jarelux" class="w-full h-full object-contain">
                     </div>
                     <div>
@@ -68,15 +77,17 @@
                     </div>
                 </div>
             </div>
-            <BR>  
+            <br>
                 <div class="flex justify-center">
                     <button onclick="window.location.href='index.html';" class="bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 mb-4">
-                        volver  
+                        volver 
                     </button>
                 </div>
-            </BR>
+            </br>
         </div>
     </div>
+
+    
 
     <div id="loginForm" class="hidden min-h-screen flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
@@ -111,13 +122,13 @@
         <div class="container mx-auto px-4 py-8">
             <nav class="bg-white rounded-lg shadow-md mb-8">
                 <div class="flex flex-wrap justify-center space-x-1 p-2">
-                    <button onclick="showPatientSection('overview')" class="patient-nav-btn bg-blue-600 text-white px-4 py-2 rounded-lg m-1">🏠 Inicio</button>
-                    <button onclick="showPatientSection('appointments')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📅 Citas</button>
-                    <button onclick="showPatientSection('medications')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">💊 Medicamentos</button>
-                    <button onclick="showPatientSection('history')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📂 Historial</button>
-                    <button onclick="showPatientSection('support')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">❤️ Apoyo</button>
-                    <button onclick="showPatientSection('nutrition')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">🥗 Nutrición</button>
-                    <button onclick="showPatientSection('services')" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📍 Servicios</button>
+                    <button onclick="showPatientSection('overview', event)" class="patient-nav-btn bg-blue-600 text-white px-4 py-2 rounded-lg m-1">🏠 Inicio</button>
+                    <button onclick="showPatientSection('appointments', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📅 Citas</button>
+                    <button onclick="showPatientSection('medications', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">💊 Medicamentos</button>
+                    <button onclick="showPatientSection('history', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📂 Historial</button>
+                    <button onclick="showPatientSection('support', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">❤️ Apoyo</button>
+                    <button onclick="showPatientSection('nutrition', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">🥗 Nutrición</button>
+                    <button onclick="showPatientSection('services', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📍 Servicios</button>
                 </div>
             </nav>
 
@@ -414,26 +425,26 @@
                     <div class="mb-8">
                            <h4 class="text-xl font-bold mb-4 text-gray-800">Beneficios de Entretenimiento (Descuentos)</h4>
                            <div class="grid md:grid-cols-2 gap-6">
-                                <div class="p-6 bg-red-50 rounded-lg border border-red-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la página de convenios Cinépolis')">
-                                    <h5 class="font-bold text-xl text-red-800 mb-3">🎬 Descuentos en Cinépolis</h5>
-                                    <p class="text-sm text-gray-700 mb-3">Disfruta de la magia del cine a un precio especial.</p>
-                                    <ul class="list-disc list-inside text-sm space-y-1 text-red-700">
-                                        <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
-                                        <li>Precio especial en combos de dulcería.</li>
-                                    </ul>
-                                    <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">Ver Códigos y Salas</button>
-                                </div>
-                                <div class="p-6 bg-purple-50 rounded-lg border border-purple-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la cartelera de obras con descuento')">
-                                    <h5 class="font-bold text-xl text-purple-800 mb-3">🎭 Descuentos en Obras de Teatro</h5>
-                                    <p class="text-sm text-gray-700 mb-3">Acceso a cultura y esparcimiento con precios preferenciales.</p>
-                                    <ul class="list-disc list-inside text-sm space-y-1 text-purple-700">
-                                        <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
-                                        <li>Beneficio aplica para el paciente y un acompañante.</li>
-                                    </ul>
-                                    <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">Consultar Cartelera</button>
-                                </div>
-                            </div>
-                        </div>
+                               <div class="p-6 bg-red-50 rounded-lg border border-red-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la página de convenios Cinépolis')">
+                                   <h5 class="font-bold text-xl text-red-800 mb-3">🎬 Descuentos en Cinépolis</h5>
+                                   <p class="text-sm text-gray-700 mb-3">Disfruta de la magia del cine a un precio especial.</p>
+                                   <ul class="list-disc list-inside text-sm space-y-1 text-red-700">
+                                       <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
+                                       <li>Precio especial en combos de dulcería.</li>
+                                   </ul>
+                                   <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">Ver Códigos y Salas</button>
+                               </div>
+                               <div class="p-6 bg-purple-50 rounded-lg border border-purple-200 card-hover cursor-pointer" onclick="alert('Se redirigirá a la cartelera de obras con descuento')">
+                                   <h5 class="font-bold text-xl text-purple-800 mb-3">🎭 Descuentos en Obras de Teatro</h5>
+                                   <p class="text-sm text-gray-700 mb-3">Acceso a cultura y esparcimiento con precios preferenciales.</p>
+                                   <ul class="list-disc list-inside text-sm space-y-1 text-purple-700">
+                                       <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
+                                       <li>Beneficio aplica para el paciente y un acompañante.</li>
+                                   </ul>
+                                   <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">Consultar Cartelera</button>
+                               </div>
+                           </div>
+                       </div>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="p-6 bg-purple-50 rounded-lg border border-purple-200">
                                 <h4 class="text-xl font-bold text-purple-800 mb-3">💬 Grupos de Apoyo en Comitán</h4>
@@ -680,6 +691,9 @@
                 
                 if (currentUserType === 'patient') {
                     document.getElementById('patientDashboard').classList.remove('hidden');
+                    // Asegurar que el botón "Inicio" se marque como activo al iniciar sesión
+                    document.querySelector('.patient-nav-btn').classList.remove('bg-gray-200', 'text-gray-700');
+                    document.querySelector('.patient-nav-btn').classList.add('bg-blue-600', 'text-white');
                 }
             }
         }
@@ -695,7 +709,7 @@
         }
         
         // Patient dashboard functions
-        function showPatientSection(section) {
+        function showPatientSection(section, event) {
             document.querySelectorAll('.patient-section').forEach(el => el.classList.add('hidden'));
             document.getElementById(`patient-${section}`).classList.remove('hidden');
             
@@ -703,8 +717,19 @@
                 btn.classList.remove('bg-blue-600', 'text-white');
                 btn.classList.add('bg-gray-200', 'text-gray-700');
             });
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('bg-blue-600', 'text-white');
+            // La lógica para marcar el botón activo si la llamada viene de un click (event)
+            if (event && event.target) {
+                event.target.classList.remove('bg-gray-200', 'text-gray-700');
+                event.target.classList.add('bg-blue-600', 'text-white');
+            } else {
+                 // Fallback para marcar el botón si se llama programáticamente (ej. después de login)
+                 const targetBtn = document.querySelector(`[onclick="showPatientSection('${section}', event)"]`);
+                 if(targetBtn) {
+                    targetBtn.classList.remove('bg-gray-200', 'text-gray-700');
+                    targetBtn.classList.add('bg-blue-600', 'text-white');
+                 }
+            }
+
 
             if (section === 'support') {
                 initializeSupportCharts();
@@ -791,17 +816,20 @@
         const luxiMessagesContainer = document.getElementById('luxi-messages');
 
         function showLuxiChat() {
+            document.body.style.overflow = 'hidden';
             luxiModal.classList.remove('hidden');
             setTimeout(() => {
                 luxiModal.style.opacity = 1;
                 luxiModalContent.style.transform = 'scale(1)';
             }, 10);
             if (luxiMessagesContainer.children.length === 0) {
-                 addMessageToLuxiChat("¡Hola! Soy Luxi, tu asistente virtual de Jarelux. Estoy aquí para responder preguntas generales sobre oncología. ¿En qué puedo ayudarte?", 'luxi');
+                 // Usa addMessageToLuxiChat para el mensaje de bienvenida
+                addMessageToLuxiChat("¡Hola! Soy Luxi, tu asistente virtual de Jarelux. Estoy aquí para responder preguntas generales sobre oncología y bienestar. ¿En qué puedo ayudarte?", 'luxi');
             }
         }
 
         function hideLuxiChat() {
+            document.body.style.overflow = ''; 
             luxiModal.style.opacity = 0;
             luxiModalContent.style.transform = 'scale(0.95)';
             setTimeout(() => {
@@ -824,7 +852,10 @@
             input.value = '';
             addLuxiThinkingMessage();
 
-            const apiKey = ""; // Canvas will provide the key
+            // =========================================================================================
+            // *** IMPORTANTE: DEBES INSERTAR TU API KEY DE GOOGLE AI (GEMINI) AQUÍ PARA QUE FUNCIONE ***
+            // =========================================================================================
+            const apiKey = AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4; // <<<<<<<<<<<<<<<< INSERTAR KEY REAL AQUÍ
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
 
             const systemPrompt = `Eres Luxi, un asistente virtual de IA de Jarelux, diseñado para apoyar a pacientes oncológicos en Comitán de Domínguez, Chiapas. Tu propósito es ofrecer información general, aliento y recursos de bienestar.
@@ -841,6 +872,16 @@
             Usuario: "¿Qué puedo comer si tengo náuseas por la quimio?"
             Luxi: "Es común sentir náuseas. Algunas personas encuentran útil comer porciones pequeñas y frecuentes, probar alimentos blandos como galletas saladas o jengibre. Sin embargo, es muy importante que hables con tu médico o nutriólogo para que te den recomendaciones específicas para ti. Recuerda, esta es solo información general."`;
 
+            // Verificar si la clave de API está configurada
+            if (apiKey === "AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4" || apiKey === "AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4" || apiKey === "") {
+                removeLuxiThinkingMessage();
+                addMessageToLuxiChat(
+                    "¡Atención! Para que Luxi funcione, debes reemplazar 'AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4' en el código JavaScript con tu clave real de la API de Gemini.", 
+                    'luxi'
+                );
+                return;
+            }
+
             const payload = {
                 contents: [{ parts: [{ text: userQuery }] }],
                 systemInstruction: { parts: [{ text: systemPrompt }] },
@@ -852,6 +893,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Error en la API: ${response.status} - ${errorText}`);
+                }
+
                 const result = await response.json();
                 removeLuxiThinkingMessage();
 
@@ -859,12 +906,12 @@
                     const text = result.candidates[0].content.parts[0].text;
                     addMessageToLuxiChat(text, 'luxi');
                 } else {
-                    addMessageToLuxiChat('No he podido procesar tu solicitud en este momento. Inténtalo de nuevo.', 'luxi');
+                    addMessageToLuxiChat('No he podido procesar tu solicitud. Inténtalo de nuevo o formula la pregunta de otra manera.', 'luxi');
                 }
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
                 removeLuxiThinkingMessage();
-                addMessageToLuxiChat('Lo siento, estoy teniendo problemas para conectarme. Por favor, intenta de nuevo más tarde.', 'luxi');
+                addMessageToLuxiChat(`Lo siento, ocurrió un error en la conexión. Por favor, intenta de nuevo más tarde. (Detalle: ${error.message.substring(0, 50)}...)`, 'luxi');
             }
         }
         
@@ -900,7 +947,9 @@
                 messageElement.innerHTML = `<div class="bg-blue-600 text-white p-3 rounded-lg max-w-xs">${message}</div>`;
             } else {
                 messageElement.className = 'flex justify-start';
-                messageElement.innerHTML = `<div class="bg-white text-gray-800 p-3 rounded-lg max-w-xs border">${message}</div>`;
+                // Añadimos un pequeño identificador para Luxi
+                const luxiContent = `<div class="font-semibold text-purple-700 mb-1">Luxi:</div>${message}`;
+                messageElement.innerHTML = `<div class="bg-white text-gray-800 p-3 rounded-lg max-w-xs border">${luxiContent}</div>`;
             }
             luxiMessagesContainer.appendChild(messageElement);
             luxiMessagesContainer.scrollTop = luxiMessagesContainer.scrollHeight;
@@ -977,8 +1026,21 @@
         }
 
         function toggleVideoChat() {
-            document.getElementById('video-chat-panel').classList.toggle('hidden');
-            document.getElementById('video-chat-panel').classList.toggle('translate-x-full');
+            // Alternar la clase 'hidden' y la transformación para deslizar
+            const chatPanel = document.getElementById('video-chat-panel');
+            const isHidden = chatPanel.classList.contains('hidden');
+
+            if (isHidden) {
+                chatPanel.classList.remove('hidden');
+                setTimeout(() => {
+                    chatPanel.classList.remove('translate-x-full');
+                }, 10); // Un pequeño retraso para que la transición sea visible
+            } else {
+                chatPanel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    chatPanel.classList.add('hidden');
+                }, 300); // 300ms es la duración de la transición
+            }
         }
 
         function sendVideoChatMessage() {
@@ -1112,6 +1174,7 @@
             const energy = parseInt(formData.get('energy'));
             const anxiety = parseInt(formData.get('anxiety'));
 
+            // Actualizar Gráfico de Ánimo
             moodChart.data.labels.push('Hoy');
             moodChart.data.datasets[0].data.push(mood);
             if(moodChart.data.labels.length > 7) {
@@ -1120,7 +1183,9 @@
             }
             moodChart.update();
             
-            wellnessSummaryChart.data.datasets[0].data = [mood, energy, 6 - anxiety];
+            // Actualizar Gráfico de Resumen (Radar)
+            // La ansiedad se calcula como 5 - valor para que un valor alto sea mejor
+            wellnessSummaryChart.data.datasets[0].data = [mood, energy, 6 - anxiety]; 
             wellnessSummaryChart.update();
 
             alert('✅ Tu registro de bienestar ha sido guardado. ¡Gracias por compartir cómo te sientes!');
