@@ -39,7 +39,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="w-12 h-12 flex items-center justify-center p-1">
-                        <img src="1000217146 (1).png" alt="Logo de Jarelux" class="w-full h-full object-contain">
+                        <div class="w-full h-full bg-white rounded-full flex items-center justify-center text-blue-600 text-lg font-bold">J</div>
                     </div>
                     <div>
                         <h1 class="text-3xl font-bold">Jarelux</h1>
@@ -145,7 +145,7 @@
                             <h4 class="font-bold text-lg mb-2">Medicamentos Hoy</h4>
                             <p class="text-3xl font-bold text-blue-600">3 Dosis Pendientes</p>
                             <p class="text-gray-600">Tamoxifeno, Ondansetrón, Calcio</p>
-                             <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver mi plan</button>
+                            <button class="mt-3 bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm">Ver mi plan</button>
                         </div>
                         
                         <div class="bg-white p-6 rounded-lg shadow-md card-hover text-center">
@@ -181,7 +181,7 @@
                                 <p class="text-sm text-gray-600">Beber al menos 2 litros de agua durante el día.</p>
                             </div>
                         </div>
-                         <div class="flex items-center p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                        <div class="flex items-center p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
                             <span class="text-3xl mr-4">📓</span>
                             <div>
                                 <p class="font-semibold text-yellow-800">Tarde - Registrar Síntomas</p>
@@ -266,7 +266,7 @@
                         </div>
                     </div>
                     <div class="mt-6 text-center">
-                            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">📄 Descargar Plan de Medicación (PDF)</button>
+                        <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">📄 Descargar Plan de Medicación (PDF)</button>
                     </div>
                 </div>
             </div>
@@ -429,8 +429,8 @@
                                    <h5 class="font-bold text-xl text-red-800 mb-3">🎬 Descuentos en Cinépolis</h5>
                                    <p class="text-sm text-gray-700 mb-3">Disfruta de la magia del cine a un precio especial.</p>
                                    <ul class="list-disc list-inside text-sm space-y-1 text-red-700">
-                                       <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
-                                       <li>Precio especial en combos de dulcería.</li>
+                                        <li>**50% de descuento** en entradas de Lunes a Viernes.</li>
+                                        <li>Precio especial en combos de dulcería.</li>
                                    </ul>
                                    <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">Ver Códigos y Salas</button>
                                </div>
@@ -438,8 +438,8 @@
                                    <h5 class="font-bold text-xl text-purple-800 mb-3">🎭 Descuentos en Obras de Teatro</h5>
                                    <p class="text-sm text-gray-700 mb-3">Acceso a cultura y esparcimiento con precios preferenciales.</p>
                                    <ul class="list-disc list-inside text-sm space-y-1 text-purple-700">
-                                       <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
-                                       <li>Beneficio aplica para el paciente y un acompañante.</li>
+                                        <li>**30% de descuento** en taquilla para obras seleccionadas.</li>
+                                        <li>Beneficio aplica para el paciente y un acompañante.</li>
                                    </ul>
                                    <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm">Consultar Cartelera</button>
                                </div>
@@ -805,12 +805,14 @@
             list.insertAdjacentHTML('afterbegin', newAppointmentHTML);
         }
 
+        
+
         // Se dejan estas funciones vacías para forzar que el modal SOLO se cierre con hideRequestAppointmentModal()
         function closeIfEscPressed(event) { }
         function closeIfClickedOutside(event) { }
 
 
-        // Asistente Virtual Luxi Functions (Powered by Gemini)
+        // Asistente Virtual Luxi Functions (Ahora con respuestas definidas - sin API)
         const luxiModal = document.getElementById('luxi-chat-modal');
         const luxiModalContent = luxiModal.querySelector('.modal-content');
         const luxiMessagesContainer = document.getElementById('luxi-messages');
@@ -824,7 +826,7 @@
             }, 10);
             if (luxiMessagesContainer.children.length === 0) {
                  // Usa addMessageToLuxiChat para el mensaje de bienvenida
-                addMessageToLuxiChat("¡Hola! Soy Luxi, tu asistente virtual de Jarelux. Estoy aquí para responder preguntas generales sobre oncología y bienestar. ¿En qué puedo ayudarte?", 'luxi');
+                addMessageToLuxiChat("¡Hola! Soy Luxi, tu asistente virtual de Jarelux. Estoy aquí para resolver dudas rápidas sobre el portal. ¿Necesitas información sobre tus **Citas**, **Medicamentos**, **Apoyo** o **Servicios**?", 'luxi');
             }
         }
 
@@ -843,77 +845,79 @@
             }
         }
 
+        // 🔑 INICIO CÓDIGO CHATBOT LOCAL (MEJORADO) 🔑
         async function sendLuxiMessage() {
             const input = document.getElementById('luxi-input');
-            const userQuery = input.value.trim();
+            const userQuery = input.value.trim().toLowerCase();
             if (!userQuery) return;
 
-            addMessageToLuxiChat(userQuery, 'user');
+            addMessageToLuxiChat(input.value.trim(), 'user');
             input.value = '';
             addLuxiThinkingMessage();
 
-            // =========================================================================================
-            // *** IMPORTANTE: DEBES INSERTAR TU API KEY DE GOOGLE AI (GEMINI) AQUÍ PARA QUE FUNCIONE ***
-            // =========================================================================================
-            const apiKey = AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4; // <<<<<<<<<<<<<<<< INSERTAR KEY REAL AQUÍ
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+            // Lógica de respuestas definidas
+            let luxiResponse = "Lo siento, no tengo una respuesta predefinida para esa pregunta. Por favor, consulta las secciones del portal (como 'Citas', 'Medicamentos' o 'Apoyo') o contacta a tu especialista para información específica.";
 
-            const systemPrompt = `Eres Luxi, un asistente virtual de IA de Jarelux, diseñado para apoyar a pacientes oncológicos en Comitán de Domínguez, Chiapas. Tu propósito es ofrecer información general, aliento y recursos de bienestar.
+            // --- RESPUESTAS POR CATEGORÍA ---
 
-            **Reglas Críticas:**
-            1.  **NO ERES UN MÉDICO:** Nunca debes dar consejos médicos, diagnósticos, interpretaciones de resultados, ni recomendaciones de tratamiento o dosis. Siempre debes empezar o terminar tus respuestas con un recordatorio de que tu información no sustituye la consulta con un profesional.
-            2.  **DETECCIÓN DE EMERGENCIAS:** Si el usuario menciona síntomas graves como "dolor fuerte en el pecho", "dificultad para respirar", "sangrado incontrolable", "pérdida de conciencia", o expresa ideas de autolesión, tu ÚNICA respuesta debe ser: "Detecto una posible emergencia. Por favor, no esperes. Llama al 911 de inmediato o acude al servicio de urgencias más cercano. Tu seguridad es lo más importante." No añadas nada más.
-            3.  **REDIRECCIÓN A ESPECIALISTAS:** Si las preguntas son sobre pronósticos, planes de tratamiento específicos, segundas opiniones o cualquier tema que requiera conocimiento del caso del paciente, debes redirigir amablemente al usuario a su oncólogo. Ejemplo: "Esa es una pregunta muy importante que debe ser respondida por tu equipo médico, ya que conocen tu caso a fondo. Por favor, consúltalo con ellos."
-            4.  **ENFOQUE EN BIENESTAR GENERAL:** Puedes responder a preguntas generales sobre qué es la quimioterapia, qué es la radioterapia, dar consejos sobre nutrición general (no dietas específicas), y ofrecer técnicas de relajación y manejo del estrés.
-            5.  **TONO:** Sé empático, amable, claro y conciso. Usa un lenguaje sencillo y tranquilizador.
-            6.  **UBICACIÓN:** Eres un asistente para pacientes en Comitán de Domínguez, Chiapas, México.
-
-            Ejemplo de respuesta segura:
-            Usuario: "¿Qué puedo comer si tengo náuseas por la quimio?"
-            Luxi: "Es común sentir náuseas. Algunas personas encuentran útil comer porciones pequeñas y frecuentes, probar alimentos blandos como galletas saladas o jengibre. Sin embargo, es muy importante que hables con tu médico o nutriólogo para que te den recomendaciones específicas para ti. Recuerda, esta es solo información general."`;
-
-            // Verificar si la clave de API está configurada
-            if (apiKey === "AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4" || apiKey === "AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4" || apiKey === "") {
-                removeLuxiThinkingMessage();
-                addMessageToLuxiChat(
-                    "¡Atención! Para que Luxi funcione, debes reemplazar 'AIzaSyDPyurSZSJC9KcX20w9eji1zWpLOqJOVO4' en el código JavaScript con tu clave real de la API de Gemini.", 
-                    'luxi'
-                );
-                return;
-            }
-
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-            };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Error en la API: ${response.status} - ${errorText}`);
-                }
-
-                const result = await response.json();
-                removeLuxiThinkingMessage();
-
-                if (result.candidates && result.candidates.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    addMessageToLuxiChat(text, 'luxi');
+            // 1. SALUDO / INICIO
+            if (userQuery.includes("hola") || userQuery.includes("saludo") || userQuery.includes("que tal") || userQuery.includes("gracias")) {
+                if(userQuery.includes("gracias")) {
+                    luxiResponse = "De nada, es un gusto ayudarte. Si tienes más preguntas, solo escríbeme. ¡Te deseo un excelente día!";
                 } else {
-                    addMessageToLuxiChat('No he podido procesar tu solicitud. Inténtalo de nuevo o formula la pregunta de otra manera.', 'luxi');
+                    luxiResponse = "¡Hola! Soy Luxi, tu asistente virtual de Jarelux. Estoy aquí para resolver dudas rápidas sobre el portal. ¿Necesitas información sobre **Citas**, **Medicamentos**, **Apoyo** o tienes alguna pregunta general?";
                 }
-            } catch (error) {
-                console.error("Error calling Gemini API:", error);
-                removeLuxiThinkingMessage();
-                addMessageToLuxiChat(`Lo siento, ocurrió un error en la conexión. Por favor, intenta de nuevo más tarde. (Detalle: ${error.message.substring(0, 50)}...)`, 'luxi');
+            } 
+            
+            // 2. DETECCIÓN DE EMERGENCIAS (Regla Crítica)
+            else if (userQuery.includes("dolor fuerte en el pecho") || userQuery.includes("dificultad para respirar") || userQuery.includes("sangrado incontrolable") || userQuery.includes("autolesión") || userQuery.includes("emergencia")) {
+                luxiResponse = "🚨 **Detecto una posible emergencia. Por favor, no esperes. Llama al 911 de inmediato o acude al servicio de urgencias más cercano. Tu seguridad es lo más importante.**";
             }
+
+            // 3. PREGUNTAS SOBRE EL PORTAL
+            else if (userQuery.includes("citas") || userQuery.includes("agendar") || userQuery.includes("proxima cita")) {
+                luxiResponse = "Puedes ver tus **próximas citas** y solicitar una nueva desde la sección **📅 Citas** en el menú principal. Si necesitas reprogramar, haz clic en el botón 'Reprogramar' de tu cita pendiente.";
+            } 
+            else if (userQuery.includes("medicamentos") || userQuery.includes("dosis") || userQuery.includes("olvidar dosis")) {
+                if (userQuery.includes("olvidar dosis")) {
+                     luxiResponse = "Si olvidaste una dosis, **no tomes una dosis doble**. Llama a tu oncólogo o a tu farmacéutico de inmediato para obtener instrucciones precisas. Consulta tu plan completo en la sección **💊 Medicamentos**.";
+                } else {
+                    luxiResponse = "Tu plan de medicamentos detallado (incluyendo dosis y horarios) se encuentra en la sección **💊 Medicamentos**. Es crucial que sigas las instrucciones de tu oncólogo al pie de la letra.";
+                }
+            } 
+            else if (userQuery.includes("apoyo") || userQuery.includes("emocional") || userQuery.includes("ansiedad")) {
+                luxiResponse = "La sección **❤️ Apoyo** tiene recursos valiosos: técnicas de relajación (como el ejercicio 4-4-6), grupos de apoyo en Comitán y la opción de contactar directamente a tu psico-oncólogo, Dr. Luis Hernández. Recuerda registrar tu bienestar emocional diariamente.";
+            } 
+            else if (userQuery.includes("historial") || userQuery.includes("documentos")) {
+                luxiResponse = "Tus documentos más importantes (Biopsias, Análisis, Diagnóstico) se encuentran en la sección **📂 Historial**. Puedes descargarlos en formato PDF para revisarlos o compartirlos con otros médicos, si es necesario.";
+            }
+            else if (userQuery.includes("servicios") || userQuery.includes("hospital") || userQuery.includes("farmacia")) {
+                luxiResponse = "La sección **📍 Servicios** te proporciona información de contacto y ubicaciones de hospitales (como el Hospital General de Comitán), laboratorios y farmacias 24h en la zona. También encontrarás enlaces para descuentos y transporte.";
+            }
+            
+            // 4. PREGUNTAS GENERALES DE SALUD (No específicas del paciente)
+            else if (userQuery.includes("nauseas") || userQuery.includes("vomito") || userQuery.includes("que comer si tengo nauseas")) {
+                luxiResponse = "Las **náuseas** son un efecto secundario común. Intenta comer alimentos blandos (como tostadas, arroz, caldo), evita los alimentos muy grasosos o picantes, y bebe líquidos fríos lentamente. **Importante:** Si las náuseas son severas, consulta a tu médico; podrían recetarte un medicamento antiemético más fuerte.";
+            }
+            else if (userQuery.includes("fatiga") || userQuery.includes("cansancio")) {
+                luxiResponse = "La **fatiga oncológica** es real. Trata de balancear el descanso con actividad ligera (como una caminata corta). Duerme bien, prioriza las tareas y pide ayuda. Recuerda registrar tu nivel de energía en la sección **❤️ Apoyo** para que tu médico pueda monitorearlo.";
+            }
+            else if (userQuery.includes("quimioterapia") || userQuery.includes("radioterapia")) {
+                luxiResponse = "Son tratamientos comunes contra el cáncer. La **quimioterapia** usa fármacos para destruir las células cancerosas en todo el cuerpo, y la **radioterapia** usa radiación para dañar las células cancerosas en un área específica. Ambos pueden tener efectos secundarios que tu equipo médico puede manejar.";
+            }
+            
+            // 5. REDIRECCIÓN A ESPECIALISTAS (Regla Crítica)
+            else if (userQuery.includes("pronostico") || userQuery.includes("etapa") || userQuery.includes("resultados") || userQuery.includes("diagnostico") || userQuery.includes("esquema de tratamiento")) {
+                luxiResponse = "Esa es una pregunta muy importante que debe ser respondida por tu **equipo médico u oncólogo**, ya que ellos conocen tu caso a fondo. Por favor, consúltalo con ellos para recibir una interpretación precisa de tu historial y resultados.";
+            }
+
+            // Simular el tiempo de respuesta
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            removeLuxiThinkingMessage();
+            addMessageToLuxiChat(luxiResponse, 'luxi');
         }
+        // 🔑 FIN CÓDIGO CHATBOT LOCAL (MEJORADO) 🔑
         
         function addLuxiThinkingMessage() {
             const messageElement = document.createElement('div');
