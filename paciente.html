@@ -23,13 +23,18 @@
             max-height: 700px;
         }
 
-        /* Estilos de transición para el modal de chat */
-        #luxi-chat-modal {
+        /* Estilos de transición para los modales */
+        #luxi-chat-modal, #payment-modal, #ticket-modal {
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        #luxi-chat-modal .modal-content {
+        #luxi-chat-modal .modal-content, #payment-modal .modal-content, #ticket-modal .modal-content {
             transition: transform 0.3s ease;
+        }
+
+        /* Estilo para simular línea de corte en el ticket */
+        .border-dashed {
+            border-style: dashed;
         }
     </style>
 </head>
@@ -130,6 +135,7 @@
                     <button onclick="showPatientSection('support', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">❤️ Apoyo</button>
                     <button onclick="showPatientSection('nutrition', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">🥗 Nutrición</button>
                     <button onclick="showPatientSection('services', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">📍 Servicios</button>
+                    <button onclick="showPatientSection('payment', event)" class="patient-nav-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg m-1">💳 Método de Pago</button>
                 </div>
             </nav>
 
@@ -572,7 +578,31 @@
                     </div>
                 </div>
             </div>
-        </div>
+            
+            <div id="patient-payment" class="patient-section hidden">
+                <div class="bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto">
+                    <h3 class="text-3xl font-extrabold text-blue-700 mb-4">💳 Suscripción JALERUX Premium</h3>
+                    <p class="text-gray-600 mb-6">Accede a videoconsultas ilimitadas, chat directo 24/7 con especialistas, y beneficios exclusivos de descuento.</p>
+
+                    <div class="bg-blue-50 p-6 rounded-lg mb-8 border-2 border-blue-300">
+                        <div class="flex justify-between items-center">
+                            <p class="text-2xl font-bold text-blue-800">Plan Mensual Premium</p>
+                            <p class="text-3xl font-extrabold text-green-600">$199.00 MXN</p>
+                        </div>
+                        <ul class="mt-4 text-gray-700 space-y-2 text-sm">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✔️</span> Videoconsultas ilimitadas.</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✔️</span> Soporte de chat con Luxi y especialistas 24/7.</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✔️</span> Acceso total a la red de descuentos Jarelux.</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✔️</span> Almacenamiento ilimitado de historial médico.</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="showPaymentModal()" class="w-full bg-purple-600 text-white py-3 rounded-lg text-xl font-bold hover:bg-purple-700 transition duration-300 shadow-lg">
+                        Proceder al Pago Premium
+                    </button>
+                </div>
+            </div>
+            </div>
     </div>
 
     <div id="requestAppointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
@@ -607,6 +637,66 @@
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Enviar Solicitud</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50">
+        <div id="paymentModalContent" class="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md modal-content transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-center mb-6 border-b pb-3">
+                <h3 class="text-2xl font-bold text-blue-700">Pasarela de Pago Segura 🔒</h3>
+                <button onclick="hidePaymentModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+
+            <div class="mb-6 bg-yellow-50 p-4 rounded-lg">
+                <p class="font-semibold text-lg text-yellow-800">Monto a pagar: <span class="float-right text-2xl font-extrabold">$199.00 MXN</span></p>
+                <p class="text-sm text-gray-600 mt-1">Suscripción Mensual JALERUX Premium</p>
+            </div>
+
+            <form id="paymentForm" onsubmit="handlePaymentSubmit(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label for="cardHolder" class="block text-sm font-medium text-gray-700 mb-1">Nombre del titular</label>
+                        <input type="text" id="cardHolder" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Ej. Juan Pérez" required>
+                    </div>
+                    <div>
+                        <label for="cardNumber" class="block text-sm font-medium text-gray-700 mb-1">Número de Tarjeta</label>
+                        <input type="text" id="cardNumber" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="XXXX XXXX XXXX XXXX" required>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-2">
+                            <label for="expiryDate" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Vencimiento (MM/AA)</label>
+                            <input type="text" id="expiryDate" pattern="(0[1-9]|1[0-2])\/\d{2}" maxlength="5" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="MM/AA" required>
+                        </div>
+                        <div>
+                            <label for="cvc" class="block text-sm font-medium text-gray-700 mb-1">CVC</label>
+                            <input type="text" id="cvc" inputmode="numeric" pattern="\d{3,4}" maxlength="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-bold hover:bg-green-700 transition duration-300 flex items-center justify-center space-x-2">
+                        <span>Pagar $199.00 MXN</span>
+                        <span class="text-xl">💳</span>
+                    </button>
+                </div>
+            </form>
+            <div class="mt-4 text-center text-xs text-gray-500">
+                <p>Al hacer clic en Pagar, aceptas los <a href="#" class="text-blue-500 hover:underline">Términos y Condiciones</a> de suscripción.</p>
+            </div>
+        </div>
+    </div>
+    <div id="ticket-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50">
+        <div id="ticketModalContent" class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-sm modal-content transform scale-95 transition-transform duration-300">
+            <div class="text-center font-mono">
+                <h3 class="text-xl font-bold mb-4 text-gray-800">🎫 TICKET JALERUX PREMIUM</h3>
+                <div id="ticket-content" class="text-left border-t border-b border-dashed py-4 mb-4 text-sm space-y-1">
+                    </div>
+                <p class="text-xs text-gray-600">¡Suscripción activa! Gracias por tu confianza.</p>
+            </div>
+            <button onclick="hideTicketModal()" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                Aceptar
+            </button>
         </div>
     </div>
     <button onclick="showLuxiChat()" id="luxi-fab" class="fixed bottom-6 right-6 bg-purple-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition-transform z-40">
@@ -841,6 +931,104 @@
         function closeIfEscPressed(event) { }
         function closeIfClickedOutside(event) { }
 
+        // --- FUNCIONES NUEVAS PARA EL MODAL DE PAGO ---
+        const paymentModal = document.getElementById('payment-modal');
+        const paymentModalContent = document.getElementById('paymentModalContent');
+
+        function showPaymentModal() {
+             document.body.style.overflow = 'hidden';
+             paymentModal.classList.remove('hidden');
+             void paymentModal.offsetWidth;
+
+             paymentModal.classList.add('opacity-100');
+             paymentModalContent.classList.remove('scale-95');
+             paymentModalContent.classList.add('scale-100');
+        }
+
+        function hidePaymentModal() {
+            paymentModal.classList.remove('opacity-100');
+            paymentModalContent.classList.remove('scale-100');
+            paymentModalContent.classList.add('scale-95');
+            document.body.style.overflow = ''; 
+
+            setTimeout(() => {
+                paymentModal.classList.add('hidden');
+                document.getElementById('paymentForm').reset();
+            }, 300);
+        }
+
+        // Funciones para el Modal de Ticket
+        const ticketModal = document.getElementById('ticket-modal');
+        const ticketModalContent = document.getElementById('ticketModalContent');
+
+        function showTicketModal(ticketData) {
+            document.body.style.overflow = 'hidden';
+            const content = document.getElementById('ticket-content');
+            content.innerHTML = `
+                <p><strong>Paciente:</strong> ${ticketData.user}</p>
+                <p><strong>Fecha/Hora:</strong> ${ticketData.date}</p>
+                <p><strong>Concepto:</strong> Suscripción Premium</p>
+                <p><strong>Monto:</strong> ${ticketData.amount}</p>
+                <p><strong>Método:</strong> Terminación ${ticketData.cardNumber.slice(-4)}</p>
+                <p><strong>ID Transacción:</strong> ${ticketData.transactionId}</p>
+                <p><strong>Estado:</strong> <span class="font-bold text-green-600">Aprobado</span></p>
+            `;
+            ticketModal.classList.remove('hidden');
+            setTimeout(() => {
+                ticketModal.style.opacity = 1;
+                ticketModalContent.style.transform = 'scale(1)';
+            }, 10);
+        }
+
+        function hideTicketModal() {
+            ticketModal.style.opacity = 0;
+            ticketModalContent.style.transform = 'scale(0.95)';
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                ticketModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function handlePaymentSubmit(event) {
+            event.preventDefault();
+            
+            const submitButton = document.querySelector('#paymentForm button[type="submit"]');
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const cardHolder = document.getElementById('cardHolder').value.trim();
+            
+            if (cardHolder && cardNumber.length >= 13 && cardNumber.length <= 19) {
+                
+                // 1. Simulación de espera de procesamiento de pago (feedback visual)
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Procesando... <span class="text-xl">⏳</span>';
+
+                setTimeout(() => {
+                    // Generación de datos del ticket
+                    const ticketData = {
+                        user: currentUser || 'Paciente JALERUX',
+                        date: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                        amount: '$199.00 MXN',
+                        cardNumber: cardNumber,
+                        transactionId: 'JLRX-' + Math.random().toString(36).substring(2, 10).toUpperCase()
+                    };
+
+                    // Pasos finales
+                    hidePaymentModal();
+                    
+                    // 2. Mostrar el ticket de confirmación
+                    showTicketModal(ticketData);
+                    
+                    // Re-habilitar el botón
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Pagar $199.00 MXN <span class="text-xl">💳</span>';
+                    
+                }, 2500); // 2.5 segundos de simulación de procesamiento
+            } else {
+                alert('Por favor, revisa los datos de la tarjeta.');
+            }
+        }
+        // --- FIN FUNCIONES NUEVAS PARA EL MODAL DE PAGO ---
+
 
         // Asistente Virtual Luxi Functions (Ahora con respuestas definidas - sin API)
         const luxiModal = document.getElementById('luxi-chat-modal');
@@ -927,11 +1115,21 @@
             else if (userQuery.includes("dolor fuerte en el pecho") || userQuery.includes("dificultad para respirar") || userQuery.includes("sangrado incontrolable") || userQuery.includes("autolesión") || userQuery.includes("emergencia")) {
                 luxiResponse = "🚨 **Detecto una posible emergencia. Por favor, no esperes. Llama al 911 de inmediato o acude al servicio de urgencias más cercano. Tu seguridad es lo más importante.**";
             }
+            
+            // 3. PAGO Y SUSCRIPCIÓN (NUEVA RESPUESTA)
+            else if (userQuery.includes("pago") || userQuery.includes("premium") || userQuery.includes("suscripcion") || userQuery.includes("costo")) {
+                luxiResponse = "La suscripción **Premium** te da acceso a beneficios exclusivos (videoconsultas ilimitadas, chat 24/7 con especialistas, descuentos). El pago es de **$199.00 MXN al mes**. Puedes gestionarlo en la sección de Método de Pago.";
+                specialResponse = {
+                    type: 'action-button',
+                    text: "Ir a Método de Pago",
+                    action: "goToSection('payment')"
+                };
+            }
 
-            // 3. RESPUESTAS ESPECÍFICAS DE MEDICAMENTOS BASADAS EN EL PLAN 💊
+            // 4. RESPUESTAS ESPECÍFICAS DE MEDICAMENTOS BASADAS EN EL PLAN 💊
             const medQuery = userQuery.includes("tamoxifeno") ? "tamoxifeno" :
-                             userQuery.includes("ondansetrón") || userQuery.includes("ondansetron") ? "ondansetron" :
-                             userQuery.includes("calcio") || userQuery.includes("vitamina d") ? "calcio" : null;
+                                 userQuery.includes("ondansetrón") || userQuery.includes("ondansetron") ? "ondansetron" :
+                                 userQuery.includes("calcio") || userQuery.includes("vitamina d") ? "calcio" : null;
             
             if (medQuery) {
                 const medDetails = getMedicationDetails(medQuery);
@@ -948,7 +1146,7 @@
                 }
             }
 
-            // 4. MANEJO DE EFECTOS SECUNDARIOS Y MEDICAMENTOS DE RESCATE (MEJORADO)
+            // 5. MANEJO DE EFECTOS SECUNDARIOS Y MEDICAMENTOS DE RESCATE (MEJORADO)
             else if (userQuery.includes("nauseas") || userQuery.includes("vomito") || userQuery.includes("malestar estomacal")) {
                 luxiResponse = "Las **náuseas** son un efecto secundario esperado. Puedes tomar tu medicamento **Ondansetrón 8mg** si es necesario. También ayuda comer porciones pequeñas de alimentos blandos (como tostadas o arroz) y evitar las grasas. Si no lo has tomado o el Ondansetrón no ayuda, debes contactar a tu oncólogo.";
                 specialResponse = {
@@ -960,7 +1158,7 @@
                 };
             }
             
-            // 5. FATIGA Y CANSANCIO (MEJORADO) 🚶‍♀️
+            // 6. FATIGA Y CANSANCIO (MEJORADO) 🚶‍♀️
             else if (userQuery.includes("fatiga") || userQuery.includes("cansancio") || userQuery.includes("sin energia")) {
                 luxiResponse = "La **fatiga oncológica** es un síntoma real. Recuerda que es importante descansar, pero una **caminata de 10 minutos** puede ser energizante. Registra tu nivel de energía en el diario para que tu equipo médico lo evalúe.";
                 specialResponse = {
@@ -970,7 +1168,7 @@
                 };
             }
 
-            // 6. RESULTADOS MÉDICOS/HISTORIAL (NUEVO) 📂
+            // 7. RESULTADOS MÉDICOS/HISTORIAL (NUEVO) 📂
             else if (userQuery.includes("mis resultados") || userQuery.includes("analisis de sangre") || userQuery.includes("historial")) {
                 luxiResponse = "Tus **resultados de laboratorio y documentos clínicos** están en la sección Historial. Si tienes dudas sobre su interpretación, te recomiendo revisarlos con tu médico. ¿Quieres ver la fecha de tu próxima cita de revisión?";
                 specialResponse = {
@@ -980,7 +1178,7 @@
                 };
             }
 
-            // 7. NUTRICIÓN Y DIETA (NUEVO) 🥗
+            // 8. NUTRICIÓN Y DIETA (NUEVO) 🥗
             else if (userQuery.includes("dieta") || userQuery.includes("comer") || userQuery.includes("nutricion")) {
                 luxiResponse = "En la sección de **Nutrición**, encontrarás guías de alimentos sugeridos. Es clave que mantengas una ingesta adecuada de proteínas. Si necesitas un plan personalizado, puedes contactar a la nutrióloga.";
                 specialResponse = {
@@ -990,7 +1188,7 @@
                 };
             }
 
-            // 8. ENTRETENIMIENTO Y DESCUENTOS (NUEVO) 🎉
+            // 9. ENTRETENIMIENTO Y DESCUENTOS (NUEVO) 🎉
             else if (userQuery.includes("cine") || userQuery.includes("descuentos") || userQuery.includes("diversión") || userQuery.includes("ocio")) {
                 luxiResponse = "¡Claro! El apoyo emocional también incluye el esparcimiento. Tenemos beneficios exclusivos de entretenimiento para ti. Puedes verlos en la sección Servicios.";
                 specialResponse = {
@@ -1000,7 +1198,7 @@
                 };
             }
             
-            // 9. REDIRECCIÓN A ESPECIALISTAS CONTEXTUAL 📞 (EXISTENTE)
+            // 10. REDIRECCIÓN A ESPECIALISTAS CONTEXTUAL 📞 (EXISTENTE)
             else if (userQuery.includes("miedo") || userQuery.includes("triste") || userQuery.includes("deprimido") || userQuery.includes("ansiedad") || userQuery.includes("psicologo")) {
                 luxiResponse = `Es totalmente normal sentirse así. Nuestro **psico-oncólogo** puede ayudarte a manejar estas emociones. ¿Te gustaría contactarlo directamente?`;
                 specialResponse = {
@@ -1012,7 +1210,7 @@
                 };
             }
 
-            // 10. ENLACES INTERACTIVOS A SECCIONES 🔗 (EXISTENTE)
+            // 11. ENLACES INTERACTIVOS A SECCIONES 🔗 (EXISTENTE)
             else if (userQuery.includes("ir a citas") || userQuery.includes("ver citas") || userQuery.includes("cita")) {
                 luxiResponse = "Claro, aquí tienes un acceso rápido a tu sección de citas.";
                 specialResponse = {
@@ -1022,7 +1220,7 @@
                 };
             }
             
-            // 11. VINCULACIÓN DE APPS DE SALUD (NUEVO) 🔗
+            // 12. VINCULACIÓN DE APPS DE SALUD (NUEVO) 🔗
             else if (userQuery.includes("samsung health") || userQuery.includes("apple salud") || userQuery.includes("vincular")) {
                 luxiResponse = "¡Excelente idea! Puedes conectar tu dispositivo de salud para sincronizar tu actividad diaria y signos vitales. Ve a la sección de **Servicios** para ver las opciones de vinculación.";
                 specialResponse = {
@@ -1032,7 +1230,7 @@
                 };
             }
 
-            // 12. OTRAS PREGUNTAS MÉDICAS Y REDIRECCIÓN CRÍTICA (EXISTENTE)
+            // 13. OTRAS PREGUNTAS MÉDICAS Y REDIRECCIÓN CRÍTICA (EXISTENTE)
             else if (userQuery.includes("pronostico") || userQuery.includes("etapa") || userQuery.includes("diagnostico") || userQuery.includes("esquema de tratamiento")) {
                 luxiResponse = "Esa es una pregunta muy importante que debe ser respondida por tu **equipo médico u oncólogo**, ya que ellos conocen tu caso a fondo. Por favor, consúltalo con ellos para recibir una interpretación precisa de tu historial y resultados.";
             }
@@ -1409,9 +1607,9 @@
             <div>
                 <h5 class="font-semibold mb-4">Contacto</h5>
                 <div class="space-y-2 text-gray-400">
-                        <p>📞 963-121-9655</p>
-                        <p>✉️ jarelux.25.contacto@gmail.com</p>
-                        <p>📍 Comitán de Domínguez, Chiapas</p>
+                    <p>📞 963-121-9655</p>
+                    <p>✉️ jarelux.25.contacto@gmail.com</p>
+                    <p>📍 Comitán de Domínguez, Chiapas</p>
                 </div>
             </div>
         </div>
